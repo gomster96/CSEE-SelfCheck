@@ -23,7 +23,7 @@
 
 ## 기획서
 
-[Figma Link](https://www.figma.com/file/vzFbuNGcSRxpvG7Zma7rQx/%EB%B6%80%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%94%84-%EA%B7%B8%EB%A3%B9-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0%3A1)
+[Figma Link](https://www.figma.com/file/PWOrxikyK7YTAdcYR2YNtS/kimleean?node-id=0%3A1)
 
 ## 백로그
 
