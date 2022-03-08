@@ -16,10 +16,9 @@
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Front-end       | <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">  <img src="https://img.shields.io/badge/emotion-5B0BB5?style=for-the-badge&logo=funimation&logoColor=black"> <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=black"> |
 | Back-end        |  <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=black"> <img src="https://img.shields.io/badge/jpa-6DB33F?style=for-the-badge&logo=springboot&logoColor=black">|
-| Production      | ![NGINX](https://img.shields.io/badge/NGINX-green?logo=NginX&colorA=gray) ![Naver Cloud Platform](https://img.shields.io/badge/NCP-compact_server-9cf&color=brightgreen) ![Git](https://img.shields.io/badge/GitHub_Actions-purple?logo=github&colorA=gray)                                                 |
 | Code Management | ![Git](https://img.shields.io/badge/Git-red?logo=Git&colorA=gray) ![github](https://img.shields.io/badge/GitHub-lightgray?logo=github&colorA=gray)                                                                                                                                                          |
-| Formatting      | ![prettier](https://img.shields.io/badge/prettier-yellow?logo=prettier&colorA=gray)                                                                                                                                                                                                                         |
-| DB              | ![redis](https://img.shields.io/badge/redis-red?logo=redis&colorA=gray) ![mysql](https://img.shields.io/badge/mysql-blue?logo=mySQL&colorA=gray)                                                                                                                                                            |
+| Formatting      | <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black">                                 |
+| DB              | <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=black"> |
 
 ## 기획서
 
