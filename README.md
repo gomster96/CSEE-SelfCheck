@@ -26,5 +26,4 @@
 
 ## 백로그
 
-[벡로그 Link](https://docs.google.com/spreadsheets/d/1cXYQpNHGweEUXEMGLWghVJOcbHzv6ascIwQowCPS3Ys/edit#gid=0)
 
