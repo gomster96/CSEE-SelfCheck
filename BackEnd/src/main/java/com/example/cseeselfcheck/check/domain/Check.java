@@ -20,9 +20,9 @@ public class Check extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private TakeStatus status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Lecture lecture;
 }

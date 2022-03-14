@@ -17,7 +17,7 @@ public class User extends BaseEntity {
     @Id @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Major major;
 
     private String name;
