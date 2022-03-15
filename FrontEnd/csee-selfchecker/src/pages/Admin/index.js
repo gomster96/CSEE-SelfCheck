@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AdminTable from './AdminTable';
+import SearchBar from './SearchBar';
 
 const AdminLayout = styled.div`
   margin-left: 20vw;
@@ -11,6 +12,7 @@ export default function Admin() {
   return (
     <>
       <AdminLayout>
+        <SearchBar />
         <AdminTable />
       </AdminLayout>
     </>
