@@ -25,19 +25,19 @@ export default function Filters() {
       <CheckBoxAlignDiv>
         <CheckBoxesTitle>과목별: </CheckBoxesTitle>
         {lectureData.map((lecture) => {
-          return <FormControlLabel control={<Checkbox name={lecture} />} label={lecture}></FormControlLabel>;
+          return <FormControlLabel control={<Checkbox name={lecture} />} label={lecture} sx={{ width: '8vw' }}></FormControlLabel>;
         })}
       </CheckBoxAlignDiv>
       <CheckBoxAlignDiv>
         <CheckBoxesTitle>학기수: </CheckBoxesTitle>
         {semester.map((semes) => {
-          return <FormControlLabel control={<Checkbox name={semes} />} label={semes}></FormControlLabel>;
+          return <FormControlLabel control={<Checkbox name={semes} />} label={semes} sx={{ width: '8vw' }}></FormControlLabel>;
         })}
       </CheckBoxAlignDiv>
       <CheckBoxAlignDiv>
         <CheckBoxesTitle>과목별: </CheckBoxesTitle>
         {possibleStudent.map((student) => {
-          return <FormControlLabel control={<Checkbox name={student} />} label={student}></FormControlLabel>;
+          return <FormControlLabel control={<Checkbox name={student} />} label={student} sx={{ width: '8vw' }}></FormControlLabel>;
         })}
       </CheckBoxAlignDiv>
     </FormGroup>

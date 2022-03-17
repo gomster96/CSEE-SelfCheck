@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 const SearchBarLayout = styled.div`
-  margin-top: 10vh;
+  margin-top: 2vh;
   display: flex;
   justify-content: center;
-  margin-bottom: 10vh;
+  margin-bottom: 5vh;
 `;
 
 export default function SearchBar() {
