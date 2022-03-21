@@ -15,7 +15,7 @@ const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 14,
+    fontSize: '1.1vw',
   },
 }))(TableCell);
 
@@ -66,7 +66,7 @@ export default function AdminTable() {
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row" align="center">
+              <StyledTableCell component="th" scope="row" align="center" style={{ height: '5vh' }}>
                 {row.name}
               </StyledTableCell>
               <StyledTableCell align="center">{row.major}</StyledTableCell>
