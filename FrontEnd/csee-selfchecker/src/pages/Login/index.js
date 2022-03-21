@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import logo from './asset/img/loginImage.png';
 import background from './asset/img/backgroundImg.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Row, Col } from 'react-bootstrap';
 //import GlobalFonts from './asset/fonts/font';
 import GoogleLogin from 'react-google-login';
 const clientId = '783610138228-anpgvtcc326gk47gpiuospu35mvgcckl.apps.googleusercontent.com';
@@ -80,6 +80,7 @@ const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 100px;
+  padding-bottom: 10px;
 `;
 const LoginFormRightsubTitle = styled.div`
   display: flex;
@@ -87,7 +88,8 @@ const LoginFormRightsubTitle = styled.div`
   align-items: center;
 `;
 const GoogleLoginContainer = styled.div`
-  padding-top: 120px;
+  padding-top: 90px;
+  padding-bottom: 50px;
   width: 300px;
 `;
 const GoogleLoginClass = styled.div`
@@ -141,19 +143,25 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
           </LoginFormRightTitle>
           <Form>
             <Form.Group controlId="Checkbox">
-              <Form.Check type="checkbox" label="학생" />
-              <Form.Check type="checkbox" label="관리자" />
+              <Row style={{ alignitems: 'center', width: '130%' }}>
+                <Col>
+                  <Form.Check type="checkbox" label="학생" />
+                </Col>
+                <Col>
+                  <Form.Check type="checkbox" label="관리자" />
+                </Col>
+              </Row>
             </Form.Group>
           </Form>
 
           <GoogleLoginContainer>
-            <LoginFormRightsubTitle>
-              <p>학교 구글 계정으로 로그인하세요.</p>
-            </LoginFormRightsubTitle>
             <GoogleLoginClass>
               <GoogleLogin clientId={clientId} responseType={'id_token'} onSuccess={onSuccess} onFailure={onFailure} />
             </GoogleLoginClass>
           </GoogleLoginContainer>
+          <LoginFormRightsubTitle>
+            <p>학교 구글 계정으로 로그인하세요.</p>
+          </LoginFormRightsubTitle>
         </LoginFormRight>
       </LoginFormDiv>
     </ContainerDiv>
