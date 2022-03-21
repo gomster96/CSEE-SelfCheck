@@ -14,8 +14,5 @@ public class Major extends BaseEntity {
 
     private String majorName;
 
-    @OneToMany(mappedBy = "major")
-    private List<User> users;
-
     private String checker;
 }

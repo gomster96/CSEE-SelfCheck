@@ -1,5 +1,6 @@
 package com.example.cseeselfcheck.user.domain.lecture;
 
+import java.util.List;
 import javax.persistence.*;
 
 import com.example.cseeselfcheck.common.BaseEntity;
@@ -19,6 +20,7 @@ public class Lecture extends BaseEntity {
 
     private int designCredit;
 
-    private int lectureNumber;
+    private int lecturePosition;
 
+    private String opendYear;
 }
