@@ -1,8 +1,8 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import logo from './asset/img/loginImage.png';
-import background from './asset/img/backgroundImg.png';
+import logo from '../../asset/img/loginImage.png';
+import background from '../../asset/img/backgroundImg.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 //import GlobalFonts from './asset/fonts/font';
@@ -18,6 +18,68 @@ ReactDOM.render(
 );
 */
 //메인 컨테이너
+
+//체크박스
+
+//구글 로그인
+export default function Login({ onGoogleLogin }) {
+  const onSuccess = async (response) => {
+    const {
+      googleId,
+      profileObj: { email, name },
+    } = response;
+
+    await onGoogleLogin();
+    // 구글 로그인 성공시 서버에 전달할 데이터
+  };
+
+  const onFailure = (error) => {
+    console.log(error);
+  };
+
+  return (
+    <ContainerDiv>
+      <LoginFormDiv>
+        <LoginFormLeft1>HGU</LoginFormLeft1>
+        <LoginFormLeft2>
+          <LoginFormLeftTitle>
+            Computer Science <br></br>And Electrical Engineering
+          </LoginFormLeftTitle>
+          <LoginFormLeftsubTitle>Welcome to our website</LoginFormLeftsubTitle>
+          <LogoImg src={logo} />
+        </LoginFormLeft2>
+
+        <LoginFormRight>
+          <LoginFormRightTitle>
+            <h1>Log in</h1>
+          </LoginFormRightTitle>
+          <Form>
+            <Form.Group controlId="Checkbox">
+              <Row style={{ alignitems: 'center', width: '130%' }}>
+                <Col>
+                  <Form.Check type="checkbox" label="학생" />
+                </Col>
+                <Col>
+                  <Form.Check type="checkbox" label="관리자" />
+                </Col>
+              </Row>
+            </Form.Group>
+          </Form>
+
+          <GoogleLoginContainer>
+            <GoogleLoginClass>
+              <GoogleLogin clientId={clientId} responseType={'id_token'} onSuccess={onSuccess} onFailure={onFailure} />
+            </GoogleLoginClass>
+          </GoogleLoginContainer>
+          <LoginFormRightsubTitle>
+            <p>학교 구글 계정으로 로그인하세요.</p>
+          </LoginFormRightsubTitle>
+        </LoginFormRight>
+      </LoginFormDiv>
+    </ContainerDiv>
+  );
+}
+
 const ContainerDiv = styled.div`
   width: 100vw;
   height: 100vh;
@@ -106,64 +168,3 @@ const LogoImg = styled.img`
   max-width: 100%;
   height: auto;
 `;
-
-//체크박스
-
-//구글 로그인
-export default function GoogleLoginBtn({ onGoogleLogin }) {
-  const onSuccess = async (response) => {
-    const {
-      googleId,
-      profileObj: { email, name },
-    } = response;
-
-    await onGoogleLogin();
-    // 구글 로그인 성공시 서버에 전달할 데이터
-  };
-
-  const onFailure = (error) => {
-    console.log(error);
-  };
-
-  return (
-    <ContainerDiv>
-      <LoginFormDiv>
-        <LoginFormLeft1>HGU</LoginFormLeft1>
-        <LoginFormLeft2>
-          <LoginFormLeftTitle>
-            Computer Science <br></br>And Electrical Engineering
-          </LoginFormLeftTitle>
-          <LoginFormLeftsubTitle>Welcome to our website</LoginFormLeftsubTitle>
-          <LogoImg src={logo} />
-        </LoginFormLeft2>
-
-        <LoginFormRight>
-          <LoginFormRightTitle>
-            <h1>Log in</h1>
-          </LoginFormRightTitle>
-          <Form>
-            <Form.Group controlId="Checkbox">
-              <Row style={{ alignitems: 'center', width: '130%' }}>
-                <Col>
-                  <Form.Check type="checkbox" label="학생" />
-                </Col>
-                <Col>
-                  <Form.Check type="checkbox" label="관리자" />
-                </Col>
-              </Row>
-            </Form.Group>
-          </Form>
-
-          <GoogleLoginContainer>
-            <GoogleLoginClass>
-              <GoogleLogin clientId={clientId} responseType={'id_token'} onSuccess={onSuccess} onFailure={onFailure} />
-            </GoogleLoginClass>
-          </GoogleLoginContainer>
-          <LoginFormRightsubTitle>
-            <p>학교 구글 계정으로 로그인하세요.</p>
-          </LoginFormRightsubTitle>
-        </LoginFormRight>
-      </LoginFormDiv>
-    </ContainerDiv>
-  );
-}

@@ -1,8 +1,8 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import background from './asset/img/backgroundImg.png';
-import logo from './asset/img/loginImage.png';
+import background from '../../asset/img/backgroundImg.png';
+import logo from '../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 //import GlobalFonts from './asset/fonts/font';
