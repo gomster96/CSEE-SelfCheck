@@ -1,9 +1,8 @@
 package com.example.cseeselfcheck.user.domain;
 
-import com.example.cseeselfcheck.check.domain.Check;
 import com.example.cseeselfcheck.common.BaseEntity;
-import com.example.cseeselfcheck.lecture.domain.Lecture;
-import com.example.cseeselfcheck.major.domain.Major;
+import com.example.cseeselfcheck.user.domain.major.Major;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,8 +31,5 @@ public class User extends BaseEntity {
 
     private int result;
 
-    @OneToMany(mappedBy = "user")
-    private List<Check> checks;
-
-
+    private String takenStatus;
 }
