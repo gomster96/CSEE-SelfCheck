@@ -23,7 +23,7 @@ const ButtonStyle = styled.div`
   border-radius: 35px;
 `;
 
-function App() {
+export default function Main() {
   return (
     <MypageLayout>
       <InnerLayout>
@@ -48,5 +48,3 @@ function App() {
     </MypageLayout>
   );
 }
-
-export default App;
