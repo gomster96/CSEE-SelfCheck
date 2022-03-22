@@ -40,7 +40,7 @@ export default function Login({ onGoogleLogin }) {
   return (
     <ContainerDiv>
       <LoginFormDiv>
-        <LoginFormLeft1>HGU</LoginFormLeft1>
+        <LoginFormLeft1></LoginFormLeft1>
         <LoginFormLeft2>
           <LoginFormLeftTitle>
             Computer Science <br></br>And Electrical Engineering
@@ -79,6 +79,16 @@ export default function Login({ onGoogleLogin }) {
     </ContainerDiv>
   );
 }
+const calcWidthPercent = (span) => {
+  if (!span) return;
+
+  const width = (span / 12) * 100;
+  return width;
+};
+
+const BREAK_POINT_MOBILE = 768;
+const BREAK_POINT_TABLET = 992;
+const BREAK_POINT_PC = 1200;
 
 const ContainerDiv = styled.div`
   width: 100vw;
@@ -88,6 +98,17 @@ const ContainerDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-image: url(${background});
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `100%`)};
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormDiv = styled.div`
   background: #f5f5f5;
@@ -102,6 +123,17 @@ const LoginFormDiv = styled.div`
   -webkit-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
   -moz-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
   box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormLeft1 = styled.div`
   margin: 0.3rem 0.4rem 0.3rem;
@@ -111,15 +143,38 @@ const LoginFormLeft1 = styled.div`
   background: #2e75b6;
   align-items: center;
   color: #2e75b6;
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `5%`)};
+  padding: 1%;
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormLeft2 = styled.div`
   width: 50%;
-  padding: 20px 40px 20px;
+  padding: 8% 5% 5% 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: left;
   color: #797979;
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormLeftTitle = styled.div`
   font-family: 'RedHatDisplayRegular';
@@ -137,6 +192,17 @@ const LoginFormRight = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 40px;
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormRightTitle = styled.div`
   display: flex;

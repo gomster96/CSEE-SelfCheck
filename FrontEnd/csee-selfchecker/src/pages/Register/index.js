@@ -4,8 +4,68 @@ import styled from 'styled-components';
 import background from '../../asset/img/backgroundImg.png';
 import logo from '../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
 //import GlobalFonts from './asset/fonts/font';
+
+export default function Resister() {
+  return (
+    <ContainerDiv>
+      <LoginFormDiv>
+        <LoginFormLeft1>HGU</LoginFormLeft1>
+        <LoginFormLeft2>
+          <LoginFormLeftTitle>
+            Computer Science <br></br>And Electrical Engineering
+          </LoginFormLeftTitle>
+          <LoginFormLeftsubTitle>Welcome to our website</LoginFormLeftsubTitle>
+          <LogoImg src={logo} />
+        </LoginFormLeft2>
+
+        <LoginFormRight>
+          <InputContainer>
+            <Form>
+              <LoginFormRightTitle>
+                <h3>Student Information</h3>
+              </LoginFormRightTitle>
+
+              <Col style={{ paddingLeft: '20%' }}>
+                <Form.Control as="select" style={{ width: '70%', height: '75%', textAlign: 'center', borderRadius: '20px' }}>
+                  <option selected>전공선택(Major)</option>
+                  <option>컴퓨터공학심화</option>
+                  <option>컴퓨터공학/1전공</option>
+                  <option>컴퓨터공학/2전공</option>
+                  <option>전자공학심화</option>
+                  <option>전자공학(1/2전공)</option>
+                </Form.Control>
+              </Col>
+
+              <Form.Group className="mb-3" controlId="studentId" style={{ marginTop: '50px' }}>
+                <Form.Control type="id" placeholder="  학번 (Student ID)" style={{ borderRadius: '20px' }} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="studentName">
+                <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="studentPhone">
+                <Form.Control type="phone" placeholder="  연락처 (010XXXXXXXX)" style={{ borderRadius: '20px' }} />
+              </Form.Group>
+            </Form>
+          </InputContainer>
+          <Button as="input" variant="primary" type="submit" value="Save!" style={{ width: '50%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
+        </LoginFormRight>
+      </LoginFormDiv>
+    </ContainerDiv>
+  );
+}
+
+const calcWidthPercent = (span) => {
+  if (!span) return;
+
+  const width = (span / 12) * 100;
+  return width;
+};
+
+const BREAK_POINT_MOBILE = 768;
+const BREAK_POINT_TABLET = 992;
+const BREAK_POINT_PC = 1200;
 
 const ContainerDiv = styled.div`
   width: 100vw;
@@ -15,6 +75,17 @@ const ContainerDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-image: url(${background});
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `100%`)};
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormDiv = styled.div`
   background: #f5f5f5;
@@ -29,6 +100,17 @@ const LoginFormDiv = styled.div`
   -webkit-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
   -moz-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
   box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormLeft1 = styled.div`
   margin: 0.3rem 0.4rem 0.3rem;
@@ -38,15 +120,38 @@ const LoginFormLeft1 = styled.div`
   background: #2e75b6;
   align-items: center;
   color: #2e75b6;
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `5%`)};
+  padding: 1%;
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormLeft2 = styled.div`
   width: 50%;
-  padding: 20px 40px 20px;
+  padding: 8% 5% 5% 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: left;
   color: #797979;
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormLeftTitle = styled.div`
   font-family: 'RedHatDisplay';
@@ -68,6 +173,18 @@ const LoginFormRight = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px;
+
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
 `;
 const LoginFormRightTitle = styled.div`
   display: flex;
@@ -81,63 +198,3 @@ const InputContainer = styled.div`
   align-items: center;
   padding: 40px;
 `;
-
-export default function Resister() {
-  return (
-    <ContainerDiv>
-      <LoginFormDiv>
-        <LoginFormLeft1>HGU</LoginFormLeft1>
-        <LoginFormLeft2>
-          <LoginFormLeftTitle>
-            Computer Science <br></br>And Electrical Engineering
-          </LoginFormLeftTitle>
-          <LoginFormLeftsubTitle>Welcome to our website</LoginFormLeftsubTitle>
-          <LogoImg src={logo} />
-        </LoginFormLeft2>
-
-        <LoginFormRight>
-          <InputContainer>
-            <Form>
-              <LoginFormRightTitle>
-                <h3>Student Information</h3>
-              </LoginFormRightTitle>
-              <Row>
-                <Col>
-                  <Form.Control as="select" style={{ width: '90%', height: '75%', margin: '4%', textAlign: 'center' }}>
-                    <option selected>Major</option>
-                    <option>컴공심화</option>
-                    <option>컴공(1전공)</option>
-                    <option>컴공(2전공)</option>
-                    <option>전자심화</option>
-                    <option>전자(1/2전공)</option>
-                  </Form.Control>
-                </Col>
-                <Col>
-                  <Form.Control as="select" style={{ width: '90%', height: '75%', margin: '4%', textAlign: 'center' }}>
-                    <option selected>Semester</option>
-                    <option>5학기</option>
-                    <option>6학기</option>
-                    <option>7학기</option>
-                    <option>8학기</option>
-                    <option>추가학기</option>
-                  </Form.Control>
-                </Col>
-              </Row>
-
-              <Form.Group className="mb-3" controlId="studentId" style={{ marginTop: '50px' }}>
-                <Form.Control type="id" placeholder="  학번 (Student ID)" style={{ borderRadius: '20px' }} />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="studentName">
-                <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="studentPhone">
-                <Form.Control type="phone" placeholder="  연락처 (010XXXXXXXX)" style={{ borderRadius: '20px' }} />
-              </Form.Group>
-            </Form>
-          </InputContainer>
-          <Button as="input" variant="primary" type="submit" value="Save!" style={{ width: '50%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
-        </LoginFormRight>
-      </LoginFormDiv>
-    </ContainerDiv>
-  );
-}
