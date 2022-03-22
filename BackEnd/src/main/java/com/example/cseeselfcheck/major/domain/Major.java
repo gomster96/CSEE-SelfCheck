@@ -1,4 +1,4 @@
-package com.example.cseeselfcheck.user.domain.major;
+package com.example.cseeselfcheck.major.domain;
 
 import java.util.List;
 import javax.persistence.*;

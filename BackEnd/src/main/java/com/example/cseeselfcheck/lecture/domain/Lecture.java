@@ -1,4 +1,4 @@
-package com.example.cseeselfcheck.user.domain.lecture;
+package com.example.cseeselfcheck.lecture.domain;
 
 import java.util.List;
 import javax.persistence.*;

@@ -1,14 +1,14 @@
 package com.example.cseeselfcheck.user.domain;
 
 import com.example.cseeselfcheck.common.BaseEntity;
-import com.example.cseeselfcheck.user.domain.major.Major;
+import com.example.cseeselfcheck.major.domain.Major;
 
 import lombok.Getter;
-import lombok.Setter;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Entity
 @Getter
