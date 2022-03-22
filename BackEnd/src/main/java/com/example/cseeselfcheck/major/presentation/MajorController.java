@@ -20,7 +20,7 @@ public class MajorController {
 
     @PostMapping("/major")
     public ResponseEntity<Object> createMajor(@RequestBody MajorCreateRequest majorCreateRequest){
-        System.out.println(majorCreateRequest.getMajorName());
+
         majorService.create(majorCreateRequest);
         return ResponseEntity.ok().body(null);
     }
