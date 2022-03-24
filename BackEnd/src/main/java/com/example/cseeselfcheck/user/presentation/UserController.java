@@ -2,7 +2,7 @@ package com.example.cseeselfcheck.user.presentation;
 
 import java.io.IOException;
 
-import com.example.cseeselfcheck.exception.referenceuser.ReferenceUserOpenFileException;
+import com.example.cseeselfcheck.exception.common.ExcelOpenFileException;
 import com.example.cseeselfcheck.user.application.ReferenceUserService;
 
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class UserController {
         try {
             referenceUserService.createByExcel(file);
         } catch (IOException e) {
-            throw new ReferenceUserOpenFileException();
+            throw new ExcelOpenFileException();
         }
 
         return ResponseEntity.ok().body(null);

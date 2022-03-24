@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.cseeselfcheck.exception.CseeCheckerException;
-import com.example.cseeselfcheck.exception.referenceuser.ReferenceUserImportException;
+import com.example.cseeselfcheck.exception.common.ExcelImportException;
 import com.example.cseeselfcheck.user.domain.ReferenceUser;
 import com.example.cseeselfcheck.user.domain.repository.ReferenceUserRepository;
 
@@ -20,12 +19,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class ReferenceUserService {
     private final ReferenceUserRepository referenceUserRepository;
 
-    public void createByExcel(MultipartFile file) throws CseeCheckerException, IOException {
+    public void createByExcel(MultipartFile file) throws IOException {
         List<ReferenceUser> referenceUsers = new ArrayList<>();
 
 
@@ -36,7 +35,7 @@ public class ReferenceUserService {
         } else if (extension.equals("xls")) {
             workbook = new HSSFWorkbook(file.getInputStream());
         } else {
-            throw new ReferenceUserImportException();
+            throw new ExcelImportException();
         }
         Sheet worksheet = workbook.getSheetAt(0);
 
