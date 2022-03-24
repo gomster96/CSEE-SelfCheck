@@ -47,7 +47,7 @@ public class LectureService {
             String openedYear = row.getCell(3).toString();
             lectures.add(new Lecture(lectureName, designCredit, lecturePosition, openedYear));
         }
-
+        lectureRepository.deleteAll();
         lectureRepository.saveAll(lectures);
     }
 }
