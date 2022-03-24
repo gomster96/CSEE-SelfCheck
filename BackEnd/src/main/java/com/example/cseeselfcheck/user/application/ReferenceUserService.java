@@ -26,8 +26,6 @@ public class ReferenceUserService {
 
     public void createByExcel(MultipartFile file) throws IOException {
         List<ReferenceUser> referenceUsers = new ArrayList<>();
-
-
         Workbook workbook = null;
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         if (extension.equals("xlsx")) {
@@ -48,6 +46,7 @@ public class ReferenceUserService {
             String phone = row.getCell(3).toString();
             referenceUsers.add(new ReferenceUser(studentNumber, name, semester, phone));
         }
+        referenceUserRepository.deleteAll();
         referenceUserRepository.saveAll(referenceUsers);
     }
 }
