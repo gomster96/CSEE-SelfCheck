@@ -26,7 +26,7 @@ const ContainerDiv = styled.div`
   align-items: center;
   background-image: url(${background});
 
-  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `100%`)};
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `100vw`)};
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }
@@ -39,7 +39,8 @@ const ContainerDiv = styled.div`
 `;
 const LoginFormDiv = styled.div`
   background: #f5f5f5;
-  height: 85vh;
+  width: 1050px;
+  height: 700px;
   display: inline-block;
   flex-direction: row;
   box-shadow: 10px black;

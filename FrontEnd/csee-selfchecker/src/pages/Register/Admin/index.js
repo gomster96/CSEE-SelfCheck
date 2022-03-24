@@ -1,46 +1,13 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import logo from '../../asset/img/loginImage.png';
-import background from '../../asset/img/backgroundImg.png';
+import background from '../../../asset/img/backgroundImg.png';
+import logo from '../../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Form } from 'react-bootstrap';
 //import GlobalFonts from './asset/fonts/font';
-import GoogleLogin from 'react-google-login';
-const clientId = '783610138228-anpgvtcc326gk47gpiuospu35mvgcckl.apps.googleusercontent.com';
 
-const { useState } = React;
-/*
-ReactDOM.render(
-  <React.StrictMode>
-    <GlobalFonts />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-*/
-
-//구글 로그인
-export default function Login({ onGoogleLogin }) {
-  const onSuccess = async (response) => {
-    const {
-      googleId,
-      profileObj: { email, name },
-    } = response;
-
-    await onGoogleLogin();
-    // 구글 로그인 성공시 서버에 전달할 데이터
-  };
-
-  const onFailure = (error) => {
-    console.log(error);
-  };
-
-  const [select, setSelect] = useState('optionA');
-
-  const handleSelectChange = (event) => {
-    const value = event.target.value;
-    setSelect(value);
-  };
-
+export default function AdminRegister() {
   return (
     <ContainerDiv>
       <LoginFormDiv>
@@ -52,34 +19,30 @@ export default function Login({ onGoogleLogin }) {
           <LoginFormLeftsubTitle>Welcome to our website</LoginFormLeftsubTitle>
           <LogoImg src={logo} />
         </LoginFormLeft2>
-        <LoginFormRight>
-          <LoginFormRightTitle>
-            <h1>Log in</h1>
-          </LoginFormRightTitle>
-          <Item>
-            <RadioButton type="radio" name="radio" value="optionA" checked={select === 'optionA'} onChange={(event) => handleSelectChange(event)} />
-            <RadioButtonLabel />
-            <div>학생</div>
-          </Item>
-          <Item>
-            <RadioButton type="radio" name="radio" value="optionB" checked={select === 'optionB'} onChange={(event) => handleSelectChange(event)} />
-            <RadioButtonLabel />
-            <div>관리자</div>
-          </Item>
 
-          <GoogleLoginContainer>
-            <GoogleLoginClass>
-              <GoogleLogin clientId={clientId} responseType={'id_token'} onSuccess={onSuccess} onFailure={onFailure} />
-            </GoogleLoginClass>
-          </GoogleLoginContainer>
-          <LoginFormRightsubTitle>
-            <p>학교 구글 계정으로 로그인하세요.</p>
-          </LoginFormRightsubTitle>
+        <LoginFormRight>
+          <InputContainer>
+            <Form>
+              <LoginFormRightTitle>
+                <h3>Admin Information</h3>
+              </LoginFormRightTitle>
+
+              <Form.Group className="mb-3" controlId="department" style={{ marginTop: '50px' }}>
+                <Form.Control type="id" placeholder="  소속 (Department)" style={{ borderRadius: '20px' }} />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="adminName">
+                <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
+              </Form.Group>
+              <p>제출 시 관리자 승인 후 로그인 가능합니다.</p>
+            </Form>
+          </InputContainer>
+          <Button as="input" variant="primary" type="submit" value="Submit!" style={{ width: '50%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
         </LoginFormRight>
       </LoginFormDiv>
     </ContainerDiv>
   );
 }
+
 const calcWidthPercent = (span) => {
   if (!span) return;
 
@@ -100,7 +63,7 @@ const ContainerDiv = styled.div`
   align-items: center;
   background-image: url(${background});
 
-  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `100vw`)};
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `100%`)};
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }
@@ -143,6 +106,7 @@ const LoginFormLeft1 = styled.div`
   display: flex;
   background: #2e75b6;
   align-items: center;
+  color: #2e75b6;
 
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `5%`)};
   padding: 1%;
@@ -177,7 +141,7 @@ const LoginFormLeft2 = styled.div`
   }
 `;
 const LoginFormLeftTitle = styled.div`
-  font-family: 'RedHatDisplayRegular';
+  font-family: 'RedHatDisplay';
   font-size: 36px;
   src: url(./asset/fonts/RedHatDisplay-Regular.ttf);
 `;
@@ -185,15 +149,20 @@ const LoginFormLeftsubTitle = styled.div`
   font-family: 'RedHatDisplay';
   src: url(/asset/fonts/RedHatDisplay-LightItalic.ttf);
 `;
+const LogoImg = styled.img`
+  padding-top: 5%;
+  max-width: 100%;
+  height: auto;
+`;
 const LoginFormRight = styled.div`
-  width: 80vw;
+  width: 50%;
   border-radius: 0px 40px 40px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px;
 
-  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `80vw`)};
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }
@@ -207,82 +176,12 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 100px;
-  padding-bottom: 10px;
+  padding: 100px 0px 10px 0px;
 `;
-const LoginFormRightsubTitle = styled.div`
+const InputContainer = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-`;
-const Item = styled.div`
-  display: flex;
-  align-items: center;
-  height: 48px;
-  position: relative;
-  margin-bottom: 10px;
-`;
-
-const RadioButtonLabel = styled.label`
-  position: absolute;
-  top: 25%;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: white;
-  border: 1px solid #ccc;
-`;
-const RadioButton = styled.input`
-  opacity: 0;
-  z-index: 1;
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
-  margin-right: 5px;
-  &:hover ~ ${RadioButtonLabel} {
-    background: #ccc;
-    &::after {
-      font-family: '';
-      display: absolute;
-      color: white;
-      width: 8px;
-      height: 8px;
-      margin: 2px;
-    }
-  }
-  &:checked + ${Item} {
-    background: #2e75b6;
-    border: 2px solid #2e75b6;
-  }
-  &:checked + ${RadioButtonLabel} {
-    background: #2e75b6;
-    border: 1px solid #2e75b6;
-    &::after {
-      font-family: '';
-      display: block;
-      color: white;
-      width: 8px;
-      height: 8px;
-      margin: 2px;
-    }
-  }
-`;
-const GoogleLoginContainer = styled.div`
-  padding-top: 90px;
-  padding-bottom: 50px;
-  width: 300px;
-`;
-const GoogleLoginClass = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 45px;
-  margin-top: 20px;
-  border-radius: 2px;
-`;
-const LogoImg = styled.img`
-  padding-top: 5%;
-  max-width: 100%;
-  height: auto;
+  padding: 40px;
 `;

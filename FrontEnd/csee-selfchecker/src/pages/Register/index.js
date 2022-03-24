@@ -11,7 +11,7 @@ export default function Resister() {
   return (
     <ContainerDiv>
       <LoginFormDiv>
-        <LoginFormLeft1>HGU</LoginFormLeft1>
+        <LoginFormLeft1></LoginFormLeft1>
         <LoginFormLeft2>
           <LoginFormLeftTitle>
             Computer Science <br></br>And Electrical Engineering
@@ -45,7 +45,7 @@ export default function Resister() {
                 <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="studentPhone">
-                <Form.Control type="phone" placeholder="  연락처 (010XXXXXXXX)" style={{ borderRadius: '20px' }} />
+                <Form.Control type="phone" placeholder="  핸드폰 뒤 4자리 (XXXX)" style={{ borderRadius: '20px' }} />
               </Form.Group>
             </Form>
           </InputContainer>
