@@ -1,13 +1,13 @@
 package com.example.cseeselfcheck.major.domain;
 
-import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import com.example.cseeselfcheck.common.BaseEntity;
-import com.example.cseeselfcheck.user.domain.User;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-//public class Major extends BaseEntity {
 public class Major extends BaseEntity {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
