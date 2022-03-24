@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.example.cseeselfcheck.common.BaseEntity;
+import com.example.cseeselfcheck.exception.major.MajorDataFormatException;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,8 +28,15 @@ public class Major extends BaseEntity {
     private Boolean isDeleted;
 
     public Major(String majorName, String checker){
+        validateData(checker, true);
         this.majorName = majorName;
         this.checker = checker;
         this.isDeleted = false;
+    }
+
+    private void validateData(String data, boolean isNumber) {
+        final String NUMBER_REGEX = "[0-9]+";
+        if (data.matches(NUMBER_REGEX) != isNumber)
+            throw new MajorDataFormatException(data);
     }
 }
