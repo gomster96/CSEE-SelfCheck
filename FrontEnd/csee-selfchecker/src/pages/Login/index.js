@@ -1,46 +1,11 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import logo from '../../asset/img/loginImage.png';
 import background from '../../asset/img/backgroundImg.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import GlobalFonts from './asset/fonts/font';
-import GoogleLogin from 'react-google-login';
-const clientId = '783610138228-anpgvtcc326gk47gpiuospu35mvgcckl.apps.googleusercontent.com';
+import Googlebutton from './Googlebutton';
 
-const { useState } = React;
-/*
-ReactDOM.render(
-  <React.StrictMode>
-    <GlobalFonts />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-*/
-
-//구글 로그인
-export default function Login({ onGoogleLogin }) {
-  const onSuccess = async (response) => {
-    const {
-      googleId,
-      profileObj: { email, name },
-    } = response;
-
-    await onGoogleLogin();
-    // 구글 로그인 성공시 서버에 전달할 데이터
-  };
-
-  const onFailure = (error) => {
-    console.log(error);
-  };
-
-  const [select, setSelect] = useState('optionA');
-
-  const handleSelectChange = (event) => {
-    const value = event.target.value;
-    setSelect(value);
-  };
-
+export default function Login() {
   return (
     <ContainerDiv>
       <LoginFormDiv>
@@ -56,20 +21,9 @@ export default function Login({ onGoogleLogin }) {
           <LoginFormRightTitle>
             <h1>Log in</h1>
           </LoginFormRightTitle>
-          <Item>
-            <RadioButton type="radio" name="radio" value="optionA" checked={select === 'optionA'} onChange={(event) => handleSelectChange(event)} />
-            <RadioButtonLabel />
-            <div>학생</div>
-          </Item>
-          <Item>
-            <RadioButton type="radio" name="radio" value="optionB" checked={select === 'optionB'} onChange={(event) => handleSelectChange(event)} />
-            <RadioButtonLabel />
-            <div>관리자</div>
-          </Item>
-
           <GoogleLoginContainer>
             <GoogleLoginClass>
-              <GoogleLogin clientId={clientId} responseType={'id_token'} onSuccess={onSuccess} onFailure={onFailure} />
+              <Googlebutton />
             </GoogleLoginClass>
           </GoogleLoginContainer>
           <LoginFormRightsubTitle>
