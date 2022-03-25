@@ -1,13 +1,12 @@
-package com.example.cseeselfcheck.major.application;
+package com.example.cseeselfcheck.user.application;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.cseeselfcheck.exception.common.ExcelImportException;
-import com.example.cseeselfcheck.major.domain.Major;
-import com.example.cseeselfcheck.major.domain.repository.MajorRepository;
-import com.example.cseeselfcheck.major.presentation.dto.MajorCreateRequest;
+import com.example.cseeselfcheck.user.domain.ReferenceUser;
+import com.example.cseeselfcheck.user.domain.repository.ReferenceUserRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,20 +19,13 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-@RequiredArgsConstructor
 @Service
-public class MajorService {
-    private final MajorRepository majorRepository;
+@RequiredArgsConstructor
+public class ReferenceUserService {
+    private final ReferenceUserRepository referenceUserRepository;
 
-    public Long create(MajorCreateRequest majorCreateRequest){
-        Major newMajor = new Major(majorCreateRequest.getMajorName(), majorCreateRequest.getChecker());
-        Major savedMajor = majorRepository.save(newMajor);
-        return savedMajor.getId();
-    }
-
-    public void createByExcel(MultipartFile file) throws IOException{
-        List<Major> majors = new ArrayList<>();
-
+    public void createByExcel(MultipartFile file) throws IOException {
+        List<ReferenceUser> referenceUsers = new ArrayList<>();
         Workbook workbook = null;
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         if (extension.equals("xlsx")) {
@@ -43,16 +35,19 @@ public class MajorService {
         } else {
             throw new ExcelImportException();
         }
-
         Sheet worksheet = workbook.getSheetAt(0);
 
-        for(int i=1; i< worksheet.getPhysicalNumberOfRows(); i++) {
+        for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
+
             Row row = worksheet.getRow(i);
-            String majorName = row.getCell(0).toString();
-            String checker = row.getCell(1).toString();
-            majors.add(new Major(majorName, checker));
+            String studentNumber = row.getCell(0).toString();
+            String name = row.getCell(1).toString();
+            String semester = row.getCell(2).toString();
+            String phone = row.getCell(3).toString();
+            referenceUsers.add(new ReferenceUser(studentNumber, name, semester, phone));
         }
-        majorRepository.deleteAll();
-        majorRepository.saveAll(majors);
+        referenceUserRepository.deleteAll();
+        referenceUserRepository.saveAll(referenceUsers);
     }
 }
+

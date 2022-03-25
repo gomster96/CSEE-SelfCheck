@@ -1,13 +1,14 @@
 package com.example.cseeselfcheck.major.domain;
 
-import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import com.example.cseeselfcheck.common.BaseEntity;
-import com.example.cseeselfcheck.user.domain.User;
+import com.example.cseeselfcheck.exception.major.MajorDataFormatException;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-//public class Major extends BaseEntity {
 public class Major extends BaseEntity {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -28,8 +28,15 @@ public class Major extends BaseEntity {
     private Boolean isDeleted;
 
     public Major(String majorName, String checker){
+        validateData(checker, true);
         this.majorName = majorName;
         this.checker = checker;
         this.isDeleted = false;
+    }
+
+    private void validateData(String data, boolean isNumber) {
+        final String NUMBER_REGEX = "[0-9]+";
+        if (data.matches(NUMBER_REGEX) != isNumber)
+            throw new MajorDataFormatException(data);
     }
 }
