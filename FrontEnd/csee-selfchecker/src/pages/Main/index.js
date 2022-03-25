@@ -37,10 +37,10 @@ const ContainerDiv = styled.div`
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
-const LoginFormDiv = styled.div`
+const RoundBackgroundDiv = styled.div`
   background: #f5f5f5;
   width: 1050px;
-  height: 700px;
+  height: 850px;
   display: inline-block;
   flex-direction: row;
   box-shadow: 10px black;
@@ -54,13 +54,14 @@ const LoginFormDiv = styled.div`
 
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
   padding: 1%;
-  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+    height: 90%;
   }
-  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+  @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
@@ -118,7 +119,7 @@ const ButtonStyle = styled.div`
 export default function Main() {
   return (
     <ContainerDiv>
-      <LoginFormDiv>
+      <RoundBackgroundDiv>
         <InnerLayout>
           <TableLayout>
             <h1>Mypage</h1>
@@ -131,16 +132,16 @@ export default function Main() {
           </TableLayout>
           <TextLayout>
             <h5>
-              공학프로젝트 입문 수강요건을 <span class="text-danger">충족</span>하였습니다
+              공학프로젝트 입문 수강이 <span class="text-danger">가능</span>합니다
             </h5>
-            <h6>*미충족이어도 제출 가능</h6>
+            <h6>*불가능이어도 제출 가능</h6>
           </TextLayout>
           <ButtonStyle>
             <Button className="rounded-pill m-2">수정하기</Button>
             <Button className="rounded-pill m-2">제출하기</Button>
           </ButtonStyle>
         </InnerLayout>
-      </LoginFormDiv>
+      </RoundBackgroundDiv>
     </ContainerDiv>
   );
 }
