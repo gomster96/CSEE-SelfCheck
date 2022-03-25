@@ -1,17 +1,27 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import background from '../../asset/img/backgroundImg.png';
 import logo from '../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, Col } from 'react-bootstrap';
-//import GlobalFonts from './asset/fonts/font';
+
+const { useState } = React;
 
 export default function Resister() {
+  const [select, setSelect] = useState('0');
+
+  const handleSelectChange = (event) => {
+    const value = event.target.value;
+    if (value.match != 0) {
+      document.location.href = '../adminregister';
+    }
+    setSelect(value);
+  };
+
   return (
     <ContainerDiv>
       <LoginFormDiv>
-        <LoginFormLeft1></LoginFormLeft1>
+        <LoginFormLeft1 />
         <LoginFormLeft2>
           <LoginFormLeftTitle>
             Computer Science <br></br>And Electrical Engineering
@@ -21,35 +31,35 @@ export default function Resister() {
         </LoginFormLeft2>
 
         <LoginFormRight>
-          <InputContainer>
-            <Form>
-              <LoginFormRightTitle>
-                <h3>Student Information</h3>
-              </LoginFormRightTitle>
-
-              <Col style={{ paddingLeft: '20%' }}>
-                <Form.Control as="select" style={{ width: '70%', height: '75%', textAlign: 'center', borderRadius: '20px' }}>
-                  <option selected>전공선택(Major)</option>
-                  <option>컴퓨터공학심화</option>
-                  <option>컴퓨터공학/1전공</option>
-                  <option>컴퓨터공학/2전공</option>
-                  <option>전자공학심화</option>
-                  <option>전자공학(1/2전공)</option>
-                </Form.Control>
-              </Col>
-
-              <Form.Group className="mb-3" controlId="studentId" style={{ marginTop: '50px' }}>
-                <Form.Control type="id" placeholder="  학번 (Student ID)" style={{ borderRadius: '20px' }} />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="studentName">
-                <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="studentPhone">
-                <Form.Control type="phone" placeholder="  핸드폰 뒤 4자리 (XXXX)" style={{ borderRadius: '20px' }} />
-              </Form.Group>
-            </Form>
-          </InputContainer>
-          <Button as="input" variant="primary" type="submit" value="Save!" style={{ width: '50%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
+          <Form>
+            <ItemContainer style={{ paddingLeft: '20%' }}>
+              <Form.Check inline label="학생" type="radio" name="radio" value="0" checked={select === '0'} onChange={(event) => handleSelectChange(event)} />
+              <Form.Check inline label="관리자" type="radio" name="radio" value="1" checked={select === '1'} onChange={(event) => handleSelectChange(event)} />
+            </ItemContainer>
+            <LoginFormRightTitle>
+              <h3>Student Information</h3>
+            </LoginFormRightTitle>
+            <Col style={{ paddingLeft: '20%' }}>
+              <Form.Control as="select" style={{ width: '70%', height: '75%', textAlign: 'center', borderRadius: '20px' }}>
+                <option selected>전공선택(Major)</option>
+                <option>컴퓨터공학심화</option>
+                <option>컴퓨터공학/1전공</option>
+                <option>컴퓨터공학/2전공</option>
+                <option>전자공학심화</option>
+                <option>전자공학(1/2전공)</option>
+              </Form.Control>
+            </Col>
+            <Form.Group className="mb-3" controlId="studentId" style={{ marginTop: '50px' }}>
+              <Form.Control type="id" placeholder="  학번 (Student ID)" style={{ borderRadius: '20px' }} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="studentName">
+              <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="studentPhone">
+              <Form.Control type="phone" placeholder="  핸드폰 뒤 4자리 (XXXX)" style={{ borderRadius: '20px' }} />
+            </Form.Group>
+          </Form>
+          <Button as="input" variant="primary" type="submit" value="Save!" style={{ width: '30%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
         </LoginFormRight>
       </LoginFormDiv>
     </ContainerDiv>
@@ -189,12 +199,9 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding: 100px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
 `;
-const InputContainer = styled.div`
-  width: 100%;
+const ItemContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
+  margin: 10vh 20px 10px 0px;
 `;

@@ -1,13 +1,23 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import background from '../../../asset/img/backgroundImg.png';
 import logo from '../../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
-//import GlobalFonts from './asset/fonts/font';
+
+const { useState } = React;
 
 export default function AdminRegister() {
+  const [select, setSelect] = useState('1');
+
+  const handleSelectChange = (event) => {
+    const value = event.target.value;
+    if (value.match != 1) {
+      document.location.href = '../register';
+    }
+    setSelect(value);
+  };
+
   return (
     <ContainerDiv>
       <LoginFormDiv>
@@ -21,22 +31,24 @@ export default function AdminRegister() {
         </LoginFormLeft2>
 
         <LoginFormRight>
-          <InputContainer>
-            <Form>
-              <LoginFormRightTitle>
-                <h3>Admin Information</h3>
-              </LoginFormRightTitle>
+          <Form>
+            <ItemContainer style={{ paddingLeft: '20%' }}>
+              <Form.Check inline label="학생" type="radio" name="radio" value="0" checked={select === '0'} onChange={(event) => handleSelectChange(event)} />
+              <Form.Check inline label="관리자" type="radio" name="radio" value="1" checked={select === '1'} onChange={(event) => handleSelectChange(event)} />
+            </ItemContainer>
+            <LoginFormRightTitle>
+              <h3>Admin Information</h3>
+            </LoginFormRightTitle>
 
-              <Form.Group className="mb-3" controlId="department" style={{ marginTop: '50px' }}>
-                <Form.Control type="id" placeholder="  소속 (Department)" style={{ borderRadius: '20px' }} />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="adminName">
-                <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
-              </Form.Group>
-              <p>제출 시 관리자 승인 후 로그인 가능합니다.</p>
-            </Form>
-          </InputContainer>
-          <Button as="input" variant="primary" type="submit" value="Submit!" style={{ width: '50%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
+            <Form.Group className="mb-3" controlId="department" style={{ marginTop: '50px' }}>
+              <Form.Control type="id" placeholder="  소속 (Department)" style={{ borderRadius: '20px' }} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="adminName">
+              <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
+            </Form.Group>
+            <p>제출 시 관리자 승인 후 로그인 가능합니다.</p>
+          </Form>
+          <Button as="input" variant="primary" type="submit" value="Submit!" style={{ width: '30%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
         </LoginFormRight>
       </LoginFormDiv>
     </ContainerDiv>
@@ -176,12 +188,9 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding: 100px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
 `;
-const InputContainer = styled.div`
-  width: 100%;
+const ItemContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
+  margin: 10vh 20px 10px 0px;
 `;
