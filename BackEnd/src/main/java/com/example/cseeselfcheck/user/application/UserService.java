@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserRequestDto;
 import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
+import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
 
 import org.springframework.stereotype.Service;
@@ -29,5 +30,11 @@ public class UserService {
     public List<UserDataDto> getSearchedUser(String searchWord){
 
         return userRepository.findUserBySearchWord(searchWord);
+    }
+
+    public UserIndividualDataDto getUserIndividualDataById(Long userId){
+        List<UserIndividualDataDto> individualData = userRepository.findIndividualDataById(userId);
+
+        return individualData.get(0);
     }
 }

@@ -35,6 +35,8 @@ public class User extends BaseEntity {
 
     private String takenStatus;
 
+    private String takenSemesterStatus;
+    
     public User(Major major, String email, String studentNumber, int result, LocalDateTime resultDate, String takenStatus) {
         this.major = major;
         this.email = email;
