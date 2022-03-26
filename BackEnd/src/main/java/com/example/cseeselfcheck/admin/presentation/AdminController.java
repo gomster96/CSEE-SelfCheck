@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.cseeselfcheck.admin.application.AdminService;
+import com.example.cseeselfcheck.admin.presentation.dto.AdminSearchRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserRequestDto;
 import com.example.cseeselfcheck.major.domain.Major;
 import com.example.cseeselfcheck.major.domain.repository.MajorRepository;
@@ -33,15 +34,23 @@ public class AdminController {
     private final UserService userService;
     private final MajorRepository majorRepository;
     private final UserRepository userRepository;
+
     @GetMapping("/users")
-    public ResponseEntity<Object> getFilteredUser(@RequestBody AdminUserRequestDto request){
+    public ResponseEntity<Object> getFilteredUser(@RequestBody AdminUserRequestDto request) {
 
         List<UserDataDto> filteredUser = userService.getFilteredUser(request);
         return ResponseEntity.ok(filteredUser);
     }
 
+    @GetMapping("/search-user")
+    public ResponseEntity<Object> getSearchUser(@RequestBody AdminSearchRequestDto request) {
+        String searchWord = request.getSearchWord();
+        List<UserDataDto> searchedUser = userService.getSearchedUser(searchWord);
+        return ResponseEntity.ok(searchedUser);
+    }
+
     @GetMapping("/test-save-user")
-    public ResponseEntity<Object> testSaveUser(){
+    public ResponseEntity<Object> testSaveUser() {
         List<User> users = new ArrayList<>();
         users.add(new User(majorRepository.getById(7L), "testEmail", "21600399", 1, LocalDateTime.now(), "11110000000"));
         users.add(new User(majorRepository.getById(8L), "testEmail", "21232132", 1, LocalDateTime.now(), "11110000000"));
