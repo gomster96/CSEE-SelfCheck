@@ -31,10 +31,11 @@ public class ReferenceUser {
     private String phone;
 
 
-    public ReferenceUser(String studentNumber, String name, String semester, String phone) {
+    public ReferenceUser(Major major,String studentNumber, String name, String semester, String phone) {
         validateData(studentNumber, true);
         validateData(phone, true);
         validateData(name, false);
+        this.major = major;
         this.studentNumber = studentNumber;
         this.name = name;
         this.semester = semester;
