@@ -1,7 +1,7 @@
 package com.example.cseeselfcheck.user.domain.dto;
 
 public interface UserDataDto {
-    String getStudentName();
+    String getStudentNumber();
     String getName();
     String getSemester();
     String getMajorName();
