@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import background from '../../asset/img/backgroundImg.png';
 import AdminTable from './AdminTable';
-import Footer from './Footer';
-import HeaderFilter from './HeaderFIlter';
+import HeaderFilter from './HeaderFIlter/Filters';
 import SearchBar from './SearchBar';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,7 +21,8 @@ const BREAK_POINT_PC = 1200;
 
 const ContainerDiv = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: auto;
+  padding: 4rem;
   background: #eff0f2;
   display: flex;
   justify-content: center;
@@ -44,7 +44,7 @@ const ContainerDiv = styled.div`
 const LoginFormDiv = styled.div`
   background: #f5f5f5;
   width: 1050px;
-  height: 700px;
+  height: auto;
   display: inline-block;
   flex-direction: row;
   box-shadow: 10px black;
@@ -55,9 +55,7 @@ const LoginFormDiv = styled.div`
   -webkit-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
   -moz-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
   box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
-
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
-  padding: 1%;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }
@@ -69,17 +67,103 @@ const LoginFormDiv = styled.div`
   }
 `;
 
+const TableLayout = styled.div`
+  font-size: 18px;
+  margin-bottom: 2vh;
+`;
+const InnerLayout = styled.div`
+  display: inline-block;
+  height: 80%;
+  margin-top: 3%;
+`;
+const TextLayout = styled.div`
+  padding: 0.5rem;
+
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    font-size: ${({ sm }) => sm && `${calcWidthPercent(sm)}rem`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    font-size: ${({ md }) => md && `${calcWidthPercent(md)}rem`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    font-size: ${({ lg }) => lg && `${calcWidthPercent(lg)}rem`};
+  }
+`;
+const ButtonStyle = styled.div`
+  border-radius: 35px;
+  display: inline-block;
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `80%`)};
+  padding: 2rem;
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+    width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+    width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
+  }
+`;
+const FooterDiv = styled.div`
+  display: flex;
+  align-itmes: center;
+  justify-content: center;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  align-itmes: center;
+`;
+
+const FooterTextLayout = styled.div`
+  color: gray;
+  font-size: 14px;
+  padding: 0.5rem;
+`;
 export default function Admin() {
   return (
     <>
+      <Navbar bg="light">
+        <Container>
+          <Navbar.Brand href="/">
+            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
       <ContainerDiv>
         <LoginFormDiv>
-          <HeaderFilter />
-          <SearchBar />
-          <AdminTable />
-          <Footer />
+          <InnerLayout>
+            <TextLayout>
+              <h1>Admin Page</h1>
+            </TextLayout>
+            <InnerLayout>
+              <HeaderFilter />
+              <SearchBar />
+              <TableLayout>
+                <AdminTable />
+              </TableLayout>
+            </InnerLayout>
+            <TextLayout>
+              <ButtonStyle className="mb-3">
+                <Button className="rounded-pill m-2">Excel Import</Button>
+                <Button className="rounded-pill m-2">Excel Export</Button>
+              </ButtonStyle>
+            </TextLayout>
+          </InnerLayout>
         </LoginFormDiv>
       </ContainerDiv>
+      <>
+        <FooterDiv className="bg-gray">
+          <Navbar>
+            <Container>
+              <Footer>
+                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
+                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
+              </Footer>
+            </Container>
+          </Navbar>
+        </FooterDiv>
+      </>
     </>
   );
 }

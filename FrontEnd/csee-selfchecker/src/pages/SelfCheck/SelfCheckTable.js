@@ -15,7 +15,7 @@ const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 14,
+    fontSize: 16,
   },
 }))(TableCell);
 
@@ -35,7 +35,7 @@ function createData2(semester, major, phone) {
 }
 
 const rows = [createData('김주은', '21700162', 'moomin@handong.ac.kr')];
-const rows2 = [createData2('8학기', '컴퓨터공학', '01031912648')];
+const rows2 = [createData2('8학기', '컴퓨터공학', '2648')];
 
 const useStyles = makeStyles({
   table: {

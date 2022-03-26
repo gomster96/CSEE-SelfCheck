@@ -41,12 +41,14 @@ const ContainerDiv = styled.div`
 const RoundBackgroundDiv = styled.div`
   background: #f5f5f5;
   width: 1050px;
-  height: 850px;
+  height: auto;
   display: inline-block;
   flex-direction: row;
   box-shadow: 10px black;
   border-radius: 40px;
   text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 
   /* 그림자 */
   -webkit-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
@@ -70,7 +72,7 @@ const RoundBackgroundDiv = styled.div`
 const InnerLayout = styled.div`
   display: inline-block;
   height: 80%;
-  margin-top: 5%;
+  margin-top: 3%;
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `90%`)};
   padding: 1rem;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
@@ -116,6 +118,21 @@ const ButtonStyle = styled.div`
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
+const FooterDiv = styled.div`
+  display: flex;
+  align-itmes: center;
+  justify-content: center;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  align-itmes: center;
+`;
+const FooterTextLayout = styled.div`
+  color: gray;
+  font-size: 14px;
+  padding: 0.5rem;
+`;
 
 export default function Main() {
   return (
@@ -152,6 +169,18 @@ export default function Main() {
           </InnerLayout>
         </RoundBackgroundDiv>
       </ContainerDiv>
+      <>
+        <FooterDiv className="bg-gray">
+          <Navbar>
+            <Container>
+              <Footer>
+                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
+                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
+              </Footer>
+            </Container>
+          </Navbar>
+        </FooterDiv>
+      </>
     </>
   );
 }
