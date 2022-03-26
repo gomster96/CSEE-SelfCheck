@@ -27,11 +27,11 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(major, completion_semester, complete, result) {
-  return { major, completion_semester, complete, result };
+function createData(major, completion_semester, complete) {
+  return { major, completion_semester, complete };
 }
 
-const rows = [createData('공학설계입문', '17-2', '이수', '충족'), createData('운영체제', '22-1', '병수', '미충족'), createData('컴퓨터구조', '21-2', '이수', '충족')];
+const rows = [createData('공학설계입문', '17-2', '이수'), createData('운영체제', '22-1', '병수'), createData('컴퓨터구조', '21-2', '이수')];
 
 const useStyles = makeStyles({
   table: {
@@ -50,7 +50,6 @@ export default function MyPageResultTable() {
             <StyledTableCell align="center">과목명</StyledTableCell>
             <StyledTableCell align="center">이수학기</StyledTableCell>
             <StyledTableCell align="center">이수여부</StyledTableCell>
-            <StyledTableCell align="center">판정</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -61,9 +60,6 @@ export default function MyPageResultTable() {
               </StyledTableCell>
               <StyledTableCell align="center">{row.completion_semester}</StyledTableCell>
               <StyledTableCell align="center">{row.complete}</StyledTableCell>
-              <StyledTableCell align="center" style={{ color: 'red' }}>
-                {row.result}
-              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
