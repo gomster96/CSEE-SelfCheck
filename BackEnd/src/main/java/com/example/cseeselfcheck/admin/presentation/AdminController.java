@@ -52,14 +52,14 @@ public class AdminController {
     @GetMapping("/test-save-user")
     public ResponseEntity<Object> testSaveUser() {
         List<User> users = new ArrayList<>();
-        users.add(new User(majorRepository.getById(7L), "testEmail", "21600399", 1, LocalDateTime.now(), "11110000000"));
-        users.add(new User(majorRepository.getById(8L), "testEmail", "21232132", 1, LocalDateTime.now(), "11110000000"));
-        users.add(new User(majorRepository.getById(9L), "testEmail", "12323123", 1, LocalDateTime.now(), "10110000000"));
-        users.add(new User(majorRepository.getById(10L), "testEmail", "12312323", 1, LocalDateTime.now(), "11010000000"));
-        users.add(new User(majorRepository.getById(11L), "testEmail", "89789789", 1, LocalDateTime.now(), "10110000000"));
-        users.add(new User(majorRepository.getById(7L), "testEmail", "78989788", 1, LocalDateTime.now(), "01110000000"));
-        users.add(new User(majorRepository.getById(7L), "testEmail", "12342343", 1, LocalDateTime.now(), "01110000000"));
-        users.add(new User(majorRepository.getById(8L), "testEmail", "12312321", 1, LocalDateTime.now(), "00000000000"));
+        users.add(new User("testEmail", "21600399", 1, LocalDateTime.now(), "11110000000"));
+        users.add(new User( "testEmail", "21232132", 1, LocalDateTime.now(), "11110000000"));
+        users.add(new User( "testEmail", "12323123", 1, LocalDateTime.now(), "10110000000"));
+        users.add(new User( "testEmail", "12312323", 1, LocalDateTime.now(), "11010000000"));
+        users.add(new User( "testEmail", "89789789", 1, LocalDateTime.now(), "10110000000"));
+        users.add(new User( "testEmail", "78989788", 1, LocalDateTime.now(), "01110000000"));
+        users.add(new User( "testEmail", "12342343", 1, LocalDateTime.now(), "01110000000"));
+        users.add(new User( "testEmail", "12312321", 1, LocalDateTime.now(), "00000000000"));
         userRepository.saveAll(users);
         return ResponseEntity.ok(null);
     }
