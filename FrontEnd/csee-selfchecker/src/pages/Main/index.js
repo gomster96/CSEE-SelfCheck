@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import MypageTable from './MypageTable';
 import MypageResultTable from './MypageResultTable';
 import background from '../../asset/img/backgroundImg.png';
+import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
 const calcWidthPercent = (span) => {
   if (!span) return;
@@ -37,15 +38,17 @@ const ContainerDiv = styled.div`
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
-const LoginFormDiv = styled.div`
+const RoundBackgroundDiv = styled.div`
   background: #f5f5f5;
   width: 1050px;
-  height: 700px;
+  height: auto;
   display: inline-block;
   flex-direction: row;
   box-shadow: 10px black;
   border-radius: 40px;
   text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 
   /* 그림자 */
   -webkit-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
@@ -54,13 +57,14 @@ const LoginFormDiv = styled.div`
 
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
   padding: 1%;
-  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+    height: 90%;
   }
-  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+  @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
@@ -68,7 +72,7 @@ const LoginFormDiv = styled.div`
 const InnerLayout = styled.div`
   display: inline-block;
   height: 80%;
-  margin-top: 5%;
+  margin-top: 3%;
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `90%`)};
   padding: 1rem;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
@@ -114,33 +118,69 @@ const ButtonStyle = styled.div`
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
+const FooterDiv = styled.div`
+  display: flex;
+  align-itmes: center;
+  justify-content: center;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  align-itmes: center;
+`;
+const FooterTextLayout = styled.div`
+  color: gray;
+  font-size: 14px;
+  padding: 0.5rem;
+`;
 
 export default function Main() {
   return (
-    <ContainerDiv>
-      <LoginFormDiv>
-        <InnerLayout>
-          <TableLayout>
-            <h1>Mypage</h1>
-          </TableLayout>
-          <TableLayout>
-            <MypageTable />
-          </TableLayout>
-          <TableLayout>
-            <MypageResultTable />
-          </TableLayout>
-          <TextLayout>
-            <h5>
-              공학프로젝트 입문 수강요건을 <span class="text-danger">충족</span>하였습니다
-            </h5>
-            <h6>*미충족이어도 제출 가능</h6>
-          </TextLayout>
-          <ButtonStyle>
-            <Button className="rounded-pill m-2">수정하기</Button>
-            <Button className="rounded-pill m-2">제출하기</Button>
-          </ButtonStyle>
-        </InnerLayout>
-      </LoginFormDiv>
-    </ContainerDiv>
+    <>
+      <Navbar bg="light">
+        <Container>
+          <Navbar.Brand href="/">
+            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+      <ContainerDiv>
+        <RoundBackgroundDiv>
+          <InnerLayout>
+            <TableLayout>
+              <h1>Mypage</h1>
+            </TableLayout>
+            <TableLayout>
+              <MypageTable />
+            </TableLayout>
+            <TableLayout>
+              <MypageResultTable />
+            </TableLayout>
+            <TextLayout>
+              <h5>
+                공학프로젝트 입문 수강이 <span class="text-danger">가능</span>합니다
+              </h5>
+              <h6>*불가능이어도 제출 가능</h6>
+            </TextLayout>
+            <ButtonStyle>
+              <Button className="rounded-pill m-2">수정하기</Button>
+              <Button className="rounded-pill m-2">제출하기</Button>
+            </ButtonStyle>
+          </InnerLayout>
+        </RoundBackgroundDiv>
+      </ContainerDiv>
+      <>
+        <FooterDiv className="bg-gray">
+          <Navbar>
+            <Container>
+              <Footer>
+                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
+                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
+              </Footer>
+            </Container>
+          </Navbar>
+        </FooterDiv>
+      </>
+    </>
   );
 }
