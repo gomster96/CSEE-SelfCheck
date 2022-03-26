@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import SelfCheckTable from './SelfCheckTable';
 import SelfCheckResultTable from './SelfCheckResultTable';
 import background from '../../asset/img/backgroundImg.png';
+import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
 const calcWidthPercent = (span) => {
   if (!span) return;
@@ -116,31 +117,38 @@ const ButtonStyle = styled.div`
   }
 `;
 
-function App() {
+export default function Main() {
   return (
-    <ContainerDiv>
-      <RoundBackgroundDiv>
-        <InnerLayout>
-          <TableLayout>
-            <h1>Self Check</h1>
-          </TableLayout>
-          <TableLayout>
-            <SelfCheckTable />
-          </TableLayout>
-          <TableLayout>
-            <SelfCheckResultTable />
-          </TableLayout>
-          <TextLayout>
-            <h6>*불가능이어도 제출 가능</h6>
-          </TextLayout>
-          <ButtonStyle>
-            <Button className="rounded-pill m-2">다시하기</Button>
-            <Button className="rounded-pill m-2">제출하기</Button>
-          </ButtonStyle>
-        </InnerLayout>
-      </RoundBackgroundDiv>
-    </ContainerDiv>
+    <>
+      <Navbar bg="light">
+        <Container>
+          <Navbar.Brand href="/">
+            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+      <ContainerDiv>
+        <RoundBackgroundDiv>
+          <InnerLayout>
+            <TableLayout>
+              <h1>Self Check</h1>
+            </TableLayout>
+            <TableLayout>
+              <SelfCheckTable />
+            </TableLayout>
+            <TableLayout>
+              <SelfCheckResultTable />
+            </TableLayout>
+            <TextLayout>
+              <h6>*불가능이어도 제출 가능</h6>
+            </TextLayout>
+            <ButtonStyle>
+              <Button className="rounded-pill m-2">다시하기</Button>
+              <Button className="rounded-pill m-2">제출하기</Button>
+            </ButtonStyle>
+          </InnerLayout>
+        </RoundBackgroundDiv>
+      </ContainerDiv>
+    </>
   );
 }
-
-export default App;

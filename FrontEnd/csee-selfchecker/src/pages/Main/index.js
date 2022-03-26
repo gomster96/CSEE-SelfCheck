@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import MypageTable from './MypageTable';
 import MypageResultTable from './MypageResultTable';
 import background from '../../asset/img/backgroundImg.png';
+import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
 const calcWidthPercent = (span) => {
   if (!span) return;
@@ -118,30 +119,39 @@ const ButtonStyle = styled.div`
 
 export default function Main() {
   return (
-    <ContainerDiv>
-      <RoundBackgroundDiv>
-        <InnerLayout>
-          <TableLayout>
-            <h1>Mypage</h1>
-          </TableLayout>
-          <TableLayout>
-            <MypageTable />
-          </TableLayout>
-          <TableLayout>
-            <MypageResultTable />
-          </TableLayout>
-          <TextLayout>
-            <h5>
-              공학프로젝트 입문 수강이 <span class="text-danger">가능</span>합니다
-            </h5>
-            <h6>*불가능이어도 제출 가능</h6>
-          </TextLayout>
-          <ButtonStyle>
-            <Button className="rounded-pill m-2">수정하기</Button>
-            <Button className="rounded-pill m-2">제출하기</Button>
-          </ButtonStyle>
-        </InnerLayout>
-      </RoundBackgroundDiv>
-    </ContainerDiv>
+    <>
+      <Navbar bg="light">
+        <Container>
+          <Navbar.Brand href="/">
+            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+      <ContainerDiv>
+        <RoundBackgroundDiv>
+          <InnerLayout>
+            <TableLayout>
+              <h1>Mypage</h1>
+            </TableLayout>
+            <TableLayout>
+              <MypageTable />
+            </TableLayout>
+            <TableLayout>
+              <MypageResultTable />
+            </TableLayout>
+            <TextLayout>
+              <h5>
+                공학프로젝트 입문 수강이 <span class="text-danger">가능</span>합니다
+              </h5>
+              <h6>*불가능이어도 제출 가능</h6>
+            </TextLayout>
+            <ButtonStyle>
+              <Button className="rounded-pill m-2">수정하기</Button>
+              <Button className="rounded-pill m-2">제출하기</Button>
+            </ButtonStyle>
+          </InnerLayout>
+        </RoundBackgroundDiv>
+      </ContainerDiv>
+    </>
   );
 }

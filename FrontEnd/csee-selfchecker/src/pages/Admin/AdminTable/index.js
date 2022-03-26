@@ -53,7 +53,7 @@ export default function AdminTable() {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
+      <Table className={classes.table} aria-label="customized table" size="small">
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">학생명</StyledTableCell>
@@ -66,7 +66,7 @@ export default function AdminTable() {
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row" align="center" style={{ height: '5vh' }}>
+              <StyledTableCell component="th" scope="row" align="center" size="small">
                 {row.name}
               </StyledTableCell>
               <StyledTableCell align="center">{row.major}</StyledTableCell>
