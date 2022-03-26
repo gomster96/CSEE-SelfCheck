@@ -18,13 +18,16 @@ public class UserService {
     public List<UserDataDto> getFilteredUser(AdminUserRequestDto data){
 
         List<UserDataDto> userDatas = userRepository.findUserData();
-        List<UserDataDto> filteredUsers = userDatas.stream()
-                                                   .filter(data::isUserContainLecture)
-                                                   .filter(data::isUserContainSemester)
-                                                   .filter(data::isSameTakePossible)
-                                                   .collect(Collectors.toList());
 
-        return filteredUsers;
+        return userDatas.stream()
+                        .filter(data::isUserContainLecture)
+                        .filter(data::isUserContainSemester)
+                        .filter(data::isSameTakePossible)
+                        .collect(Collectors.toList());
     }
 
+    public List<UserDataDto> getSearchedUser(String searchWord){
+
+        return userRepository.findUserBySearchWord(searchWord);
+    }
 }

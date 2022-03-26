@@ -13,4 +13,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "from User u, ReferenceUser r " +
             "where u.studentNumber = r.studentNumber")
     List<UserDataDto> findUserData();
+
+    @Query("select u.studentNumber as studentNumber, u.major.majorName as majorName, u.result as result, u.takenStatus as takenStatus, r.name as name, r.semester as semester " +
+            "from User u, ReferenceUser r " +
+            "where u.studentNumber = r.studentNumber " +
+            "and ( r.studentNumber like :searchWord% or r.name like :searchWord%)")
+    List<UserDataDto> findUserBySearchWord(String searchWord);
 }
