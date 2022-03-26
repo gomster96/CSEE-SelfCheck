@@ -3,19 +3,43 @@ import styled from 'styled-components';
 import background from '../../asset/img/backgroundImg.png';
 import logo from '../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, Col } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 const { useState } = React;
 
 export default function Resister() {
+  const [email, setEmail] = useState('');
   const [select, setSelect] = useState('0');
-
-  const handleSelectChange = (event) => {
-    const value = event.target.value;
-    if (value.match != 0) {
-      document.location.href = '../adminregister';
+  const handleUserChange = (e) => {
+    const value = e.target.value;
+    if (value.match !== 0) {
+      document.location.href = '../Register/Admin';
     }
     setSelect(value);
+  };
+
+  const initialFormData = Object.freeze({
+    studentId: '',
+    studentName: '',
+    studentPhone: '',
+    studentEmail: email,
+  });
+
+  const [formData, updateFormData] = React.useState(initialFormData);
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    // ... submit to API or something
   };
 
   return (
@@ -31,35 +55,25 @@ export default function Resister() {
         </LoginFormLeft2>
 
         <LoginFormRight>
-          <Form>
-            <ItemContainer style={{ paddingLeft: '20%' }}>
-              <Form.Check inline label="학생" type="radio" name="radio" value="0" checked={select === '0'} onChange={(event) => handleSelectChange(event)} />
-              <Form.Check inline label="관리자" type="radio" name="radio" value="1" checked={select === '1'} onChange={(event) => handleSelectChange(event)} />
+          <Form onSubmit={handleSubmit}>
+            <ItemContainer>
+              <Form.Check inline label="학생" type="radio" value="0" checked={select === '0'} onChange={handleUserChange} />
+              <Form.Check inline label="관리자" type="radio" value="1" checked={select === '1'} onChange={handleUserChange} />
             </ItemContainer>
             <LoginFormRightTitle>
               <h3>Student Information</h3>
             </LoginFormRightTitle>
-            <Col style={{ paddingLeft: '20%' }}>
-              <Form.Control as="select" style={{ width: '70%', height: '75%', textAlign: 'center', borderRadius: '20px' }}>
-                <option selected>전공선택(Major)</option>
-                <option>컴퓨터공학심화</option>
-                <option>컴퓨터공학/1전공</option>
-                <option>컴퓨터공학/2전공</option>
-                <option>전자공학심화</option>
-                <option>전자공학(1/2전공)</option>
-              </Form.Control>
-            </Col>
-            <Form.Group className="mb-3" controlId="studentId" style={{ marginTop: '50px' }}>
-              <Form.Control type="id" placeholder="  학번 (Student ID)" style={{ borderRadius: '20px' }} />
+            <Form.Group className="mb-3" style={{ marginTop: '50px' }}>
+              <Form.Control placeholder="  학번 (Student ID)" name="studentId" onChange={handleChange} style={{ borderRadius: '20px' }} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="studentName">
-              <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
+            <Form.Group className="mb-3">
+              <Form.Control placeholder="  이름 (Name)" name="studentName" onChange={handleChange} style={{ borderRadius: '20px' }} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="studentPhone">
-              <Form.Control type="phone" placeholder="  핸드폰 뒤 4자리 (XXXX)" style={{ borderRadius: '20px' }} />
+            <Form.Group className="mb-3">
+              <Form.Control placeholder="  핸드폰 뒤 4자리 (XXXX)" name="studentPhone" onChange={handleChange} style={{ borderRadius: '20px' }} />
             </Form.Group>
+            <Button as="input" type="submit" value="Save!" style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
           </Form>
-          <Button as="input" variant="primary" type="submit" value="Save!" style={{ width: '30%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
         </LoginFormRight>
       </LoginFormDiv>
     </ContainerDiv>
@@ -72,7 +86,6 @@ const calcWidthPercent = (span) => {
   const width = (span / 12) * 100;
   return width;
 };
-
 const BREAK_POINT_MOBILE = 768;
 const BREAK_POINT_TABLET = 992;
 const BREAK_POINT_PC = 1200;
@@ -204,4 +217,5 @@ const LoginFormRightTitle = styled.div`
 const ItemContainer = styled.div`
   display: flex;
   margin: 10vh 20px 10px 0px;
+  padding-left: 20%;
 `;
