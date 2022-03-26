@@ -22,9 +22,6 @@ public class User extends BaseEntity {
     @Id @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Major major;
-
     private String email;
 
     private String studentNumber;
@@ -37,8 +34,7 @@ public class User extends BaseEntity {
 
     private String takenSemesterStatus;
     
-    public User(Major major, String email, String studentNumber, int result, LocalDateTime resultDate, String takenStatus) {
-        this.major = major;
+    public User(String email, String studentNumber, int result, LocalDateTime resultDate, String takenStatus) {
         this.email = email;
         this.studentNumber = studentNumber;
         this.result = result;
