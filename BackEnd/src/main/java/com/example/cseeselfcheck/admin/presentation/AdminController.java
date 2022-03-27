@@ -26,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
+@CrossOrigin(origins = "*")
 public class AdminController {
 
     /* 들어오는 데이터 꼴

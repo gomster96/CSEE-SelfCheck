@@ -7,6 +7,8 @@ import SearchBar from './SearchBar';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
+import ImportButton from './ImportButton';
+import ExportButton from './ExportButton';
 
 const calcWidthPercent = (span) => {
   if (!span) return;
@@ -77,7 +79,7 @@ const InnerLayout = styled.div`
   margin-top: 3%;
 `;
 const TextLayout = styled.div`
-  padding: 0.5rem;
+  padding-top: 0.5rem;
 
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     font-size: ${({ sm }) => sm && `${calcWidthPercent(sm)}rem`};
@@ -145,8 +147,8 @@ export default function Admin() {
             </InnerLayout>
             <TextLayout>
               <ButtonStyle className="mb-3">
-                <Button className="rounded-pill m-2">Excel Import</Button>
-                <Button className="rounded-pill m-2">Excel Export</Button>
+                <ImportButton />
+                <ExportButton />
               </ButtonStyle>
             </TextLayout>
           </InnerLayout>
