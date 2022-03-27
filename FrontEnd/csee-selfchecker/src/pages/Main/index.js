@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import SelfCheckTable from './SelfCheckTable';
-import SelfCheckResultTable from './SelfCheckResultTable';
+import MypageTable from './MypageTable';
+import MypageResultTable from './MypageResultTable';
 import background from '../../asset/img/backgroundImg.png';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -87,7 +87,7 @@ const InnerLayout = styled.div`
 `;
 
 const TableLayout = styled.div`
-  margin-top: 6vh;
+  margin-bottom: 6vh;
 `;
 
 const TextLayout = styled.div`
@@ -107,19 +107,17 @@ const ButtonStyle = styled.div`
   border-radius: 35px;
   display: inline-block;
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `80%`)};
-  padding: 1rem;
-  margin: 1rem;
-  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+  padding-bottom: 1rem;
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+  @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
-
 const FooterDiv = styled.div`
   display: flex;
   align-itmes: center;
@@ -130,7 +128,6 @@ const Footer = styled.div`
   display: flex;
   align-itmes: center;
 `;
-
 const FooterTextLayout = styled.div`
   color: gray;
   font-size: 14px;
@@ -151,17 +148,27 @@ export default function Main() {
         <RoundBackgroundDiv>
           <InnerLayout>
             <TableLayout>
-              <h1>Self Check</h1>
+              <h1>Mypage</h1>
             </TableLayout>
             <TableLayout>
-              <SelfCheckTable />
+              <MypageTable />
             </TableLayout>
             <TableLayout>
-              <SelfCheckResultTable />
+              <MypageResultTable />
             </TableLayout>
+            <TextLayout>
+              <h4>
+                공학프로젝트 입문 수강이 <span class="text-danger">가능</span>합니다
+              </h4>
+            </TextLayout>
+            <TextLayout>
+              <h6>
+                *불가능이어도 제출 가능합니다.<br></br>**제출 버튼을 누르셔야 최종적으로 제출됩니다.
+              </h6>
+            </TextLayout>
             <ButtonStyle>
-              <Button className="rounded-pill m-2">다시하기</Button>
-              <Button className="rounded-pill m-2">저장하기</Button>
+              <Button className="rounded-pill m-2">수정하기</Button>
+              <Button className="rounded-pill m-2">제출하기</Button>
             </ButtonStyle>
           </InnerLayout>
         </RoundBackgroundDiv>
