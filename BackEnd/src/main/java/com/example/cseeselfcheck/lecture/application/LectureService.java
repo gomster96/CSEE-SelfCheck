@@ -9,8 +9,6 @@ import com.example.cseeselfcheck.lecture.domain.Lecture;
 import com.example.cseeselfcheck.lecture.domain.repository.LectureDataDto;
 import com.example.cseeselfcheck.lecture.domain.repository.LectureRepository;
 
-import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
-import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

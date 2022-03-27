@@ -5,9 +5,7 @@ import java.io.IOException;
 import com.example.cseeselfcheck.exception.common.ExcelOpenFileException;
 import com.example.cseeselfcheck.lecture.application.LectureService;
 
-import com.example.cseeselfcheck.lecture.domain.Lecture;
 import com.example.cseeselfcheck.lecture.domain.repository.LectureDataDto;
-import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
