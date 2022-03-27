@@ -5,6 +5,7 @@ import AdminTable from './AdminTable';
 import Footer from './Footer';
 import HeaderFilter from './HeaderFIlter';
 import SearchBar from './SearchBar';
+import { useNavigate, useLocation } from 'react-router';
 
 const calcWidthPercent = (span) => {
   if (!span) return;
@@ -67,6 +68,7 @@ const LoginFormDiv = styled.div`
 `;
 
 export default function Admin() {
+  const { state } = useLocation();
   return (
     <>
       <ContainerDiv>

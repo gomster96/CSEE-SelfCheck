@@ -4,6 +4,7 @@ import SelfCheckTable from './SelfCheckTable';
 import SelfCheckResultTable from './SelfCheckResultTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
+import { useNavigate, useLocation } from 'react-router';
 
 const MypageLayout = styled.div`
   margin-top: 10vh;
@@ -24,6 +25,7 @@ const ButtonStyle = styled.div`
 `;
 
 function App() {
+  const { state } = useLocation();
   return (
     <MypageLayout>
       <InnerLayout>
