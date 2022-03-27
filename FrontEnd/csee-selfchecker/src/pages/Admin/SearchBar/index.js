@@ -8,13 +8,14 @@ const SearchBarLayout = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 5vh;
+  font-size: 16px;
 `;
 
 export default function SearchBar() {
   return (
     <SearchBarLayout>
-      <TextField sx={{ width: '30vw', fontSize: '20vh' }} label="Search" variant="outlined" />
-      <Button sx={{ width: '5vw', height: '56px' }} variant="contained">
+      <TextField sx={{ width: '15vw', fontSize: '14' }} label="Search" variant="outlined" size="small" />
+      <Button sx={{ width: '3vw' }} variant="contained">
         검색
       </Button>
     </SearchBarLayout>

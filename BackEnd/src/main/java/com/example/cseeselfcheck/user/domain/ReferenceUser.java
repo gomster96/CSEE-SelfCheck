@@ -1,11 +1,9 @@
 package com.example.cseeselfcheck.user.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.example.cseeselfcheck.exception.referenceuser.ReferenceUserDataFormatException;
+import com.example.cseeselfcheck.major.domain.Major;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +19,9 @@ public class ReferenceUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Major major;
+
     private String studentNumber;
 
     private String name;
@@ -30,10 +31,11 @@ public class ReferenceUser {
     private String phone;
 
 
-    public ReferenceUser(String studentNumber, String name, String semester, String phone) {
+    public ReferenceUser(Major major,String studentNumber, String name, String semester, String phone) {
         validateData(studentNumber, true);
         validateData(phone, true);
         validateData(name, false);
+        this.major = major;
         this.studentNumber = studentNumber;
         this.name = name;
         this.semester = semester;

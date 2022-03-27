@@ -35,4 +35,5 @@ public class MajorController {
         }
         return ResponseEntity.ok().body(null);
     }
+
 }

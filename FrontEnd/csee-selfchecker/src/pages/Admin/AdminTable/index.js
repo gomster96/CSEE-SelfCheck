@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -15,7 +16,7 @@ const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: '1.1vw',
+    fontSize: '20',
   },
 }))(TableCell);
 
@@ -53,7 +54,7 @@ export default function AdminTable() {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
+      <Table className={classes.table} aria-label="customized table" size="small">
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">학생명</StyledTableCell>
@@ -66,7 +67,7 @@ export default function AdminTable() {
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row" align="center" style={{ height: '5vh' }}>
+              <StyledTableCell component="th" scope="row" align="center" size="small">
                 {row.name}
               </StyledTableCell>
               <StyledTableCell align="center">{row.major}</StyledTableCell>

@@ -4,12 +4,11 @@ import java.io.IOException;
 
 import com.example.cseeselfcheck.exception.common.ExcelOpenFileException;
 import com.example.cseeselfcheck.user.application.ReferenceUserService;
+import com.example.cseeselfcheck.user.application.UserService;
+import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
     private final ReferenceUserService referenceUserService;
+    private final UserService userService;
 
     @PostMapping("/upload/users")
     public ResponseEntity<Object> uploadReferenceUser(@RequestParam("file") MultipartFile file) {
@@ -30,5 +30,12 @@ public class UserController {
         }
 
         return ResponseEntity.ok().body(null);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<Object> getUserById(@PathVariable Long userId){
+        UserIndividualDataDto userIndividualData = userService.getUserIndividualDataById(userId);
+
+        return ResponseEntity.ok(userIndividualData);
     }
 }

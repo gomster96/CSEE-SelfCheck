@@ -80,13 +80,13 @@ const LoginFormDiv = styled.div`
   box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
 
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
-  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+  @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
@@ -100,13 +100,14 @@ const LoginFormLeft1 = styled.div`
 
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `5%`)};
   padding: 1%;
-  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+    display: none;
   }
-  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+  @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
@@ -120,16 +121,18 @@ const LoginFormLeft2 = styled.div`
   color: #797979;
 
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `70vw`)};
-  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
+    display: none;
   }
-  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+  @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
+
 const LoginFormLeftTitle = styled.div`
   font-family: 'RedHatDisplayRegular';
   font-size: 36px;
@@ -147,7 +150,7 @@ const LoginFormRight = styled.div`
   align-items: center;
   padding: 40px;
 
-  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `80vw`)};
+  width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `100%`)};
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }

@@ -51,6 +51,8 @@ export default function Resister() {
         email: state.studentEmail,
       },
     });
+    e.preventDefault();
+    console.log(formData);
     // ... submit to API or something
   };
 
