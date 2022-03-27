@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MypageTable from './MypageTable';
-import MypageResultTable from './MypageResultTable';
+import SelfCheckTable from './SelfCheckTable';
+import SelfCheckResultTable from './SelfCheckResultTable';
 import background from '../../asset/img/backgroundImg.png';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -87,7 +87,7 @@ const InnerLayout = styled.div`
 `;
 
 const TableLayout = styled.div`
-  margin-bottom: 6vh;
+  margin-top: 6vh;
 `;
 
 const TextLayout = styled.div`
@@ -108,6 +108,7 @@ const ButtonStyle = styled.div`
   display: inline-block;
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `80%`)};
   padding: 1rem;
+  margin: 1rem;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }
@@ -118,6 +119,7 @@ const ButtonStyle = styled.div`
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
+
 const FooterDiv = styled.div`
   display: flex;
   align-itmes: center;
@@ -128,6 +130,7 @@ const Footer = styled.div`
   display: flex;
   align-itmes: center;
 `;
+
 const FooterTextLayout = styled.div`
   color: gray;
   font-size: 14px;
@@ -148,23 +151,17 @@ export default function Main() {
         <RoundBackgroundDiv>
           <InnerLayout>
             <TableLayout>
-              <h1>Mypage</h1>
+              <h1>Self Check</h1>
             </TableLayout>
             <TableLayout>
-              <MypageTable />
+              <SelfCheckTable />
             </TableLayout>
             <TableLayout>
-              <MypageResultTable />
+              <SelfCheckResultTable />
             </TableLayout>
-            <TextLayout>
-              <h5>
-                공학프로젝트 입문 수강이 <span class="text-danger">가능</span>합니다
-              </h5>
-              <h6>*불가능이어도 제출 가능</h6>
-            </TextLayout>
             <ButtonStyle>
-              <Button className="rounded-pill m-2">수정하기</Button>
-              <Button className="rounded-pill m-2">제출하기</Button>
+              <Button className="rounded-pill m-2">다시하기</Button>
+              <Button className="rounded-pill m-2">저장하기</Button>
             </ButtonStyle>
           </InnerLayout>
         </RoundBackgroundDiv>
