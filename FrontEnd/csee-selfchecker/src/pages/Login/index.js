@@ -172,58 +172,6 @@ const LoginFormRightsubTitle = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Item = styled.div`
-  display: flex;
-  align-items: center;
-  height: 48px;
-  position: relative;
-  margin-bottom: 10px;
-`;
-
-const RadioButtonLabel = styled.label`
-  position: absolute;
-  top: 25%;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: white;
-  border: 1px solid #ccc;
-`;
-const RadioButton = styled.input`
-  opacity: 0;
-  z-index: 1;
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
-  margin-right: 5px;
-  &:hover ~ ${RadioButtonLabel} {
-    background: #ccc;
-    &::after {
-      font-family: '';
-      display: absolute;
-      color: white;
-      width: 8px;
-      height: 8px;
-      margin: 2px;
-    }
-  }
-  &:checked + ${Item} {
-    background: #2e75b6;
-    border: 2px solid #2e75b6;
-  }
-  &:checked + ${RadioButtonLabel} {
-    background: #2e75b6;
-    border: 1px solid #2e75b6;
-    &::after {
-      font-family: '';
-      display: block;
-      color: white;
-      width: 8px;
-      height: 8px;
-      margin: 2px;
-    }
-  }
-`;
 const GoogleLoginContainer = styled.div`
   padding-top: 90px;
   padding-bottom: 50px;

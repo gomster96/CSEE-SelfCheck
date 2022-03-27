@@ -4,20 +4,53 @@ import background from '../../../asset/img/backgroundImg.png';
 import logo from '../../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
+import { useNavigate, useLocation } from 'react-router';
 
 const { useState } = React;
 
 export default function AdminRegister() {
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const [select, setSelect] = useState('1');
-
-  const handleSelectChange = (event) => {
-    const value = event.target.value;
-    if (value.match != 1) {
-      document.location.href = '../register';
+  const handleUserChange = (e) => {
+    const value = e.target.value;
+    if (value.match !== 1) {
+      navigate('/register', {
+        state: {
+          email: state.email,
+        },
+      });
     }
     setSelect(value);
   };
 
+  const initialFormData = Object.freeze({
+    adminDepartment: '',
+    adminName: '',
+    adminEmail: state.email,
+  });
+
+  const [formData, updateFormData] = React.useState(initialFormData);
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    navigate('/register', {
+      state: {
+        data: formData,
+      },
+    });
+    // ... submit to API or something
+  };
   return (
     <ContainerDiv>
       <LoginFormDiv>
@@ -31,24 +64,23 @@ export default function AdminRegister() {
         </LoginFormLeft2>
 
         <LoginFormRight>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <ItemContainer style={{ paddingLeft: '20%' }}>
-              <Form.Check inline label="학생" type="radio" name="radio" value="0" checked={select === '0'} onChange={(event) => handleSelectChange(event)} />
-              <Form.Check inline label="관리자" type="radio" name="radio" value="1" checked={select === '1'} onChange={(event) => handleSelectChange(event)} />
+              <Form.Check inline label="학생" type="radio" name="radio" value="0" checked={select === '0'} onChange={(e) => handleUserChange(e)} />
+              <Form.Check inline label="관리자" type="radio" name="radio" value="1" checked={select === '1'} onChange={(e) => handleUserChange(e)} />
             </ItemContainer>
             <LoginFormRightTitle>
               <h3>Admin Information</h3>
             </LoginFormRightTitle>
-
-            <Form.Group className="mb-3" controlId="department" style={{ marginTop: '50px' }}>
-              <Form.Control type="id" placeholder="  소속 (Department)" style={{ borderRadius: '20px' }} />
+            <Form.Group className="mb-3" style={{ marginTop: '50px' }}>
+              <Form.Control placeholder="  소속 (Department)" name="adminDepartment" onChange={handleChange} style={{ borderRadius: '20px' }} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="adminName">
-              <Form.Control type="name" placeholder="  이름 (Name)" style={{ borderRadius: '20px' }} />
+            <Form.Group className="mb-3">
+              <Form.Control placeholder="  이름 (Name)" name="adminName" onChange={handleChange} style={{ borderRadius: '20px' }} />
             </Form.Group>
             <p>제출 시 관리자 승인 후 로그인 가능합니다.</p>
+            <Button as="input" type="submit" value="Submit!" style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
           </Form>
-          <Button as="input" variant="primary" type="submit" value="Submit!" style={{ width: '30%', borderRadius: '20px', background: '#2e75b6' }} />{' '}
         </LoginFormRight>
       </LoginFormDiv>
     </ContainerDiv>
