@@ -4,16 +4,22 @@ import background from '../../asset/img/backgroundImg.png';
 import logo from '../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
+import { useNavigate, useLocation } from 'react-router';
 
 const { useState } = React;
 
 export default function Resister() {
-  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const [select, setSelect] = useState('0');
   const handleUserChange = (e) => {
     const value = e.target.value;
     if (value.match !== 0) {
-      document.location.href = '../Register/Admin';
+      navigate('/adminregister', {
+        state: {
+          email: state.email,
+        },
+      });
     }
     setSelect(value);
   };
@@ -22,7 +28,7 @@ export default function Resister() {
     studentId: '',
     studentName: '',
     studentPhone: '',
-    studentEmail: email,
+    studentEmail: state.email,
   });
 
   const [formData, updateFormData] = React.useState(initialFormData);

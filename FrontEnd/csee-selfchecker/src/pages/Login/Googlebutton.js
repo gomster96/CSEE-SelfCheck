@@ -1,17 +1,21 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
-import { Route } from 'react-router-dom';
-import Register from '../Register';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
 function LoginGoogle() {
   const clientId = '783610138228-anpgvtcc326gk47gpiuospu35mvgcckl.apps.googleusercontent.com';
+  const navigate = useNavigate();
   async function onSuccess(res) {
     var regExp = '@handong.ac.kr';
     var regEmail = res.profileObj.email;
     if (regEmail.match(regExp) != null) {
-      //<Route path="/register" element={<Register />} component={() => <Register email={regEmail} />} />;
-      document.location.href = '/register';
+      navigate('/register', {
+        state: {
+          email: regEmail,
+        },
+      });
+      //document.location.href = '/register';
     } else {
       alert('handong.ac.kr 계정으로 로그인하세요.');
       console.error('비인증 계정');

@@ -4,16 +4,22 @@ import background from '../../../asset/img/backgroundImg.png';
 import logo from '../../../asset/img/loginImage.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
+import { useNavigate, useLocation } from 'react-router';
 
 const { useState } = React;
 
 export default function AdminRegister() {
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const [select, setSelect] = useState('1');
-
-  const handleUserChange = ({ event }) => {
-    const value = event.target.value;
+  const handleUserChange = (e) => {
+    const value = e.target.value;
     if (value.match !== 1) {
-      document.location.href = '../../Register';
+      navigate('/register', {
+        state: {
+          email: state.email,
+        },
+      });
     }
     setSelect(value);
   };
@@ -21,6 +27,7 @@ export default function AdminRegister() {
   const initialFormData = Object.freeze({
     adminDepartment: '',
     adminName: '',
+    adminEmail: state.email,
   });
 
   const [formData, updateFormData] = React.useState(initialFormData);
@@ -37,6 +44,11 @@ export default function AdminRegister() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    navigate('/register', {
+      state: {
+        data: formData,
+      },
+    });
     // ... submit to API or something
   };
   return (
@@ -54,8 +66,8 @@ export default function AdminRegister() {
         <LoginFormRight>
           <Form onSubmit={handleSubmit}>
             <ItemContainer style={{ paddingLeft: '20%' }}>
-              <Form.Check inline label="학생" type="radio" name="radio" value="0" checked={select === '0'} onChange={(event) => handleUserChange(event)} />
-              <Form.Check inline label="관리자" type="radio" name="radio" value="1" checked={select === '1'} onChange={(event) => handleUserChange(event)} />
+              <Form.Check inline label="학생" type="radio" name="radio" value="0" checked={select === '0'} onChange={(e) => handleUserChange(e)} />
+              <Form.Check inline label="관리자" type="radio" name="radio" value="1" checked={select === '1'} onChange={(e) => handleUserChange(e)} />
             </ItemContainer>
             <LoginFormRightTitle>
               <h3>Admin Information</h3>
