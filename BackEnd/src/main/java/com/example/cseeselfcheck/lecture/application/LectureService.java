@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.cseeselfcheck.exception.common.ExcelImportException;
 import com.example.cseeselfcheck.lecture.domain.Lecture;
+import com.example.cseeselfcheck.lecture.domain.repository.LectureDataDto;
 import com.example.cseeselfcheck.lecture.domain.repository.LectureRepository;
 
 import org.springframework.stereotype.Service;
@@ -49,5 +50,13 @@ public class LectureService {
         }
         lectureRepository.deleteAll();
         lectureRepository.saveAll(lectures);
+
+    }
+
+    public LectureDataDto getLectureDataById(Long lectureId) {
+        List<LectureDataDto> lectureData = lectureRepository.findLectureDataById(lectureId);
+
+        return lectureData.get(0);
+
     }
 }
