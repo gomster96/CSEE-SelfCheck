@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import SelfCheck from './pages/SelfCheck';
 import AdminRegister from './pages/Register/Admin';
 import Main from './pages/Main';
+import Test from './pages/Test';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/main" element={<Main />} />
         <Route path="/selfcheck" element={<SelfCheck />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
   );
