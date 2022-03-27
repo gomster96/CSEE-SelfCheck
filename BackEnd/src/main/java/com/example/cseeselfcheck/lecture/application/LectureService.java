@@ -6,8 +6,11 @@ import java.util.List;
 
 import com.example.cseeselfcheck.exception.common.ExcelImportException;
 import com.example.cseeselfcheck.lecture.domain.Lecture;
+import com.example.cseeselfcheck.lecture.domain.repository.LectureDataDto;
 import com.example.cseeselfcheck.lecture.domain.repository.LectureRepository;
 
+import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
+import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,5 +52,13 @@ public class LectureService {
         }
         lectureRepository.deleteAll();
         lectureRepository.saveAll(lectures);
+
+    }
+
+    public LectureDataDto getLectureDataById(Long lectureId) {
+        List<LectureDataDto> lectureData = lectureRepository.findLectureDataById(lectureId);
+
+        return lectureData.get(0);
+
     }
 }
