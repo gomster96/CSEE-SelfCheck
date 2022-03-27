@@ -5,6 +5,7 @@ public interface UserDataDto {
     String getName();
     String getSemester();
     String getMajorName();
+    String getChecker();
     int getResult();
     String getTakenStatus();
 
@@ -15,4 +16,5 @@ public interface UserDataDto {
     default boolean isSameSemester(String semester){
         return getSemester().equals(semester);
     }
+
 }
