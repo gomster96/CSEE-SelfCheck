@@ -4,6 +4,7 @@ import background from '../../asset/img/backgroundImg.png';
 import AdminTable from './AdminTable';
 import HeaderFilter from './HeaderFIlter/Filters';
 import SearchBar from './SearchBar';
+import { useNavigate, useLocation } from 'react-router';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
@@ -121,6 +122,7 @@ const FooterTextLayout = styled.div`
   padding: 0.5rem;
 `;
 export default function Admin() {
+  const { state } = useLocation();
   return (
     <>
       <Navbar bg="light">

@@ -42,6 +42,13 @@ export default function AdminRegister() {
   };
 
   const handleSubmit = (e) => {
+    /* e.preventDefault();
+    console.log(formData); */
+    navigate('/admin', {
+      state: {
+        department: state.adminDepartment,
+        name: state.adminName,
+        email: state.adminEmail,
     e.preventDefault();
     console.log(formData);
     navigate('/register', {

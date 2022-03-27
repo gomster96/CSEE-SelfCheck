@@ -43,6 +43,14 @@ export default function Resister() {
   };
 
   const handleSubmit = (e) => {
+    navigate('/selfcheck', {
+      state: {
+        id: state.studentId,
+        name: state.studentName,
+        phone: state.studentPhone,
+        email: state.studentEmail,
+      },
+    });
     e.preventDefault();
     console.log(formData);
     // ... submit to API or something
