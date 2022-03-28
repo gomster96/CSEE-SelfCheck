@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
+import service from '../../../util/service';
 
 function createData(name, major, semester, result, reason) {
   return { name, major, semester, result, reason };
@@ -21,39 +22,33 @@ const rows = [
   createData('김광', '국제어문학부', 8, '불합격', '운영체제, 데이터구조, 공학설계입문'),
   createData('안병웅', '컴퓨터공학 심화', 7, '합격', '운영체제'),
   createData('이선경', '콘텐츠융합디자인', 7, '불합격', '운영체제'),
-  createData('김주은', '전자공학 심화', 7, '합격', ''),
-  createData('김광', '국제어문학부', 8, '불합격', '운영체제, 데이터구조, 공학설계입문'),
-  createData('안병웅', '컴퓨터공학 심화', 7, '불합격', '운영체제'),
-  createData('이선경', '콘텐츠융합디자인', 7, '불합격', '운영체제'),
-  createData('김주은', '전자공학 심화', 7, '합격', ''),
-  createData('김광', '국제어문학부', 8, '불합격', '운영체제, 데이터구조, 공학설계입문'),
-  createData('안병웅', '컴퓨터공학 심화', 7, '합격', '운영체제'),
-  createData('이선경', '콘텐츠융합디자인', 7, '불합격', '운영체제'),
-  createData('김주은', '전자공학 심화', 7, '합격', ''),
-  createData('김광', '국제어문학부', 8, '불합격', '운영체제, 데이터구조, 공학설계입문'),
-  createData('안병웅', '컴퓨터공학 심화', 7, '불합격', '운영체제'),
-  createData('이선경', '콘텐츠융합디자인', 7, '불합격', '운영체제'),
-  createData('김주은', '전자공학 심화', 7, '합격', ''),
-  createData('김광', '국제어문학부', 8, '불합격', '운영체제, 데이터구조, 공학설계입문'),
-  createData('안병웅', '컴퓨터공학 심화', 7, '합격', '운영체제'),
-  createData('이선경', '콘텐츠융합디자인', 7, '불합격', '운영체제'),
-  createData('김주은', '전자공학 심화', 7, '합격', ''),
-  createData('김광', '국제어문학부', 8, '불합격', '운영체제, 데이터구조, 공학설계입문'),
 ];
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
-
-const TableLayout = styled.div`
-  height: 35vh;
-  overflow: scroll;
-`;
-
-export default function AdminTable() {
+export default function AdminTable(props) {
   const classes = useStyles();
+
+  const [studentDatas, setStudentDatas] = useState([]);
+
+  const parseTakenStatus = (takenStatus) => {
+    let parsedStatus = '';
+    // for (let i = 0; i < takenStatus.length; i++) {
+    //   if (takenStatus[i] === '-') {
+    //     parsedStatus += props.lectureList[i].lectureName + ' 미이수';
+    //   } else if (takenStatus[i] === '+') {
+    //     parsedStatus += props.lectureList[i].lectureName + ' 병수예정';
+    //   }
+    // }
+    return parsedStatus;
+  };
+
+  useEffect(() => {
+    // craeteFetchBody(props.filterStatus);
+    const fetchLectures = async () => {
+      const data = await service.getStudents(props.fetchBody);
+      setStudentDatas(data);
+    };
+    fetchLectures();
+  }, [props.fetchBody]);
 
   return (
     <TableLayout>
@@ -69,15 +64,15 @@ export default function AdminTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
+            {studentDatas.map((student) => (
+              <StyledTableRow key={student.studentNumber}>
                 <StyledTableCell component="th" scope="row" align="center" size="small">
-                  {row.name}
+                  {student.name}
                 </StyledTableCell>
-                <StyledTableCell align="center">{row.major}</StyledTableCell>
-                <StyledTableCell align="center">{row.semester}</StyledTableCell>
-                <StyledTableCell align="center">{row.result}</StyledTableCell>
-                <StyledTableCell align="center">{row.reason}</StyledTableCell>
+                <StyledTableCell align="center">{student.majorName}</StyledTableCell>
+                <StyledTableCell align="center">{student.semester}</StyledTableCell>
+                <StyledTableCell align="center">{student.result === '1' ? '만족' : '불만족'}</StyledTableCell>
+                <StyledTableCell align="center">{parseTakenStatus(student.takenStatus)}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -105,3 +100,25 @@ const StyledTableRow = withStyles((theme) => ({
     },
   },
 }))(TableRow);
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
+});
+
+const TableLayout = styled.div`
+  height: 35vh;
+  overflow: scroll;
+  /* ::-webkit-scrollbar {
+    width: 1vw;
+  
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #2e75b6;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: grey;
+  } */
+`;

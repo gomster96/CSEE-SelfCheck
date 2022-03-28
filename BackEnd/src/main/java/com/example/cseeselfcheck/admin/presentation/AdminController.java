@@ -40,7 +40,7 @@ public class AdminController {
     private final LectureService lectureService;
     private final UserRepository userRepository;
 
-    @GetMapping("/users")
+    @PostMapping("/users")
     public ResponseEntity<Object> getFilteredUser(@RequestBody AdminUserRequestDto request) {
 
         List<AdminUserResponseDto> filteredUser = userService.getFilteredUser(request);

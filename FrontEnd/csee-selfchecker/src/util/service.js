@@ -4,9 +4,22 @@ const getOptions = () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      credential: 'include',
+      // credential: 'include',
     },
   };
+  return option;
+};
+const postOptions = (body) => {
+  const option = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Cache: 'no-cache',
+    },
+    // credentials: 'include',
+  };
+  if (body) option.body = JSON.stringify(body);
   return option;
 };
 
@@ -22,8 +35,15 @@ const getLectures = async () => {
   return await handleResult(response);
 };
 
+const getStudents = async (body) => {
+  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/users`;
+  const response = await fetch(getStudentUrl, postOptions(body));
+  return await handleResult(response);
+};
+
 const service = {
   getLectures,
+  getStudents,
 };
 
 export default service;
