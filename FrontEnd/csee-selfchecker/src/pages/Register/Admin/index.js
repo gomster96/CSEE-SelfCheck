@@ -42,11 +42,13 @@ export default function AdminRegister() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    navigate('/register', {
+    /* e.preventDefault();
+    console.log(formData); */
+    navigate('/admin', {
       state: {
-        data: formData,
+        department: state.adminDepartment,
+        name: state.adminName,
+        email: state.adminEmail,
       },
     });
     // ... submit to API or something

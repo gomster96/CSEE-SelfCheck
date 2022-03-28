@@ -5,6 +5,7 @@ import SelfCheckResultTable from './SelfCheckResultTable';
 import background from '../../asset/img/backgroundImg.png';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate, useLocation } from 'react-router';
 import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
 const calcWidthPercent = (span) => {
