@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import background from '../../asset/img/backgroundImg.png';
 import AdminTable from './AdminTable';
@@ -8,6 +8,59 @@ import { useNavigate, useLocation } from 'react-router';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
+import ImportButton from './ImportButton';
+import ExportButton from './ExportButton';
+
+export default function Admin() {
+  const [filterStatus, setFilterStatus] = useState({ lectures: [], semesters: [], possibleStatus: [] });
+  const [fetchBody, setFetchBody] = useState({ lectures: [], semesters: [], takePossible: '' });
+  const [lectureList, setLectureList] = useState([]);
+  return (
+    <>
+      <Navbar bg="light">
+        <Container>
+          <Navbar.Brand href="/">
+            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+      <ContainerDiv>
+        <LoginFormDiv>
+          <InnerLayout>
+            <TextLayout>
+              <h1>Admin Page</h1>
+            </TextLayout>
+            <InnerLayout>
+              <HeaderFilter filterStatus={filterStatus} setFilterStatus={setFilterStatus} setFetchBody={setFetchBody} lectureList={lectureList} setLectureList={setLectureList} />
+              <SearchBar />
+              <TableLayout>
+                <AdminTable fetchBody={fetchBody} lectureList={lectureList} />
+              </TableLayout>
+            </InnerLayout>
+            <TextLayout>
+              <ButtonStyle className="mb-3">
+                <ImportButton />
+                <ExportButton />
+              </ButtonStyle>
+            </TextLayout>
+          </InnerLayout>
+        </LoginFormDiv>
+      </ContainerDiv>
+      <>
+        <FooterDiv className="bg-gray">
+          <Navbar>
+            <Container>
+              <Footer>
+                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
+                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
+              </Footer>
+            </Container>
+          </Navbar>
+        </FooterDiv>
+      </>
+    </>
+  );
+}
 
 const calcWidthPercent = (span) => {
   if (!span) return;
@@ -78,7 +131,7 @@ const InnerLayout = styled.div`
   margin-top: 3%;
 `;
 const TextLayout = styled.div`
-  padding: 0.5rem;
+  padding-top: 0.5rem;
 
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     font-size: ${({ sm }) => sm && `${calcWidthPercent(sm)}rem`};
@@ -121,51 +174,3 @@ const FooterTextLayout = styled.div`
   font-size: 14px;
   padding: 0.5rem;
 `;
-export default function Admin() {
-  const { state } = useLocation();
-  return (
-    <>
-      <Navbar bg="light">
-        <Container>
-          <Navbar.Brand href="/">
-            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
-      <ContainerDiv>
-        <LoginFormDiv>
-          <InnerLayout>
-            <TextLayout>
-              <h1>Admin Page</h1>
-            </TextLayout>
-            <InnerLayout>
-              <HeaderFilter />
-              <SearchBar />
-              <TableLayout>
-                <AdminTable />
-              </TableLayout>
-            </InnerLayout>
-            <TextLayout>
-              <ButtonStyle className="mb-3">
-                <Button className="rounded-pill m-2">Excel Import</Button>
-                <Button className="rounded-pill m-2">Excel Export</Button>
-              </ButtonStyle>
-            </TextLayout>
-          </InnerLayout>
-        </LoginFormDiv>
-      </ContainerDiv>
-      <>
-        <FooterDiv className="bg-gray">
-          <Navbar>
-            <Container>
-              <Footer>
-                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
-                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
-              </Footer>
-            </Container>
-          </Navbar>
-        </FooterDiv>
-      </>
-    </>
-  );
-}

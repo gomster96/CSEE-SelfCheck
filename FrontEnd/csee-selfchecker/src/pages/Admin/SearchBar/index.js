@@ -3,14 +3,6 @@ import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const SearchBarLayout = styled.div`
-  margin-top: 2vh;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5vh;
-  font-size: 16px;
-`;
-
 export default function SearchBar() {
   return (
     <SearchBarLayout>
@@ -21,3 +13,11 @@ export default function SearchBar() {
     </SearchBarLayout>
   );
 }
+
+const SearchBarLayout = styled.div`
+  margin-top: 2vh;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5vh;
+  font-size: 16px;
+`;

@@ -49,11 +49,6 @@ export default function AdminRegister() {
         department: state.adminDepartment,
         name: state.adminName,
         email: state.adminEmail,
-    e.preventDefault();
-    console.log(formData);
-    navigate('/register', {
-      state: {
-        data: formData,
       },
     });
     // ... submit to API or something

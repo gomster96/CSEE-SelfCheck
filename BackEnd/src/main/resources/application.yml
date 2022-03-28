@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test2
+    url: jdbc:h2:tcp://localhost/~/csee
     username: sa
     password: 1234
     driver-class-name: org.h2.Driver
@@ -10,7 +10,7 @@ spring:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true

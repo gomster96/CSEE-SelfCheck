@@ -5,7 +5,6 @@ import SelfCheckResultTable from './SelfCheckResultTable';
 import background from '../../asset/img/backgroundImg.png';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router';
 import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
@@ -122,8 +121,6 @@ const ButtonStyle = styled.div`
   }
 `;
 
-function App() {
-  const { state } = useLocation();
 const FooterDiv = styled.div`
   display: flex;
   align-itmes: center;

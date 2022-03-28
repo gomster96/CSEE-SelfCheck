@@ -8,6 +8,9 @@ import com.example.cseeselfcheck.admin.application.AdminService;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminSearchRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
+import com.example.cseeselfcheck.lecture.application.LectureService;
+import com.example.cseeselfcheck.lecture.domain.repository.LectureRepository;
+import com.example.cseeselfcheck.lecture.presentation.dto.LectureResponseDto;
 import com.example.cseeselfcheck.major.domain.Major;
 import com.example.cseeselfcheck.major.domain.repository.MajorRepository;
 import com.example.cseeselfcheck.user.application.UserService;
@@ -23,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
+@CrossOrigin(origins = "*")
 public class AdminController {
 
     /* 들어오는 데이터 꼴
@@ -33,10 +37,10 @@ public class AdminController {
     }
     */
     private final UserService userService;
-    private final MajorRepository majorRepository;
+    private final LectureService lectureService;
     private final UserRepository userRepository;
 
-    @GetMapping("/users")
+    @PostMapping("/users")
     public ResponseEntity<Object> getFilteredUser(@RequestBody AdminUserRequestDto request) {
 
         List<AdminUserResponseDto> filteredUser = userService.getFilteredUser(request);
@@ -63,6 +67,11 @@ public class AdminController {
         users.add(new User( "testEmail", "12312321", 0, LocalDateTime.now(), "00000000000"));
         userRepository.saveAll(users);
         return ResponseEntity.ok(null);
+    }
+    @GetMapping("/lectures")
+    public ResponseEntity<Object> getLectures(){
+        List<LectureResponseDto> lectures = lectureService.getLectures();
+        return ResponseEntity.ok(lectures);
     }
 }
 
