@@ -249,4 +249,5 @@ const FooterTextLayout = styled.div`
   color: gray;
   font-size: 14px;
   padding: 0.5rem;
+  padding: 18vh 0px 10px 0px;
 `;
