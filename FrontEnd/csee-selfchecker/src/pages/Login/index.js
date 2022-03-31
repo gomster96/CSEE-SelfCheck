@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../asset/img/loginImage.png';
 import background from '../../asset/img/backgroundImg.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Googlebutton from './Googlebutton';
+import { Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
 
 export default function Login() {
+  const [isUserSelect, setIsUserSelect] = useState('0');
+  const handleUserChange = (e) => {
+    const value = e.target.value;
+    setIsUserSelect(value);
+    console.log(value);
+  };
   return (
     <ContainerDiv>
       <LoginFormDiv>
@@ -21,9 +29,13 @@ export default function Login() {
           <LoginFormRightTitle>
             <h1>Log in</h1>
           </LoginFormRightTitle>
+          <ItemContainer>
+            <Form.Check inline label="학생" type="radio" value="0" checked={isUserSelect === '0'} onChange={handleUserChange} />
+            <Form.Check inline label="관리자" type="radio" value="1" checked={isUserSelect === '1'} onChange={handleUserChange} />
+          </ItemContainer>
           <GoogleLoginContainer>
             <GoogleLoginClass>
-              <Googlebutton />
+              <Googlebutton isUserSelect={isUserSelect} setIsUserSelect={setIsUserSelect} />
             </GoogleLoginClass>
           </GoogleLoginContainer>
           <LoginFormRightsubTitle>
@@ -190,4 +202,10 @@ const LogoImg = styled.img`
   padding-top: 5%;
   max-width: 100%;
   height: auto;
+`;
+
+const ItemContainer = styled.div`
+  display: flex;
+  margin: 5vh 20px 10px 0px;
+  padding-left: 10%;
 `;

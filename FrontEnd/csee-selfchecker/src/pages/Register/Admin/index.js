@@ -6,23 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router';
 
-const { useState } = React;
-
 export default function AdminRegister() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [select, setSelect] = useState('1');
-  const handleUserChange = (e) => {
-    const value = e.target.value;
-    if (value.match !== 1) {
-      navigate('/register', {
-        state: {
-          email: state.email,
-        },
-      });
-    }
-    setSelect(value);
-  };
 
   const initialFormData = Object.freeze({
     adminDepartment: '',
@@ -67,10 +53,6 @@ export default function AdminRegister() {
 
         <LoginFormRight>
           <Form onSubmit={handleSubmit}>
-            <ItemContainer style={{ paddingLeft: '20%' }}>
-              <Form.Check inline label="학생" type="radio" name="radio" value="0" checked={select === '0'} onChange={(e) => handleUserChange(e)} />
-              <Form.Check inline label="관리자" type="radio" name="radio" value="1" checked={select === '1'} onChange={(e) => handleUserChange(e)} />
-            </ItemContainer>
             <LoginFormRightTitle>
               <h3>Admin Information</h3>
             </LoginFormRightTitle>
@@ -222,9 +204,5 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding: 10px 0px 10px 0px;
-`;
-const ItemContainer = styled.div`
-  display: flex;
-  margin: 10vh 20px 10px 0px;
+  padding: 60% 0px 10px 0px;
 `;

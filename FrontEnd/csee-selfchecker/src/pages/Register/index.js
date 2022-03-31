@@ -6,24 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router';
 
-const { useState } = React;
-
 export default function Resister() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [select, setSelect] = useState('0');
-  const handleUserChange = (e) => {
-    const value = e.target.value;
-    if (value.match !== 0) {
-      navigate('/adminregister', {
-        state: {
-          email: state.email,
-        },
-      });
-    }
-    setSelect(value);
-  };
-
   const initialFormData = Object.freeze({
     studentId: '',
     studentName: '',
@@ -70,10 +55,6 @@ export default function Resister() {
 
         <LoginFormRight>
           <Form onSubmit={handleSubmit}>
-            <ItemContainer>
-              <Form.Check inline label="학생" type="radio" value="0" checked={select === '0'} onChange={handleUserChange} />
-              <Form.Check inline label="관리자" type="radio" value="1" checked={select === '1'} onChange={handleUserChange} />
-            </ItemContainer>
             <LoginFormRightTitle>
               <h3>Student Information</h3>
             </LoginFormRightTitle>
@@ -85,8 +66,12 @@ export default function Resister() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Control placeholder="  핸드폰 뒤 4자리 (XXXX)" name="studentPhone" onChange={handleChange} style={{ borderRadius: '20px' }} />
+              <p style={{ marginTop: '2vh', fontSize: '1.2vw', textAlign: 'center' }}>Hisnet에 저장된 연락처 뒤 4자리를 입력하세요.</p>
             </Form.Group>
-            <Button as="input" type="submit" value="Save!" style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
+            <Button as="input" type="submit" value="회원가입" style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
+            <p style={{ marginTop: '2vh', fontSize: '1.2vw', textAlign: 'center' }}>
+              회원가입이 안될 시 관리자에게 문의하세요.<br></br>[054-260-1234 / admin@handong.ac.kr]{' '}
+            </p>
           </Form>
         </LoginFormRight>
       </LoginFormDiv>
@@ -226,10 +211,5 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding: 10px 0px 10px 0px;
-`;
-const ItemContainer = styled.div`
-  display: flex;
-  margin: 10vh 20px 10px 0px;
-  padding-left: 20%;
+  padding: 18vh 0px 10px 0px;
 `;
