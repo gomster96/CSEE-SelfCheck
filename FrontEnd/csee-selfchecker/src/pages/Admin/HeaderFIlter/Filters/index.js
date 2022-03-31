@@ -9,7 +9,7 @@ import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 
 // const lectureData = ['공학설계입문', '데이터구조', '컴퓨터구조', '운영체제', '공학설계입문', '데이터구조', '컴퓨터구조', '운영체제'];
 const semester = ['6학기', '7학기', '8학기', '9학기', '10학기'];
-const possibleStudent = ['충족', '미충족'];
+const possibleStudent = ['만족', '불만족'];
 
 export default function Filters(props) {
   const lectureBoxClicked = (idx) => {
@@ -48,8 +48,13 @@ export default function Filters(props) {
         }
       })
       .filter((el) => el !== undefined);
+    let tmp = 0;
+    if (props.filterStatus.possibleStatus[0] === true && props.filterStatus.possibleStatus[1] === true) tmp = 2;
+    else if (props.filterStatus.possibleStatus[0] === true) tmp = 1;
+    else if (props.filterStatus.possibleStatus[1] === true) tmp = 0;
+    else tmp = 2;
     props.setFetchBody((prevState) => {
-      return { ...prevState, lectures: tmpLecture, semesters: tmpSemester };
+      return { ...prevState, lectures: tmpLecture, semesters: tmpSemester, takePossible: tmp };
     });
   };
 
