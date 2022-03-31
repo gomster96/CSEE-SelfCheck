@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import SelfCheck from './pages/SelfCheck';
 import AdminRegister from './pages/Register/Admin';
 import Main from './pages/Main';
+import LoginGoogle from './pages/Login/Googlebutton';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/main" element={<Main />} />
         <Route path="/selfcheck" element={<SelfCheck />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/google-login" element={<LoginGoogle />} />
       </Routes>
     </BrowserRouter>
   );
