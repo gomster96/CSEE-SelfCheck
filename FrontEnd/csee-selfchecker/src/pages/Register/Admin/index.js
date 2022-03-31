@@ -29,16 +29,20 @@ export default function AdminRegister() {
   };
 
   const handleSubmit = (e) => {
-    /* e.preventDefault();
-    console.log(formData); */
-    navigate('/admin', {
-      state: {
-        department: state.adminDepartment,
-        name: state.adminName,
-        email: state.adminEmail,
-      },
-    });
-    // ... submit to API or something
+    if (!e.adminDepartment || !e.adminName) {
+      alert('모든 정보를 입력해주세요.');
+    } else {
+      navigate('/admin', {
+        state: {
+          department: state.adminDepartment,
+          name: state.adminName,
+          email: state.adminEmail,
+        },
+      });
+    }
+    e.preventDefault();
+    console.log(formData);
+    // … submit to API or something
   };
   return (
     <>
