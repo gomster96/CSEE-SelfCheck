@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.example.cseeselfcheck.exception.common.ExcelOpenFileException;
 import com.example.cseeselfcheck.user.application.ReferenceUserService;
 import com.example.cseeselfcheck.user.application.UserService;
+import com.example.cseeselfcheck.user.application.dto.UserFullDataResponseDto;
 import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
 
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class UserController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<Object> getUserById(@PathVariable Long userId){
-        UserIndividualDataDto userIndividualData = userService.getUserIndividualDataById(userId);
+        UserFullDataResponseDto userIndividualData = userService.getUserIndividualDataById(userId);
 
         return ResponseEntity.ok(userIndividualData);
     }
