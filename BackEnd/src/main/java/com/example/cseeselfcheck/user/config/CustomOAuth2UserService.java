@@ -1,4 +1,4 @@
-package com.example.cseeselfcheck.user.config;
+/* package com.example.cseeselfcheck.user.config;
 
 import com.example.cseeselfcheck.user.config.dto.OAuthAttributes;
 import com.example.cseeselfcheck.user.config.dto.SessionUser;
@@ -52,4 +52,4 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         return userRepository.save(user);
     }
 
-}
+} */
