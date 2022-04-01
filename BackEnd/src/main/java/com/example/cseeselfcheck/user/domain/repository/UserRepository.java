@@ -1,6 +1,7 @@
 package com.example.cseeselfcheck.user.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.cseeselfcheck.user.domain.User;
 import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
@@ -21,10 +22,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "and ( r.studentNumber like :searchWord% or r.name like :searchWord%)")
     List<UserDataDto> findUserBySearchWord(String searchWord);
 
-    @Query("select u.studentNumber as studentNumber, r.name as name, u.email as email, r.semester as semester, " +
-            "r.major.majorName as majorName, r.phone as phone, u.takenStatus as takenStatus, " +
-            "u.takenSemesterStatus as takenSemesterStatus, u.result as result " +
+    @Query("select u.id as userId, r.name as name, u.studentNumber as studentNumber,  " +
+            "r.semester as semester, u.email as email, r.phone as phone, " +
+            "u.result as result, u.takenStatus as takenStatus, u.takenSemesterStatus as takenSemesters, " +
+            "r.major.majorName as majorName, r.major.checker as checker " +
             "from User u, ReferenceUser r " +
-            "where u.id = :userId " )
-    List<UserIndividualDataDto> findIndividualDataById(Long userId);
+            "where u.id = :userId AND u.studentNumber = r.studentNumber")
+    Optional<UserIndividualDataDto> findFirstByIndividualDataById(Long userId);
 }
