@@ -57,9 +57,4 @@ public class UserService {
                 .collect(Collectors.toList());
         return new UserFullDataResponseDto(individualData, userLectures);
     }
-
-    @Transactional
-    public String save(UserDto userDto) {
-        return userRepository.save(userDto.toEntity()).getEmail();
-    }
 }
