@@ -13,7 +13,7 @@ import ExportButton from './ExportButton';
 
 export default function Admin() {
   const [filterStatus, setFilterStatus] = useState({ lectures: [], semesters: [], possibleStatus: [] });
-  const [fetchBody, setFetchBody] = useState({ lectures: [], semesters: [], takePossible: '' });
+  const [fetchBody, setFetchBody] = useState({ lectures: [], semesters: [], takePossible: '', searchWord: '' });
   const [lectureList, setLectureList] = useState([]);
   return (
     <>
@@ -32,7 +32,7 @@ export default function Admin() {
             </TextLayout>
             <InnerLayout>
               <HeaderFilter filterStatus={filterStatus} setFilterStatus={setFilterStatus} setFetchBody={setFetchBody} lectureList={lectureList} setLectureList={setLectureList} />
-              <SearchBar />
+              <SearchBar setFetchBody={setFetchBody} />
               <TableLayout>
                 <AdminTable fetchBody={fetchBody} lectureList={lectureList} />
               </TableLayout>
