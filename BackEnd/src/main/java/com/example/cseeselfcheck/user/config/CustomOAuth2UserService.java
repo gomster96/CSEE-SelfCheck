@@ -4,8 +4,6 @@ import com.example.cseeselfcheck.user.config.dto.OAuthAttributes;
 import com.example.cseeselfcheck.user.config.dto.SessionUser;
 import com.example.cseeselfcheck.user.domain.User;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
-import com.example.cseeselfcheck.user.googlelogin.entity.UserEntity;
-import com.example.cseeselfcheck.user.googlelogin.repository.UserGoogleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -23,7 +21,6 @@ import java.util.Collections;
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    private final UserGoogleRepository userGoogleRepository;
     private final UserRepository userRepository;
     private final HttpSession httpSession;
 
@@ -39,28 +36,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes()); //
 
-        UserEntity userEntity = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new SessionUser(userEntity)); //
-
-        return new DefaultOAuth2User(
-                Collections.singleton(new SimpleGrantedAuthority(userEntity.getRoleKey())),
         User user = saveOrUpdate(attributes);
         httpSession.setAttribute("user", new SessionUser(user)); //
 
-        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
+        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getEmail())),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
     }
 
-
-    private UserEntity saveOrUpdate(OAuthAttributes attributes) {
-        UserEntity userEntity = userGoogleRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getEmail()))
-                .orElse(attributes.toEntity());
-
-        return userGoogleRepository.save(userEntity);
-    }
-}
     private User saveOrUpdate(OAuthAttributes attributes) {
         User user = userRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getEmail()))
@@ -68,5 +51,4 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         return userRepository.save(user);
     }
-
 }

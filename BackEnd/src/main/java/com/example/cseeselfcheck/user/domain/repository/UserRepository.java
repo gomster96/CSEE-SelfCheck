@@ -29,4 +29,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "from User u, ReferenceUser r " +
             "where u.id = :userId AND u.studentNumber = r.studentNumber")
     Optional<UserIndividualDataDto> findFirstByIndividualDataById(Long userId);
+
+
+    Optional<User> findByEmail(String email);
 }
+
