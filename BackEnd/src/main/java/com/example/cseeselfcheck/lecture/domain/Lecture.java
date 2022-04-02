@@ -44,4 +44,8 @@ public class Lecture extends BaseEntity {
             throw new LectureDataFormatException(data);
     }
     //ToDo openedYear 에 대한 데이터 검증도 만들어야함
+
+    public boolean isMandatoryLecture(String checker){
+        return checker.charAt(lecturePosition) == '1';
+    }
 }

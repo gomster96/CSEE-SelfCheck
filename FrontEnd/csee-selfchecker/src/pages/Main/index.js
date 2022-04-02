@@ -107,14 +107,14 @@ const ButtonStyle = styled.div`
   border-radius: 35px;
   display: inline-block;
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `80%`)};
-  padding: 1rem;
-  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
+  padding-bottom: 1rem;
+  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
-  @media only screen and (min-width: ${BREAK_POINT_PC}px) {
+  @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
@@ -157,10 +157,14 @@ export default function Main() {
               <MypageResultTable />
             </TableLayout>
             <TextLayout>
-              <h5>
-                공학프로젝트 입문 수강이 <span class="text-danger">가능</span>합니다
-              </h5>
-              <h6>*불가능이어도 제출 가능</h6>
+              <h4>
+                공학프로젝트 입문 수강이 <span className="text-danger">가능</span>합니다
+              </h4>
+            </TextLayout>
+            <TextLayout>
+              <h6>
+                *불가능이어도 제출 가능합니다.<br></br>**제출 버튼을 누르셔야 최종적으로 제출됩니다.
+              </h6>
             </TextLayout>
             <ButtonStyle>
               <Button className="rounded-pill m-2">수정하기</Button>

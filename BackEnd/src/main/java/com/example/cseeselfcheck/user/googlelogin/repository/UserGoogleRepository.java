@@ -11,3 +11,10 @@ import java.util.Optional;
 public interface UserGoogleRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByEmail(String email);
 }
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
+
+@Service
+public interface UserGoogleRepository extends CrudRepository<UserEntity, String> {
+}

@@ -1,14 +1,15 @@
 package com.example.cseeselfcheck.user.domain.dto;
 
 public interface UserIndividualDataDto {
+    Long getUserId();
     String getName();
     String getStudentNumber();
-    String getEmail();
     String getSemester();
-    String getMajorName();
+    String getEmail();
     String getPhone();
-    String getTakenStatus();
-    String getTakenSemesterStatus();
     int getResult();
-
+    String getTakenStatus();
+    String getTakenSemesters();
+    String getMajorName();
+    String getChecker();
 }

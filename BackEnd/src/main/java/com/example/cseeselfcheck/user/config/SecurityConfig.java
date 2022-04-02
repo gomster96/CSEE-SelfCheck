@@ -1,12 +1,14 @@
 package com.example.cseeselfcheck.user.config;
 
 import com.example.cseeselfcheck.user.googlelogin.entity.Role;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @RequiredArgsConstructor
+@EnableWebSecurity
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -29,5 +31,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
+                .headers().frameOptions().disable() 
+
+                .and()
+                .authorizeRequests() 
+                .antMatchers("/", "/css/**", "/images/**",
+                        "/js/**", "/h2-console/**").permitAll() 
+                .antMatchers("/api/**").hasRole(Role.USER.name())
+                .anyRequest().authenticated() 
+
+                .and()
+                .logout()
+                .logoutSuccessUrl("/") 
+
+                .and()
+                .oauth2Login() 
+                .userInfoEndpoint() 
+                .userService(customOAuth2UserService); 
     }
 }

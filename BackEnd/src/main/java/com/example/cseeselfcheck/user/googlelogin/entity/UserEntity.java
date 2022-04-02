@@ -10,7 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 public class UserEntity {
-
     @Id
     private Long id;
     private String email;
@@ -33,5 +32,11 @@ public class UserEntity {
     }
     public String getRoleKey(){
         return this.role.getKey();
+
+    @Builder
+    public UserEntity(Long id, String email,String token) {
+        this.id = id;
+        this.email = email;
+        this.token = token;
     }
 }

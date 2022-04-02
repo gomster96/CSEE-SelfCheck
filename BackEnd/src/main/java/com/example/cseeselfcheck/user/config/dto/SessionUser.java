@@ -13,3 +13,10 @@ public class SessionUser implements Serializable {
         this.email = userEntity.getEmail();
     }
 }
+
+    private String email;
+
+    public SessionUser(UserEntity userEntity) {
+        this.email = userEntity.getEmail();
+    }
+}
