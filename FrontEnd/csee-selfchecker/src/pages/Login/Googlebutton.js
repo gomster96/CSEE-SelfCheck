@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
+import ApiService from '../../ApiService';
 
 export default function LoginGoogle(props) {
   const clientId = '783610138228-anpgvtcc326gk47gpiuospu35mvgcckl.apps.googleusercontent.com';
@@ -14,21 +15,21 @@ export default function LoginGoogle(props) {
     var userEmail = res.profileObj.email;
     if (isUser.match('0')) {
       if (userEmail.match(regExp) != null) {
-        /* const emailCheck = await dbService.collection('User').where('email', '==', value).get();
-        if (emailCheck.docs.length == 0 && value.length > 0) {
-          navigate('/main', {
-            state: { userEmail },
+        if (!ApiService.fetchUserByID(userEmail)) {
+          console.log('회원가입 페이지 데이터 넘기기 성공!');
+          navigate('/register', {
+            state: {
+              userEmail,
+            },
           });
         } else {
-          navigate('/register', {
-            state: { userEmail },
+          console.log('메인 페이지 데이터 넘기기 성공!');
+          navigate('/main', {
+            state: {
+              userEmail,
+            },
           });
-        } */
-        navigate('/register', {
-          state: {
-            userEmail,
-          },
-        });
+        }
       } else {
         alert('handong.ac.kr 계정으로 로그인하세요.');
         console.log(userEmail);
@@ -37,11 +38,21 @@ export default function LoginGoogle(props) {
       }
     } else {
       if (userEmail.match(regExp) || userEmail.match(regExp2) != null) {
-        navigate('/adminregister', {
-          state: {
-            userEmail,
-          },
-        });
+        if (!ApiService.fetchUserByID(userEmail)) {
+          console.log('회원가입 페이지 데이터 넘기기 성공!');
+          navigate('/adminregister', {
+            state: {
+              userEmail,
+            },
+          });
+        } else {
+          console.log('관리자 페이지 데이터 넘기기 성공!');
+          navigate('/admin', {
+            state: {
+              userEmail,
+            },
+          });
+        }
       } else {
         alert('handong.ac.kr / handong.edu 계정으로 로그인하세요.');
         console.log(userEmail);
