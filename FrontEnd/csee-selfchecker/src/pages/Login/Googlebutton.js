@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router';
-// import { dbService } from 'fbase';
 import styled from 'styled-components';
 
 export default function LoginGoogle(props) {
