@@ -31,31 +31,35 @@ public class UserService {
 
         List<UserDataDto> userDatas = userRepository.findUserData();
         return userDatas.stream()
-                        .filter(data::isUserContainLecture)
-                        .filter(data::isUserContainSemester)
-                        .filter(data::isSameTakePossible)
-                        .map(AdminUserResponseDto::new)
-                        .collect(Collectors.toList());
+                .filter(data::isUserContainLecture)
+                .filter(data::isUserContainSemester)
+                .filter(data::isSameTakePossible)
+                .map(AdminUserResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     public List<AdminUserResponseDto> getSearchedUser(String searchWord) {
 
         return userRepository.findUserBySearchWord(searchWord)
-                             .stream()
-                             .map(AdminUserResponseDto::new)
-                             .collect(Collectors.toList());
+                .stream()
+                .map(AdminUserResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     public UserFullDataResponseDto getUserIndividualDataById(Long userId) {
         UserIndividualDataDto individualData = userRepository.findFirstByIndividualDataById(userId)
-                                                             .orElseThrow();
+                .orElseThrow();
         String lectureChecker = individualData.getChecker();
         List<Lecture> lectures = lectureRepository.findAll();
         List<LectureDataDto> userLectures = lectures.stream()
-                                                    .filter(lecture -> lecture.isMandatoryLecture(lectureChecker))
-                                                    .map(LectureDataDto::new)
-                                                    .collect(Collectors.toList());
+                .filter(lecture -> lecture.isMandatoryLecture(lectureChecker))
+                .map(LectureDataDto::new)
+                .collect(Collectors.toList());
         return new UserFullDataResponseDto(individualData, userLectures);
     }
 
+    @Transactional
+    public String save(UserDto userDto) {
+        return userRepository.save(userDto.toEntity()).getEmail();
+    }
 }

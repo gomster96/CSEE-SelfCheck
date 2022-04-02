@@ -16,5 +16,4 @@ public interface UserDataDto {
     default boolean isSameSemester(String semester){
         return getSemester().equals(semester);
     }
-
 }

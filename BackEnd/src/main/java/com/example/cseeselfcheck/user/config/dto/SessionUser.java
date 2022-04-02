@@ -1,6 +1,6 @@
 package com.example.cseeselfcheck.user.config.dto;
 
-import com.example.cseeselfcheck.user.googlelogin.entity.UserEntity;
+import com.example.cseeselfcheck.user.domain.User;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -9,14 +9,7 @@ import java.io.Serializable;
 public class SessionUser implements Serializable {
     private String email;
 
-    public SessionUser(UserEntity userEntity){
-        this.email = userEntity.getEmail();
-    }
-}
-
-    private String email;
-
-    public SessionUser(UserEntity userEntity) {
-        this.email = userEntity.getEmail();
+    public SessionUser(User user){
+        this.email = user.getEmail();
     }
 }
