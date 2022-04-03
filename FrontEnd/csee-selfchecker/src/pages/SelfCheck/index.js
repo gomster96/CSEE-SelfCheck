@@ -1,10 +1,11 @@
 import React from 'react';
 import { ContainerDiv, RoundBackgroundDiv, InnerLayout, TableLayout, TextLayout, ButtonStyle, FooterDiv, Footer, FooterTextLayout } from './main.styled';
 import Table from './components/Table';
+import Result_table from './components/Result_table';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, useLocation } from 'react-router';
-import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
+import { Navbar, Button, Container } from 'react-bootstrap';
 
 export default function Main() {
   return (
@@ -22,9 +23,10 @@ export default function Main() {
             <TableLayout>
               <h1>Self Check</h1>
             </TableLayout>
-
             <Table />
-
+            <TableLayout></TableLayout>
+            <Result_table />
+            <TableLayout></TableLayout>
             <ButtonStyle>
               <Button className="rounded-pill m-2">초기화</Button>
               <Button className="rounded-pill m-2">저장하기</Button>

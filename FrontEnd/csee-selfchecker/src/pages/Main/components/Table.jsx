@@ -2,12 +2,13 @@
 import { StyledTable } from './Table_styled';
 import TableCell from './TableCell';
 import TableRow from './TableRow';
-import UserData from '../Getdata/Table_user_state';
+import { Tab } from 'bootstrap';
+import Table_user_state from '../Getdata/Table_user_state';
 
 const Table = ({ children }) => {
   return (
     <>
-      <UserData />
+      <Table_user_state />
       <StyledTable>
         {children}
         <TableRow>

@@ -1,7 +1,7 @@
 // Table.js
-import { StyledTable } from "./Table_styled";
-import TableCell from "./TableCell";
-import TableRow from "./TableRow";
+import { StyledTable } from './Table_styled';
+import TableCell from './TableCell';
+import TableRow from './TableRow';
 
 const Table = ({ children }) => {
   return (
