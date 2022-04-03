@@ -9,7 +9,7 @@ import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
 import com.example.cseeselfcheck.lecture.application.dto.LectureDataDto;
 import com.example.cseeselfcheck.lecture.domain.Lecture;
 import com.example.cseeselfcheck.lecture.domain.repository.LectureRepository;
-import com.example.cseeselfcheck.major.domain.repository.MajorRepository;
+
 import com.example.cseeselfcheck.user.application.dto.UserFullDataResponseDto;
 import com.example.cseeselfcheck.user.domain.User;
 import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
@@ -24,12 +24,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final MajorRepository majorRepository;
     private final LectureRepository lectureRepository;
 
     public List<AdminUserResponseDto> getFilteredUser(AdminUserRequestDto data) {
 
-        List<UserDataDto> userDatas = userRepository.findUserData();
+        List<UserDataDto> userDatas = userRepository.findUserData(data.getSearchWord());
         return userDatas.stream()
                 .filter(data::isUserContainLecture)
                 .filter(data::isUserContainSemester)
@@ -38,13 +37,6 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public List<AdminUserResponseDto> getSearchedUser(String searchWord) {
-
-        return userRepository.findUserBySearchWord(searchWord)
-                .stream()
-                .map(AdminUserResponseDto::new)
-                .collect(Collectors.toList());
-    }
 
     public UserFullDataResponseDto getUserIndividualDataById(Long userId) {
         UserIndividualDataDto individualData = userRepository.findFirstByIndividualDataById(userId)

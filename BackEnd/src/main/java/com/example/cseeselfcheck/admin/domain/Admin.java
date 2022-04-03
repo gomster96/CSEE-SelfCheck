@@ -11,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Getter @Setter
-public class Admin extends BaseEntity {
+@Getter
+public class Admin {
 
     @Id @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -25,4 +25,10 @@ public class Admin extends BaseEntity {
 
     @NotNull
     private String department;
+
+    private boolean isActive;
+
+    public void activate(){
+        isActive = true;
+    }
 }

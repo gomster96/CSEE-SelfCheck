@@ -14,6 +14,7 @@ public class AdminUserRequestDto {
     private List<Integer> lectures;
     private List<String> semesters;
     private int takePossible;
+    private String searchWord;
 
     public boolean isUserContainLecture(UserDataDto user){
         for(int lectureIdx : lectures){
