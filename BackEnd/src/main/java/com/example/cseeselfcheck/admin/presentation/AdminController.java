@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.cseeselfcheck.admin.application.AdminService;
 import com.example.cseeselfcheck.admin.application.dto.AdminResponseDto;
+import com.example.cseeselfcheck.admin.presentation.dto.AdminAcceptRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
 import com.example.cseeselfcheck.lecture.application.LectureService;
@@ -68,6 +69,12 @@ public class AdminController {
     @GetMapping("/list")
     public ResponseEntity<Object> getAdmins(@RequestParam boolean isActive){
         List<AdminResponseDto> admins = adminService.findAdminsByActiveStatus(isActive);
+        return ResponseEntity.ok(admins);
+    }
+
+    @PostMapping("/accept")
+    public ResponseEntity<Object> getAdmins(@RequestBody AdminAcceptRequestDto request){
+        List<AdminResponseDto> admins = adminService.activateAdminById(request);
         return ResponseEntity.ok(admins);
     }
 }

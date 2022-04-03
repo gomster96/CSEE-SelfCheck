@@ -12,7 +12,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-public class Admin extends BaseEntity {
+public class Admin {
 
     @Id @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -27,4 +27,8 @@ public class Admin extends BaseEntity {
     private String department;
 
     private boolean isActive;
+
+    public void activate(){
+        isActive = true;
+    }
 }
