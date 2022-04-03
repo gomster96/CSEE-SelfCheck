@@ -2,28 +2,37 @@ import React, { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-import ApiService from '../../ApiService';
+import service from '../../util/service';
 
 export default function LoginGoogle(props) {
   const clientId = '783610138228-anpgvtcc326gk47gpiuospu35mvgcckl.apps.googleusercontent.com';
-  const isUser = props.isUserSelect;
+  const [isUser, setIsUser] = useState([]);
+  const isUserType = props.isUserSelect;
   const navigate = useNavigate();
   async function onSuccess(res) {
-    console.log(isUser);
+    console.log(isUserType);
+    console.log(res.profileObj.email);
     var regExp = '@handong.ac.kr';
     var regExp2 = '@handong.edu';
     var userEmail = res.profileObj.email;
-    if (isUser.match('0')) {
+    const checkUser = async () => {
+      const data = await service.getUserByEmail(userEmail);
+      setIsUser(data);
+    };
+    if (isUserType.match('0')) {
       if (userEmail.match(regExp) != null) {
-        if (!ApiService.fetchUserByID(userEmail)) {
-          console.log('회원가입 페이지 데이터 넘기기 성공!');
+        checkUser();
+
+        console.log(isUser.email);
+        if (!isUser.email) {
+          console.log('등록되지 않은 계정입니다');
           navigate('/register', {
             state: {
               userEmail,
             },
           });
         } else {
-          console.log('메인 페이지 데이터 넘기기 성공!');
+          console.log('등록된 계정입니다');
           navigate('/main', {
             state: {
               userEmail,
@@ -37,8 +46,8 @@ export default function LoginGoogle(props) {
         window.location.reload();
       }
     } else {
-      if (userEmail.match(regExp) || userEmail.match(regExp2) != null) {
-        if (!ApiService.fetchUserByID(userEmail)) {
+      /* if (userEmail.match(regExp) || userEmail.match(regExp2) != null) {
+         if (!ApiService.fetchUserByEmail(userEmail)) {
           console.log('회원가입 페이지 데이터 넘기기 성공!');
           navigate('/adminregister', {
             state: {
@@ -58,7 +67,7 @@ export default function LoginGoogle(props) {
         console.log(userEmail);
         console.error('비인증 계정입니다.');
         window.location.reload();
-      }
+      } */
     }
   }
   const onFailure = (res) => {
