@@ -71,7 +71,7 @@ export default function AdminTable(props) {
                 </StyledTableCell>
                 <StyledTableCell align="center">{student.majorName}</StyledTableCell>
                 <StyledTableCell align="center">{student.semester}</StyledTableCell>
-                <StyledTableCell align="center">{student.result === '1' ? '만족' : '불만족'}</StyledTableCell>
+                <StyledTableCell align="center">{student.result === 1 ? '만족' : '불만족'}</StyledTableCell>
                 <StyledTableCell align="center">{parseTakenStatus(student.takenStatus)}</StyledTableCell>
               </StyledTableRow>
             ))}
