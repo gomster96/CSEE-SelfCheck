@@ -4,18 +4,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.cseeselfcheck.admin.application.AdminService;
-import com.example.cseeselfcheck.admin.presentation.dto.AdminSearchRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
 import com.example.cseeselfcheck.lecture.application.LectureService;
-import com.example.cseeselfcheck.lecture.domain.repository.LectureRepository;
 import com.example.cseeselfcheck.lecture.presentation.dto.LectureResponseDto;
-import com.example.cseeselfcheck.major.domain.Major;
-import com.example.cseeselfcheck.major.domain.repository.MajorRepository;
 import com.example.cseeselfcheck.user.application.UserService;
 import com.example.cseeselfcheck.user.domain.User;
-import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
 
 import org.springframework.http.ResponseEntity;
@@ -33,7 +27,7 @@ public class AdminController {
     {
     "lectures" : [0, 2, 3],
     "semesters" : ["6학기", "7학기", "8학기"],
-    "takePossible"  : true
+    "takePossible"  : 1
     }
     */
     private final UserService userService;
@@ -47,12 +41,6 @@ public class AdminController {
         return ResponseEntity.ok(filteredUser);
     }
 
-    @GetMapping("/search-user")
-    public ResponseEntity<Object> getSearchUser(@RequestBody AdminSearchRequestDto request) {
-        String searchWord = request.getSearchWord();
-        List<AdminUserResponseDto> searchedUser = userService.getSearchedUser(searchWord);
-        return ResponseEntity.ok(searchedUser);
-    }
 
     @GetMapping("/test-save-user")
     public ResponseEntity<Object> testSaveUser() {
