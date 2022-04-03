@@ -38,8 +38,8 @@ public class UserController {
         return ResponseEntity.ok().body(null);
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<Object> getUserById(@PathVariable Long userId){
+    @GetMapping("/user/info")
+    public ResponseEntity<Object> getUserById(@RequestParam Long userId){
         UserFullDataResponseDto userIndividualData = userService.getUserIndividualDataById(userId);
 
         return ResponseEntity.ok(userIndividualData);
