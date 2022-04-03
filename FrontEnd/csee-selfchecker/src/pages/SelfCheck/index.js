@@ -1,9 +1,6 @@
 import React from 'react';
 import { ContainerDiv, RoundBackgroundDiv, InnerLayout, TableLayout, TextLayout, ButtonStyle, FooterDiv, Footer, FooterTextLayout } from './main.styled';
 import Table from './components/Table';
-import SelfCheckTable from './SelfCheckTable';
-import SelfCheckResultTable from './SelfCheckResultTable';
-import background from '../../asset/img/backgroundImg.png';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, useLocation } from 'react-router';
@@ -28,9 +25,6 @@ export default function Main() {
 
             <Table />
 
-            <TableLayout>
-              <SelfCheckResultTable />
-            </TableLayout>
             <ButtonStyle>
               <Button className="rounded-pill m-2">초기화</Button>
               <Button className="rounded-pill m-2">저장하기</Button>

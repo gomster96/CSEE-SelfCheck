@@ -1,14 +1,12 @@
+//Main.index.js
 import React, { Component } from 'react';
 import { ContainerDiv, RoundBackgroundDiv, InnerLayout, TableLayout, TextLayout, ButtonStyle, FooterDiv, Footer, FooterTextLayout } from './main.styled';
-import MypageTable from './MypageTable';
 import Table from './components/Table';
-import MypageResultTable from './MypageResultTable';
-
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
-class index extends Component {
+class Index extends Component {
   render() {
     return (
       <>
@@ -28,9 +26,6 @@ class index extends Component {
 
               <Table />
 
-              <TableLayout>
-                <MypageResultTable />
-              </TableLayout>
               <TextLayout>
                 <h4>
                   공학프로젝트 입문 수강이 <span className="text-danger">가능</span>합니다
@@ -60,4 +55,4 @@ class index extends Component {
   }
 }
 
-export default index;
+export default Index;
