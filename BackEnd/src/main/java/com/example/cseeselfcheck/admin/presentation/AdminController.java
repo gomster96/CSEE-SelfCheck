@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.cseeselfcheck.admin.application.AdminService;
+import com.example.cseeselfcheck.admin.application.dto.AdminResponseDto;
+import com.example.cseeselfcheck.admin.presentation.dto.AdminAcceptRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
 import com.example.cseeselfcheck.lecture.application.LectureService;
@@ -33,6 +36,7 @@ public class AdminController {
     private final UserService userService;
     private final LectureService lectureService;
     private final UserRepository userRepository;
+    private final AdminService adminService;
 
     @PostMapping("/users")
     public ResponseEntity<Object> getFilteredUser(@RequestBody AdminUserRequestDto request) {
@@ -60,6 +64,18 @@ public class AdminController {
     public ResponseEntity<Object> getLectures(){
         List<LectureResponseDto> lectures = lectureService.getLectures();
         return ResponseEntity.ok(lectures);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Object> getAdmins(@RequestParam boolean isActive){
+        List<AdminResponseDto> admins = adminService.findAdminsByActiveStatus(isActive);
+        return ResponseEntity.ok(admins);
+    }
+
+    @PostMapping("/accept")
+    public ResponseEntity<Object> getAdmins(@RequestBody AdminAcceptRequestDto request){
+        List<AdminResponseDto> admins = adminService.activateAdminById(request);
+        return ResponseEntity.ok(admins);
     }
 }
 
