@@ -161,7 +161,7 @@ export default function Main() {
               <SelfCheckResultTable />
             </TableLayout>
             <ButtonStyle>
-              <Button className="rounded-pill m-2">다시하기</Button>
+              <Button className="rounded-pill m-2">초기화</Button>
               <Button className="rounded-pill m-2">저장하기</Button>
             </ButtonStyle>
           </InnerLayout>

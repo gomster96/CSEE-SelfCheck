@@ -161,14 +161,9 @@ export default function Main() {
                 공학프로젝트 입문 수강이 <span className="text-danger">가능</span>합니다
               </h4>
             </TextLayout>
-            <TextLayout>
-              <h6>
-                *불가능이어도 제출 가능합니다.<br></br>**제출 버튼을 누르셔야 최종적으로 제출됩니다.
-              </h6>
-            </TextLayout>
+
             <ButtonStyle>
               <Button className="rounded-pill m-2">수정하기</Button>
-              <Button className="rounded-pill m-2">제출하기</Button>
             </ButtonStyle>
           </InnerLayout>
         </RoundBackgroundDiv>
