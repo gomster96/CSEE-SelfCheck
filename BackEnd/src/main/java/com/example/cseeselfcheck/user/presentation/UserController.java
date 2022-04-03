@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final ReferenceUserService referenceUserService;
