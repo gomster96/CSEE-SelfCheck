@@ -28,6 +28,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<UserIndividualDataDto> findFirstByIndividualDataById(Long userId);
 
 
-    //Optional<User> findByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 }
 

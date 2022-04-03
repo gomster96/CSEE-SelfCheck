@@ -8,7 +8,9 @@ import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
 import com.example.cseeselfcheck.lecture.application.dto.LectureDataDto;
 import com.example.cseeselfcheck.lecture.domain.Lecture;
 import com.example.cseeselfcheck.lecture.domain.repository.LectureRepository;
+
 import com.example.cseeselfcheck.user.application.dto.UserFullDataResponseDto;
+import com.example.cseeselfcheck.user.domain.User;
 import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
 import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
@@ -45,5 +47,10 @@ public class UserService {
                 .map(LectureDataDto::new)
                 .collect(Collectors.toList());
         return new UserFullDataResponseDto(individualData, userLectures);
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+
+        return userRepository.findUserByEmail(email);
     }
 }

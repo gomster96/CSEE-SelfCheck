@@ -41,9 +41,16 @@ const getStudents = async (body) => {
   return await handleResult(response);
 };
 
+const getUserByEmail = async (body) => {
+  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/user/check`;
+  const response = await fetch(getStudentUrl, postOptions(body));
+  return await handleResult(response);
+};
+
 const service = {
   getLectures,
   getStudents,
+  getUserByEmail,
 };
 
 export default service;
