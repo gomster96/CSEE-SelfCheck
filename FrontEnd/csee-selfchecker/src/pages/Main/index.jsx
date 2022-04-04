@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { ContainerDiv, RoundBackgroundDiv, InnerLayout, TableLayout, TextLayout, ButtonStyle, FooterDiv, Footer, FooterTextLayout } from './main.styled';
 import Table from './components/Table';
+import ResultTable from './components/Result_table';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
@@ -25,7 +26,9 @@ class Index extends Component {
               </TableLayout>
 
               <Table />
-
+              <TableLayout>
+                <ResultTable />
+              </TableLayout>
               <TextLayout>
                 <h4>
                   공학프로젝트 입문 수강이 <span className="text-danger">가능</span>합니다

@@ -5,6 +5,7 @@ import TableRow from './TableRow';
 import UserDataItem from '../Getdata/user_data_item/user_data_item';
 import UserDataList from '../Getdata/Table_user_state';
 import React, { useEffect, useState } from 'react';
+import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
   const Table = ({ children }) => {
   
@@ -15,7 +16,7 @@ import React, { useEffect, useState } from 'react';
           {children}
 
           <TableRow>
-            <TableCell title="이름" value="{user.name}"></TableCell>
+  
             <TableCell title="학번" value="21700162"></TableCell>
             <TableCell title="이메일" value="moomin@handong.ac.kr"></TableCell>
             <TableCell title="학기수" value="8학기"></TableCell>
