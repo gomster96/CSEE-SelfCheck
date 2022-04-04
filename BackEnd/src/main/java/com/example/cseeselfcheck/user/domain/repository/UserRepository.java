@@ -10,6 +10,9 @@ import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.transaction.Transactional;
+
+@Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u.studentNumber as studentNumber, r.major.majorName as majorName, r.major.checker as checker, u.result as result, u.takenStatus as takenStatus, r.name as name, r.semester as semester " +
             "from User u, ReferenceUser r " +
@@ -27,7 +30,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "where u.id = :userId AND u.studentNumber = r.studentNumber")
     Optional<UserIndividualDataDto> findFirstByIndividualDataById(Long userId);
 
-
-    Optional<User> findUserByEmail(String email);
+    @Query("select u.id as userId from User u where u.email = :email")
+    Optional<User> findByEmail(String email);
 }
-

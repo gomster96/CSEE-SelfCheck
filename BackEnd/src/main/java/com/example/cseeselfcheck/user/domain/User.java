@@ -1,12 +1,8 @@
 package com.example.cseeselfcheck.user.domain;
 
 import com.example.cseeselfcheck.common.BaseEntity;
-import com.example.cseeselfcheck.major.domain.Major;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 import javax.persistence.*;
@@ -15,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity{
