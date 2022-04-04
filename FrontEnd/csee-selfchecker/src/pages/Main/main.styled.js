@@ -1,11 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
-import MypageTable from './MypageTable';
-import MypageResultTable from './MypageResultTable';
 import background from '../../asset/img/backgroundImg.png';
-import headerImg from '../../asset/img/csee-logo-symbol.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
 const calcWidthPercent = (span) => {
   if (!span) return;
@@ -18,7 +12,7 @@ const BREAK_POINT_MOBILE = 768;
 const BREAK_POINT_TABLET = 992;
 const BREAK_POINT_PC = 1200;
 
-const ContainerDiv = styled.div`
+export const ContainerDiv = styled.div`
   width: 100vw;
   height: 100vh;
   background: #eff0f2;
@@ -38,7 +32,7 @@ const ContainerDiv = styled.div`
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
-const RoundBackgroundDiv = styled.div`
+export const RoundBackgroundDiv = styled.div`
   background: #f5f5f5;
   width: 1050px;
   height: auto;
@@ -59,7 +53,7 @@ const RoundBackgroundDiv = styled.div`
   padding: 1%;
   @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
     width: ${({ sm }) => sm && `${calcWidthPercent(sm)}%`};
-    height: 90%;
+    height: 95%;
   }
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
@@ -69,7 +63,7 @@ const RoundBackgroundDiv = styled.div`
   }
 `;
 
-const InnerLayout = styled.div`
+export const InnerLayout = styled.div`
   display: inline-block;
   height: 80%;
   margin-top: 3%;
@@ -86,11 +80,11 @@ const InnerLayout = styled.div`
   }
 `;
 
-const TableLayout = styled.div`
+export const TableLayout = styled.div`
   margin-bottom: 6vh;
 `;
 
-const TextLayout = styled.div`
+export const TextLayout = styled.div`
   padding: 0.5rem;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     font-size: ${({ sm }) => sm && `${calcWidthPercent(sm)}rem`};
@@ -103,7 +97,7 @@ const TextLayout = styled.div`
   }
 `;
 
-const ButtonStyle = styled.div`
+export const ButtonStyle = styled.div`
   border-radius: 35px;
   display: inline-block;
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `80%`)};
@@ -118,73 +112,18 @@ const ButtonStyle = styled.div`
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
-const FooterDiv = styled.div`
+export const FooterDiv = styled.div`
   display: flex;
   align-itmes: center;
   justify-content: center;
 `;
 
-const Footer = styled.div`
+export const Footer = styled.div`
   display: flex;
   align-itmes: center;
 `;
-const FooterTextLayout = styled.div`
+export const FooterTextLayout = styled.div`
   color: gray;
   font-size: 14px;
   padding: 0.5rem;
 `;
-
-export default function Main() {
-  return (
-    <>
-      <Navbar bg="light">
-        <Container>
-          <Navbar.Brand href="/">
-            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
-      <ContainerDiv>
-        <RoundBackgroundDiv>
-          <InnerLayout>
-            <TableLayout>
-              <h1>Mypage</h1>
-            </TableLayout>
-            <TableLayout>
-              <MypageTable />
-            </TableLayout>
-            <TableLayout>
-              <MypageResultTable />
-            </TableLayout>
-            <TextLayout>
-              <h4>
-                공학프로젝트 입문 수강이 <span className="text-danger">가능</span>합니다
-              </h4>
-            </TextLayout>
-            <TextLayout>
-              <h6>
-                *불가능이어도 제출 가능합니다.<br></br>**제출 버튼을 누르셔야 최종적으로 제출됩니다.
-              </h6>
-            </TextLayout>
-            <ButtonStyle>
-              <Button className="rounded-pill m-2">수정하기</Button>
-              <Button className="rounded-pill m-2">제출하기</Button>
-            </ButtonStyle>
-          </InnerLayout>
-        </RoundBackgroundDiv>
-      </ContainerDiv>
-      <>
-        <FooterDiv className="bg-gray">
-          <Navbar>
-            <Container>
-              <Footer>
-                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
-                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
-              </Footer>
-            </Container>
-          </Navbar>
-        </FooterDiv>
-      </>
-    </>
-  );
-}

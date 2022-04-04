@@ -41,16 +41,33 @@ const getStudents = async (body) => {
   return await handleResult(response);
 };
 
-const getUserByEmail = async (body) => {
-  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/user/check`;
+const checkUserByEmail = async (body) => {
+  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/checkemail`;
   const response = await fetch(getStudentUrl, postOptions(body));
+  console.log(response);
+  return await handleResult(response);
+};
+
+const checkAdminByEmail = async (body) => {
+  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/checkemail`;
+  const response = await fetch(getStudentUrl, postOptions(body));
+  console.log(response);
+  return await handleResult(response);
+};
+
+const checkUserInfo = async (body) => {
+  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/checkInfo`;
+  const response = await fetch(getStudentUrl, postOptions(body));
+  console.log(response);
   return await handleResult(response);
 };
 
 const service = {
   getLectures,
   getStudents,
-  getUserByEmail,
+  checkUserByEmail,
+  checkAdminByEmail,
+  checkUserInfo,
 };
 
 export default service;

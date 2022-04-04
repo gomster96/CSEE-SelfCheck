@@ -16,14 +16,11 @@ import javax.transaction.Transactional;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u.studentNumber as studentNumber, r.major.majorName as majorName, r.major.checker as checker, u.result as result, u.takenStatus as takenStatus, r.name as name, r.semester as semester " +
             "from User u, ReferenceUser r " +
-            "where u.studentNumber = r.studentNumber")
-    List<UserDataDto> findUserData();
-
-    @Query("select u.studentNumber as studentNumber, r.major.majorName as majorName, r.major.checker as checker, u.result as result, u.takenStatus as takenStatus, r.name as name, r.semester as semester " +
-            "from User u, ReferenceUser r " +
             "where u.studentNumber = r.studentNumber " +
-            "and ( r.studentNumber like :searchWord% or r.name like :searchWord%)")
-    List<UserDataDto> findUserBySearchWord(String searchWord);
+            "and ( r.studentNumber like :searchWord% or r.name like :searchWord% )")
+    List<UserDataDto> findUserData(String searchWord);
+
+
 
     @Query("select u.id as userId, r.name as name, u.studentNumber as studentNumber,  " +
             "r.semester as semester, u.email as email, r.phone as phone, " +

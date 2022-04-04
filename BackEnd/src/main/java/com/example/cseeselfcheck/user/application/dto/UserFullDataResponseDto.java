@@ -13,9 +13,11 @@ import lombok.Getter;
 public class UserFullDataResponseDto {
     private Long userId;
     private String name;
+    private String studentNumber;
     private String majorName;
     private String semester;
     private String email;
+    private String phone;
     private int result;
     private String takenStatus;
     private List<String> takenSemesters;
@@ -24,9 +26,11 @@ public class UserFullDataResponseDto {
     public UserFullDataResponseDto(UserIndividualDataDto userData, List<LectureDataDto> lectures) {
         this.userId = userData.getUserId();
         this.name = userData.getName();
+        this.studentNumber = userData.getStudentNumber();
         this.majorName = userData.getMajorName();
         this.semester = userData.getSemester();
         this.email = userData.getEmail();
+        this.phone = userData.getPhone();
         this.result = userData.getResult();
         this.takenStatus = userData.getTakenStatus();
         setTakenSemestsersToList(userData.getTakenSemesters());
