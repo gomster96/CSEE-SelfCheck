@@ -26,9 +26,7 @@ class Index extends Component {
               </TableLayout>
 
               <Table />
-              <TableLayout>
-                <ResultTable />
-              </TableLayout>
+       
               <TextLayout>
                 <h4>
                   공학프로젝트 입문 수강이 <span className="text-danger">가능</span>합니다

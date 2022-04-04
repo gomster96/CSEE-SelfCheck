@@ -35,14 +35,14 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     createUser();
-    /*navigate('/selfcheck', {
-        state: {
-          studentNumber: data.studentNumber,
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-        },
-      });*/
+    navigate('/selfcheck', {
+      state: {
+        studentNumber: data.studentNumber,
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+      },
+    });
 
     e.preventDefault();
     console.log(formData);
