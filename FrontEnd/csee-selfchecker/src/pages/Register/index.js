@@ -6,17 +6,22 @@ import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Navbar, Container, Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router';
+import service from '../../util/service';
 
-export default function Resister() {
+export default function Register() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  var data = '';
   const initialFormData = Object.freeze({
-    studentId: '',
-    studentName: '',
-    studentPhone: '',
-    studentEmail: state.email,
+    studentNumber: '',
+    name: '',
+    phone: '',
+    email: state.email,
   });
-
+  const createUser = async () => {
+    console.log('Submit 진입!!!');
+    data = await service.checkUserInfo(formData);
+  };
   const [formData, updateFormData] = React.useState(initialFormData);
 
   const handleChange = (e) => {
@@ -29,18 +34,16 @@ export default function Resister() {
   };
 
   const handleSubmit = (e) => {
-    if (!e.studentId || !e.studentName || !e.studentPhone) {
-      alert('모든 정보를 입력해주세요.');
-    } else {
-      navigate('/selfcheck', {
+    createUser();
+    /*navigate('/selfcheck', {
         state: {
-          id: state.studentId,
-          name: state.studentName,
-          phone: state.studentPhone,
-          email: state.studentEmail,
+          studentNumber: data.studentNumber,
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
         },
-      });
-    }
+      });*/
+
     e.preventDefault();
     console.log(formData);
     // … submit to API or something
@@ -72,13 +75,13 @@ export default function Resister() {
                 <h3>Student Information</h3>
               </LoginFormRightTitle>
               <Form.Group className="mb-3" style={{ marginTop: '50px' }}>
-                <Form.Control placeholder="  학번 (Student ID)" name="studentId" onChange={handleChange} style={{ borderRadius: '20px' }} />
+                <Form.Control placeholder="  학번 (Student ID)" name="studentNumber" onChange={handleChange} style={{ borderRadius: '20px' }} />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Control placeholder="  이름 (Name)" name="studentName" onChange={handleChange} style={{ borderRadius: '20px' }} />
+                <Form.Control placeholder="  이름 (Name)" name="name" onChange={handleChange} style={{ borderRadius: '20px' }} />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Control placeholder="  핸드폰 뒤 4자리 (XXXX)" name="studentPhone" onChange={handleChange} style={{ borderRadius: '20px' }} />
+                <Form.Control placeholder="  핸드폰 뒤 4자리 (XXXX)" name="phone" onChange={handleChange} style={{ borderRadius: '20px' }} />
                 <p style={{ marginTop: '2vh', fontSize: '1.2vw', textAlign: 'center' }}>Hisnet에 저장된 연락처 뒤 4자리를 입력하세요.</p>
               </Form.Group>
               <Button as="input" type="submit" value="회원가입" style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
