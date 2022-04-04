@@ -85,18 +85,16 @@ export default function Filters(props) {
       <FormGroup>
         <CheckBoxAlignDiv>
           <CheckBoxesTitle>과목별 </CheckBoxesTitle>
-          <GaroScroll>
-            {props.lectureList.map((lecture, idx) => {
-              return (
-                <FormControlLabel
-                  control={<Checkbox name={lecture.lectureName} style={{ transform: 'scale(0.8)' }} />}
-                  label={<span style={{ fontSize: '0.8vw', width: '7vw' }}>{lecture.lectureName}</span>}
-                  sx={{ marginRight: '0.8vw' }}
-                  onClick={lectureBoxClicked.bind(this, idx)}
-                ></FormControlLabel>
-              );
-            })}
-          </GaroScroll>
+          {props.lectureList.map((lecture, idx) => {
+            return (
+              <FormControlLabel
+                control={<Checkbox name={lecture.lectureName} style={{ transform: 'scale(0.8)' }} />}
+                label={<span style={{ fontSize: '0.8vw', width: '7vw' }}>{lecture.lectureName}</span>}
+                sx={{ marginRight: '0.8vw' }}
+                onClick={lectureBoxClicked.bind(this, idx)}
+              ></FormControlLabel>
+            );
+          })}
         </CheckBoxAlignDiv>
         <CheckBoxAlignDiv>
           <CheckBoxesTitle>학기수 </CheckBoxesTitle>
@@ -136,23 +134,6 @@ const CheckBoxesTitle = styled.div`
   font-size: 1vw;
   font-weight: bolder;
   margin-right: 2vw;
-`;
-
-const GaroScroll = styled.div`
-  width: 40vw;
-  white-space: nowrap;
-  overflow-x: scroll;
-  /* scrollbar-width: none; */
-  ::-webkit-scrollbar {
-    height: 0.8vh;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #2e75b6;
-  }
-
-  ::-webkit-scrollbar-track {
-    /* background-color: grey; */
-  }
 `;
 
 const FiltersLayout = styled.div`

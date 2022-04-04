@@ -37,7 +37,6 @@ public class AdminController {
     private final AdminService adminService;
     private final LectureService lectureService;
     private final UserRepository userRepository;
-    private final AdminService adminService;
 
     @PostMapping("/users")
     public ResponseEntity<Object> getFilteredUser(@RequestBody AdminUserRequestDto request) {
@@ -69,9 +68,10 @@ public class AdminController {
 
 
     @PostMapping("/checkemail")
-    public ResponseEntity<Object> checkAdminByEmail(@RequestBody String adminEmail){
-        System.out.println("중복 확인 요청된 이메일: "+ adminEmail);
+    public ResponseEntity<Object> checkAdminByEmail(@RequestBody String adminEmail) {
+        System.out.println("중복 확인 요청된 이메일: " + adminEmail);
         return ResponseEntity.ok(adminService.checkAdminByEmail(adminEmail));
+    }
 
     @GetMapping("/list")
     public ResponseEntity<Object> getAdmins(@RequestParam boolean isActive){
