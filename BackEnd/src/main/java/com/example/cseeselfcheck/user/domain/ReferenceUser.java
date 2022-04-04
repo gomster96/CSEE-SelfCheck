@@ -50,7 +50,7 @@ public class ReferenceUser {
             throw new ReferenceUserDataFormatException(data);
     }
 
-    @Override
+    /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -63,6 +63,6 @@ public class ReferenceUser {
     @Override
     public int hashCode() {
         return Objects.hash(name, studentNumber, phone);
-    }
+    } */
 
 }
