@@ -2,18 +2,21 @@
 import { StyledTable } from './Table_styled';
 import TableCell from './TableCell';
 import TableRow from './TableRow';
-import Table_user_state from '../Getdata/lectureData';
-import React from 'react';
+import UserDataItem from '../Getdata/user_data_item/user_data_item';
+import UserDataList from '../Getdata/Table_user_state';
+import React, { useEffect, useState } from 'react';
+import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 
-function Table(props) {
   const Table = ({ children }) => {
+  
     return (
       <>
-        <Table_user_state />
+ 
         <StyledTable>
           {children}
+
           <TableRow>
-            <TableCell title="이름" value="김주은"></TableCell>
+  
             <TableCell title="학번" value="21700162"></TableCell>
             <TableCell title="이메일" value="moomin@handong.ac.kr"></TableCell>
             <TableCell title="학기수" value="8학기"></TableCell>
@@ -24,6 +27,6 @@ function Table(props) {
       </>
     );
   };
-}
+
 
 export default Table;
