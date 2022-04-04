@@ -27,9 +27,9 @@ public class AdminService {
 
 
     public Optional<Admin> checkAdminByEmail(String adminEmail) {
-        System.out.println(adminEmail+" 중복검사");
+        System.out.println(adminEmail + " 중복검사");
         return adminRepository.findByEmail(adminEmail);
-
+    }
 
     public List<AdminResponseDto> findAdminsByActiveStatus(boolean isActive) {
         return adminRepository.findAllByActiveStatus(isActive)
