@@ -37,6 +37,7 @@ public class AdminController {
     }
     */
     private final UserService userService;
+    private final AdminService adminService;
     private final LectureService lectureService;
     private final UserRepository userRepository;
 
@@ -72,6 +73,12 @@ public class AdminController {
     public ResponseEntity<Object> getLectures(){
         List<LectureResponseDto> lectures = lectureService.getLectures();
         return ResponseEntity.ok(lectures);
+    }
+
+    @PostMapping("/checkemail")
+    public ResponseEntity<Object> checkAdminByEmail(@RequestBody String adminEmail){
+        System.out.println("중복 확인 요청된 이메일: "+ adminEmail);
+        return ResponseEntity.ok(adminService.checkAdminByEmail(adminEmail));
     }
 }
 

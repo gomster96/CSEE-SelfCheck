@@ -2,16 +2,29 @@ package com.example.cseeselfcheck.user.presentation;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.example.cseeselfcheck.exception.common.ExcelOpenFileException;
 import com.example.cseeselfcheck.user.application.ReferenceUserService;
 import com.example.cseeselfcheck.user.application.UserService;
 import com.example.cseeselfcheck.user.application.dto.UserFullDataResponseDto;
+import com.example.cseeselfcheck.user.domain.ReferenceUser;
 import com.example.cseeselfcheck.user.domain.User;
+import com.example.cseeselfcheck.user.domain.Validator.CheckPhoneValidator;
+import com.example.cseeselfcheck.user.domain.Validator.CheckStudentNumberValidator;
+import com.example.cseeselfcheck.user.domain.Validator.CheckUsernameValidator;
 import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
 
+import com.example.cseeselfcheck.user.domain.dto.UserRequestDto;
+import com.example.cseeselfcheck.user.domain.repository.UserRepository;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,13 +32,19 @@ import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpSession;
 
+@Log4j2
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final ReferenceUserService referenceUserService;
     private final UserService userService;
+    private final UserRepository userRepository;
+    private final CheckUsernameValidator checkUsernameValidator;
+    private final CheckStudentNumberValidator checkStudentNumberValidator;
+    private final CheckPhoneValidator checkPhoneValidator;
 
     @PostMapping("/upload/users")
     public ResponseEntity<Object> uploadReferenceUser(@RequestParam("file") MultipartFile file) {
@@ -45,10 +64,37 @@ public class UserController {
         return ResponseEntity.ok(userIndividualData);
     }
 
-    @GetMapping("/user/{email}")
-    public ResponseEntity<Object> getUserByEmail(@PathVariable String email){
-        Optional<User> user = userService.getUserByEmail(email);
-
-        return ResponseEntity.ok(user);
+    @PostMapping("/user/checkemail")
+    public ResponseEntity<Object> checkUserByEmail(@RequestBody String email){
+        System.out.println("중복 확인 요청된 이메일: "+email);
+        return ResponseEntity.ok(userService.checkUserByEmail(email));
     }
+
+    @InitBinder
+    public void validatorBinder(WebDataBinder binder) {
+        binder.addValidators(checkUsernameValidator);
+        binder.addValidators(checkStudentNumberValidator);
+        binder.addValidators(checkPhoneValidator);
+    }
+
+    @GetMapping("/user/signup")
+    public String signup() {
+        return "/user/user-join";
+    }
+
+    /* 회원가입 */
+    @PostMapping("/auth/signupProc")
+    public String signupProc(@Validated UserRequestDto userDto, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            /* 회원가입 실패시 입력 데이터 값을 유지 */
+            model.addAttribute("userDto", userDto);
+            /* 유효성 통과 못한 필드와 메시지를 핸들링 */
+            Map<String, String> validatorResult = userService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+            /* 회원가입 페이지로 다시 리턴 */
+            return "/user/user-join";
+        } userService.userSignup(userDto); return "redirect:/user/login"; }
+
 }
