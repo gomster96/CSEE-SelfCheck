@@ -6,19 +6,19 @@ function Table_user_state() {
   useEffect(() => {
     console.log('useEffect');
   }, []);
+const requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
 
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-  };
-
-  fetch('http://localhost:8080/admin/lectures', requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      console.log(JSON.stringify(result));
+fetch("http://localhost:8080/api/user/info?userId=3", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    console.log(JSON.stringify(result));
       setUserDatas(result);
-    })
-    .catch((error) => console.log('error', error));
+  })
+  .catch(error => console.log('error', error));
+ 
   return <UserDataList userDatas={userDatas} />;
 }
 

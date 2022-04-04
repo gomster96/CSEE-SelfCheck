@@ -2,30 +2,15 @@
 import { StyledTable } from './Table_styled';
 import TableCell from './TableCell';
 import TableRow from './TableRow';
-import UserData from '../../SelfCheck/Getdata/Table_user_state';
+import UserDataItem from '../Getdata/user_data_item/user_data_item';
+import UserDataList from '../Getdata/Table_user_state';
 import React, { useEffect, useState } from 'react';
-function Table() {
+
   const Table = ({ children }) => {
-    const [userDatas, setUserDatas] = useState([]);
-    useEffect(() => {
-      console.log('useEffect');
-    }, []);
-
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
-
-    fetch('http://localhost:8080/api/user/info?userId=1', requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(JSON.stringify(result));
-        setUserDatas(result);
-      })
-      .catch((error) => console.log('error', error));
+  
     return (
       <>
-        <UserData />
+ 
         <StyledTable>
           {children}
 
@@ -41,6 +26,6 @@ function Table() {
       </>
     );
   };
-}
+
 
 export default Table;

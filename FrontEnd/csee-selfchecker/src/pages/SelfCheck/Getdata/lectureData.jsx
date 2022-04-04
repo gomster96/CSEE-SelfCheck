@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import UserDataList from './user_data_list/user_data_list';
+import LectureDataList from './lecture_data_list/lecture_data_list';
 
-function Table_user_state() {
-  const [userDatas, setUserDatas] = useState([]);
+function LectureData() {
+  const [lectureDatas, setLectureDatas] = useState([]);
   useEffect(() => {
     console.log('useEffect');
   }, []);
@@ -16,10 +16,10 @@ function Table_user_state() {
     .then((response) => response.json())
     .then((result) => {
       console.log(JSON.stringify(result));
-      setUserDatas(result);
+      setLectureDatas(result);
     })
     .catch((error) => console.log('error', error));
-  return <UserDataList userDatas={userDatas} />;
+  return <LectureDataList lectureDatas={lectureDatas} />;
 }
 
-export default Table_user_state;
+export default LectureData;

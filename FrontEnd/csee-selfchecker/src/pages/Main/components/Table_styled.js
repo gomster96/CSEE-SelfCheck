@@ -103,7 +103,7 @@ export const StyledTd = styled.div`
 
   //border-right: 1px solid ${({ theme }) => theme.lightGray};
   //border-bottom: 1px solid ${({ theme }) => theme.lightGray};
-  @media only screen and (max-width: ${BREAK_POINT_MOBILE}px) {
+  @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     flex: 0 0 7rem;
     min-width: 7rem;
     &:first-child {
@@ -111,9 +111,9 @@ export const StyledTd = styled.div`
     }
     word-break: break-all;
   }
-  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    flex: 0 0 10rem;
-    min-width: 10rem;
+  @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+    flex: 0 0 7rem;
+    min-width: 7rem;
 
     &:first-child {
       //border-bottom: 0;
