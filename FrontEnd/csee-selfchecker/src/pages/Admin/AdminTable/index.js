@@ -31,13 +31,15 @@ export default function AdminTable(props) {
 
   const parseTakenStatus = (takenStatus) => {
     let parsedStatus = '';
-    // for (let i = 0; i < takenStatus.length; i++) {
-    //   if (takenStatus[i] === '-') {
-    //     parsedStatus += props.lectureList[i].lectureName + ' 미이수';
-    //   } else if (takenStatus[i] === '+') {
-    //     parsedStatus += props.lectureList[i].lectureName + ' 병수예정';
-    //   }
-    // }
+    for (let i = 0; i < takenStatus.length; i++) {
+      if (props.lectureList.length === 0) break;
+      if (takenStatus[i] === '-') {
+        parsedStatus += props.lectureList[i].lectureName + ', ';
+      } else if (takenStatus[i] === '+') {
+        parsedStatus += props.lectureList[i].lectureName + ' 병수예정, ';
+      }
+    }
+    if (parsedStatus.length > 2) parsedStatus = parsedStatus.substring(0, parsedStatus.length - 2);
     return parsedStatus;
   };
 
@@ -72,7 +74,7 @@ export default function AdminTable(props) {
                 <StyledTableCell align="center">{student.majorName}</StyledTableCell>
                 <StyledTableCell align="center">{student.semester}</StyledTableCell>
                 <StyledTableCell align="center">{student.result === 1 ? '만족' : '불만족'}</StyledTableCell>
-                <StyledTableCell align="center">{parseTakenStatus(student.takenStatus)}</StyledTableCell>
+                <StyledTableCell align="center">{student.takenStatus ? parseTakenStatus(student.takenStatus) : ''}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
