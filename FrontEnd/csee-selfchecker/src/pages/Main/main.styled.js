@@ -79,7 +79,9 @@ export const InnerLayout = styled.div`
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
-
+export const MarginLayout = styled.div`
+  margin-bottom: 6vh;
+`;
 export const TableLayout = styled.div`
   margin-bottom: 6vh;
 `;
@@ -111,19 +113,4 @@ export const ButtonStyle = styled.div`
   @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
-`;
-export const FooterDiv = styled.div`
-  display: flex;
-  align-itmes: center;
-  justify-content: center;
-`;
-
-export const Footer = styled.div`
-  display: flex;
-  align-itmes: center;
-`;
-export const FooterTextLayout = styled.div`
-  color: gray;
-  font-size: 14px;
-  padding: 0.5rem;
 `;
