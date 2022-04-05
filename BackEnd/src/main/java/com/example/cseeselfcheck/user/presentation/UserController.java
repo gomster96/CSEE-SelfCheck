@@ -1,30 +1,23 @@
 package com.example.cseeselfcheck.user.presentation;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import com.example.cseeselfcheck.exception.common.ExcelOpenFileException;
 import com.example.cseeselfcheck.user.application.ReferenceUserService;
 import com.example.cseeselfcheck.user.application.UserService;
 import com.example.cseeselfcheck.user.application.dto.UserFullDataResponseDto;
 
-import com.example.cseeselfcheck.user.domain.dto.UserRequestDto;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
+import com.example.cseeselfcheck.user.presentation.dto.UserDataSaveRequest;
+import com.example.cseeselfcheck.user.application.dto.UserDataSaveResponseDto;
+
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
-
-import javax.servlet.http.HttpSession;
 
 @Log4j2
 @RestController
@@ -53,6 +46,12 @@ public class UserController {
         UserFullDataResponseDto userIndividualData = userService.getUserIndividualDataById(userId);
 
         return ResponseEntity.ok(userIndividualData);
+    }
+
+    @PostMapping("/user/save")
+    public ResponseEntity<UserDataSaveResponseDto> saveUserInfo(@RequestBody UserDataSaveRequest request){
+        UserDataSaveResponseDto userDataSaveResponse = userService.saveUserData(request);
+        return ResponseEntity.ok(userDataSaveResponse);
     }
 
     @PostMapping("/user/checkemail")

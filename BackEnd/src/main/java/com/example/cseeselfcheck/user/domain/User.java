@@ -1,6 +1,7 @@
 package com.example.cseeselfcheck.user.domain;
 
 import com.example.cseeselfcheck.common.BaseEntity;
+import com.example.cseeselfcheck.user.presentation.dto.UserDataSaveRequest;
 
 import lombok.*;
 
@@ -37,5 +38,11 @@ public class User extends BaseEntity{
         this.result = result;
         this.resultDate = resultDate;
         this.takenStatus = takenStatus;
+    }
+
+    public void saveUserData(int result, UserDataSaveRequest userSaveData){
+        this.result = result;
+        this.takenStatus = userSaveData.getTakenStatus();
+        this.takenSemesterStatus = userSaveData.getTakenSemester();
     }
 }
