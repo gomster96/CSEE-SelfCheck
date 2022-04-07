@@ -8,7 +8,7 @@ export default function ExportButton() {
     console.log('export button clicked');
   };
   return (
-    <Button className="rounded-pill m-2" onClick={test}>
+    <Button className="rounded-pill m-2" onClick={test} disabled>
       Excel Export
     </Button>
   );

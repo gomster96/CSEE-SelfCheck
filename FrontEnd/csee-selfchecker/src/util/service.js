@@ -41,6 +41,36 @@ const getStudents = async (body) => {
   return await handleResult(response);
 };
 
+const uploadLectures = async (formData) => {
+  const uploadUrl = `${process.env.REACT_APP_SERVER_URL}/api/upload/lectures`;
+  const options = {
+    method: 'POST',
+    body: formData,
+  };
+  const response = await fetch(uploadUrl, options);
+  if (response.status !== 200) console.log('Error Occur');
+};
+
+const uploadMajors = async (formData) => {
+  const uploadUrl = `${process.env.REACT_APP_SERVER_URL}/api/upload/majors`;
+  const options = {
+    method: 'POST',
+    body: formData,
+  };
+  const response = await fetch(uploadUrl, options);
+  if (response.status !== 200) console.log('Error Occur');
+};
+
+const uploadUsers = async (formData) => {
+  const uploadUrl = `${process.env.REACT_APP_SERVER_URL}/api/upload/users`;
+  const options = {
+    method: 'POST',
+    body: formData,
+  };
+  const response = await fetch(uploadUrl, options);
+  if (response.status !== 200) console.log('Error Occur');
+};
+
 const checkUserByEmail = async (body) => {
   const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/checkemail`;
   const response = await fetch(getStudentUrl, postOptions(body));
@@ -65,6 +95,9 @@ const checkUserInfo = async (body) => {
 const service = {
   getLectures,
   getStudents,
+  uploadLectures,
+  uploadMajors,
+  uploadUsers,
   checkUserByEmail,
   checkAdminByEmail,
   checkUserInfo,

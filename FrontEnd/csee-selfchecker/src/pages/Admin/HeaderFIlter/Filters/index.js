@@ -88,6 +88,7 @@ export default function Filters(props) {
           {props.lectureList.map((lecture, idx) => {
             return (
               <FormControlLabel
+                key={lecture.lectureName}
                 control={<Checkbox name={lecture.lectureName} style={{ transform: 'scale(0.8)' }} />}
                 label={<span style={{ fontSize: '0.8vw', width: '7vw' }}>{lecture.lectureName}</span>}
                 sx={{ marginRight: '0.8vw' }}
@@ -101,6 +102,7 @@ export default function Filters(props) {
           {semester.map((semes, idx) => {
             return (
               <FormControlLabel
+                key={idx}
                 control={<Checkbox name={semes} style={{ transform: 'scale(0.8)' }} />}
                 label={<span style={{ fontSize: '0.8vw', width: '7vw' }}>{semes}</span>}
                 onClick={semesterBoxClicked.bind(this, idx)}
@@ -113,6 +115,7 @@ export default function Filters(props) {
           {possibleStudent.map((student, idx) => {
             return (
               <FormControlLabel
+                key={idx}
                 control={<Checkbox name={student} style={{ transform: 'scale(0.8)' }} />}
                 label={<span style={{ fontSize: '0.8vw', width: '7vw' }}>{student}</span>}
                 onClick={resultBoxClicked.bind(this, idx)}
