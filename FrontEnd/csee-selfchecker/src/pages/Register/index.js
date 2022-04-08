@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../asset/img/loginImage.png';
 import background from '../../asset/img/backgroundImg.png';
@@ -11,42 +11,47 @@ import service from '../../util/service';
 export default function Register() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  var data = '';
-  const initialFormData = Object.freeze({
+  const [userDatas, setUserDatas] = useState([]);
+  var userId;
+
+  const checkIsUser = async () => {
+    const response = await service.checkUserByEmail(formData.email);
+    console.log('response is ', response);
+    userId = response;
+    console.log('userid is ', userId);
+
+    if (!userId) {
+      alert('[공학 프로젝트 기획] 수강 가능 명단에 입력하신 정보가 존재하지 않습니다. 모든 정보를 정확하게 입력해주세요.');
+      navigate('/');
+    } else {
+      navigate('/selfcheck', {
+        state: { userId: userId },
+      });
+    }
+  };
+
+  const initialFormData = {
     studentNumber: '',
     name: '',
     phone: '',
-    email: state.email,
-  });
-  const createUser = async () => {
-    console.log('Submit 진입!!!');
-    data = await service.checkUserInfo(formData);
+    email: '',
   };
-  const [formData, updateFormData] = React.useState(initialFormData);
+
+  const [formData, updateFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     updateFormData({
       ...formData,
-
-      // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
+      email: state.email,
     });
   };
 
-  const handleSubmit = (e) => {
-    createUser();
-    navigate('/selfcheck', {
-      state: {
-        studentNumber: data.studentNumber,
-        name: data.name,
-        phone: data.phone,
-        email: data.email,
-      },
-    });
-
-    e.preventDefault();
+  const handleSubmit = () => {
     console.log(formData);
-    // … submit to API or something
+    const response = service.checkUserInfo(formData);
+    setUserDatas(response);
+    checkIsUser();
   };
 
   return (
@@ -70,7 +75,7 @@ export default function Register() {
           </LoginFormLeft2>
 
           <LoginFormRight>
-            <Form onSubmit={handleSubmit}>
+            <Form>
               <LoginFormRightTitle>
                 <h3>Student Information</h3>
               </LoginFormRightTitle>
@@ -84,11 +89,11 @@ export default function Register() {
                 <Form.Control placeholder="  핸드폰 뒤 4자리 (XXXX)" name="phone" onChange={handleChange} style={{ borderRadius: '20px' }} />
                 <p style={{ marginTop: '2vh', fontSize: '1.2vw', textAlign: 'center' }}>Hisnet에 저장된 연락처 뒤 4자리를 입력하세요.</p>
               </Form.Group>
-              <Button as="input" type="submit" value="회원가입" style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
-              <p style={{ marginTop: '2vh', fontSize: '1.2vw', textAlign: 'center' }}>
-                회원가입이 안될 시 관리자에게 문의하세요.<br></br>[054-260-1234 / admin@handong.ac.kr]{' '}
-              </p>
             </Form>
+            <Button as="input" type="button" value="회원가입" onClick={handleSubmit} style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
+            <p style={{ marginTop: '2vh', fontSize: '1.2vw', textAlign: 'center' }}>
+              회원가입이 안될 시 관리자에게 문의하세요.<br></br>[054-260-1234 / admin@handong.ac.kr]{' '}
+            </p>
           </LoginFormRight>
         </LoginFormDiv>
       </ContainerDiv>
