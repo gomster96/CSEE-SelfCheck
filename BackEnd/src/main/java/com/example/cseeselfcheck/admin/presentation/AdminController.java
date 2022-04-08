@@ -5,16 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.cseeselfcheck.admin.application.AdminService;
+import com.example.cseeselfcheck.admin.application.dto.AdminInsertResponseDto;
 import com.example.cseeselfcheck.admin.application.dto.AdminResponseDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminAcceptRequestDto;
+import com.example.cseeselfcheck.admin.presentation.dto.AdminInsertRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
 import com.example.cseeselfcheck.lecture.application.LectureService;
 import com.example.cseeselfcheck.lecture.presentation.dto.LectureResponseDto;
 import com.example.cseeselfcheck.user.application.UserService;
+import com.example.cseeselfcheck.user.application.dto.UserResponseDto;
 import com.example.cseeselfcheck.user.domain.User;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
 
+import com.example.cseeselfcheck.user.presentation.dto.UserCheckRequestDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,6 +88,10 @@ public class AdminController {
         List<AdminResponseDto> admins = adminService.activateAdminById(request);
         return ResponseEntity.ok(admins);
     }
+
+    @PostMapping("/signup")
+    public ResponseEntity<Object> insertAdmin(@RequestBody AdminInsertRequestDto data){
+        List<AdminInsertResponseDto> admins = adminService.insertAdmin(data);
+        return ResponseEntity.ok(admins);
+    }
 }
-
-

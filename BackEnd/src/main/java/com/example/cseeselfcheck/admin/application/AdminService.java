@@ -1,11 +1,12 @@
 package com.example.cseeselfcheck.admin.application;
 
+import com.example.cseeselfcheck.admin.application.dto.AdminInsertResponseDto;
 import com.example.cseeselfcheck.admin.domain.Admin;
 import com.example.cseeselfcheck.admin.domain.repository.AdminRepository;
-import com.example.cseeselfcheck.user.domain.User;
-import com.example.cseeselfcheck.user.domain.repository.UserRepository;
+import com.example.cseeselfcheck.admin.presentation.dto.AdminInsertRequestDto;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -13,12 +14,9 @@ import javax.transaction.Transactional;
 import com.example.cseeselfcheck.admin.application.dto.AdminResponseDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminAcceptRequestDto;
 
-
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,9 +31,9 @@ public class AdminService {
 
     public List<AdminResponseDto> findAdminsByActiveStatus(boolean isActive) {
         return adminRepository.findAllByActiveStatus(isActive)
-                              .stream()
-                              .map(AdminResponseDto::new)
-                              .collect(Collectors.toList());
+                .stream()
+                .map(AdminResponseDto::new)
+                .collect(Collectors.toList());
 
     }
 
@@ -44,8 +42,17 @@ public class AdminService {
         Admin admin = adminRepository.findById(acceptRequest.getAdminId()).orElseThrow();
         admin.activate();
         return adminRepository.findAllByActiveStatus(false)
-                              .stream()
-                              .map(AdminResponseDto::new)
-                              .collect(Collectors.toList());
+                .stream()
+                .map(AdminResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<AdminInsertResponseDto> insertAdmin(AdminInsertRequestDto data) {
+        Admin admin = new Admin();
+        admin.insertAdminData(data);
+        adminRepository.save(admin);
+        System.out.println("관리자 회원가입 성공!");
+        return null;
     }
 }
