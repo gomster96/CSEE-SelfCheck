@@ -10,7 +10,7 @@ function header(props) {
       <Navbar bg="light">
         <Container>
           <Navbar.Brand href="/">
-            <img alt="" src={headerImg} width="40" height="40" className="d-inline-block align-top" /> CSEE Self-Checker
+            <img alt="" src={headerImg} width="40" height="40" className="d-inline-block align-top" /> CSEE 공학프로젝트기획 Self-Checker
           </Navbar.Brand>
           <Link to="../">
             <button>로그아웃</button>

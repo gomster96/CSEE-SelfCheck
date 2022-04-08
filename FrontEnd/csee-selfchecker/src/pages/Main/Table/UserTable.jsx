@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import SelfCheckUserTable from '../../SelfCheck/Table/SelfCheckUserTable';
 import { TableLayout } from '../main.styled';
 import { useLocation } from 'react-router';
-import { useNavigate } from 'react-router';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -41,7 +41,6 @@ export default function MyPageTable() {
   const classes = TableStyles();
   const [userData, setUserData] = useState({});
   const { state } = useLocation();
-  const history = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
@@ -99,7 +98,7 @@ export default function MyPageTable() {
       ) : null}
       <h6 className="text-muted">
         <small>
-          <br></br>*개인정보수정 필요시 관리자에게 문의하세요.
+          <br></br>*개인정보수정 필요시 관리자에게 문의하세요.<br></br>[054-260-1234 / admin@handong.ac.kr]
         </small>
       </h6>
     </TableLayout>
