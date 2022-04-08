@@ -46,6 +46,8 @@ export default function ResultTable(props) {
       .then((response) => response.json())
       .then((result) => {
         console.log(result.res);
+        console.log('state is');
+        console.log(state);
         console.log('result is');
         console.log(result);
         setUserData(result);
@@ -91,7 +93,7 @@ export default function ResultTable(props) {
       ) : null}
       <h5 className="m-5">
         공학 프로젝트 기획 수강 요건을
-        <span className="text-danger">{userData.result === 1 ? ' 충족' : ' 미충족'}</span>
+        <span className="text-danger">{userData.result === 0 ? ' 미충족' : ' 충족'}</span>
         하셨습니다
       </h5>
     </TableLayout>

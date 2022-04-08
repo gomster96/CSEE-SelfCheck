@@ -7,7 +7,9 @@ import { Button } from 'react-bootstrap';
 function ResetButton(props) {
   return (
     <>
-      <Button className="rounded-pill m-2">저장하기</Button>
+      <Link to="../main">
+        <Button className="rounded-pill m-2">저장하기</Button>
+      </Link>
     </>
   );
 }
