@@ -1,13 +1,16 @@
 package com.example.cseeselfcheck.user.presentation;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.example.cseeselfcheck.exception.common.ExcelOpenFileException;
 import com.example.cseeselfcheck.user.application.ReferenceUserService;
 import com.example.cseeselfcheck.user.application.UserService;
 import com.example.cseeselfcheck.user.application.dto.UserFullDataResponseDto;
 
+import com.example.cseeselfcheck.user.application.dto.UserResponseDto;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
+import com.example.cseeselfcheck.user.presentation.dto.UserCheckRequestDto;
 import com.example.cseeselfcheck.user.presentation.dto.UserDataSaveRequest;
 import com.example.cseeselfcheck.user.application.dto.UserDataSaveResponseDto;
 
@@ -28,7 +31,6 @@ public class UserController {
 
     private final ReferenceUserService referenceUserService;
     private final UserService userService;
-    private final UserRepository userRepository;
 
     @PostMapping("/upload/users")
     public ResponseEntity<Object> uploadReferenceUser(@RequestParam("file") MultipartFile file) {
@@ -60,23 +62,9 @@ public class UserController {
         return ResponseEntity.ok(userService.checkUserByEmail(email));
     }
 
-    /* @GetMapping("/user/signup")
-    public String signup() {
-        return "/user/user-join";
+    @PostMapping("/user/checkInfo")
+    public ResponseEntity<Object> checkUserInfo(@RequestBody UserCheckRequestDto data){
+        List<UserResponseDto> userDatas = userService.checkUserInfo(data);
+        return ResponseEntity.ok(userDatas);
     }
-
-
-    @PostMapping("/auth/signupProc")
-    public String signupProc(@Validated UserRequestDto userDto, Errors errors, Model model) {
-        if (errors.hasErrors()) {
-
-            model.addAttribute("userDto", userDto);
-
-            Map<String, String> validatorResult = userService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
-
-            return "/user/user-join";
-        } userService.userSignup(userDto); return "redirect:/user/login"; } */
 }

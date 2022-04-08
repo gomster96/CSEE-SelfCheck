@@ -7,5 +7,4 @@ public interface UserRequestDto {
     String getStudentNumber();
     String getPhone();
     String getEmail();
-
 }
