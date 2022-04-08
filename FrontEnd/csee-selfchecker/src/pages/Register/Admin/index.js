@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../../asset/img/loginImage.png';
 import background from '../../../asset/img/backgroundImg.png';
@@ -6,43 +6,36 @@ import headerImg from '../../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Navbar, Container, Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router';
+import service from '../../../util/service';
 
 export default function AdminRegister() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const [userDatas, setUserDatas] = useState([]);
 
-  const initialFormData = Object.freeze({
-    adminDepartment: '',
-    adminName: '',
-    adminEmail: state.email,
-  });
+  const initialFormData = {
+    adminEmail: '',
+    department: '',
+    name: '',
+  };
 
-  const [formData, updateFormData] = React.useState(initialFormData);
+  const [formData, updateFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     updateFormData({
       ...formData,
-
-      // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
+      adminEmail: state.email,
     });
   };
 
-  const handleSubmit = (e) => {
-    if (!e.adminDepartment || !e.adminName) {
-      alert('모든 정보를 입력해주세요.');
-    } else {
-      navigate('/admin', {
-        state: {
-          department: state.adminDepartment,
-          name: state.adminName,
-          email: state.adminEmail,
-        },
-      });
-    }
-    e.preventDefault();
+  const handleSubmit = () => {
     console.log(formData);
-    // … submit to API or something
+    const response = service.signupAdmin(formData);
+    setUserDatas(response);
+
+    alert('관리자 회원가입 정보 제출 완료! 관리자 승인 후 로그인이 가능합니다.');
+    navigate('/');
   };
   return (
     <>
@@ -65,19 +58,19 @@ export default function AdminRegister() {
           </LoginFormLeft2>
 
           <LoginFormRight>
-            <Form onSubmit={handleSubmit}>
+            <Form>
               <LoginFormRightTitle>
                 <h3>Admin Information</h3>
               </LoginFormRightTitle>
               <Form.Group className="mb-3" style={{ marginTop: '50px' }}>
-                <Form.Control placeholder="  소속 (Department)" name="adminDepartment" onChange={handleChange} style={{ borderRadius: '20px' }} />
+                <Form.Control placeholder="  소속 (Department)" name="department" onChange={handleChange} style={{ borderRadius: '20px' }} />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Control placeholder="  이름 (Name)" name="adminName" onChange={handleChange} style={{ borderRadius: '20px' }} />
+                <Form.Control placeholder="  이름 (Name)" name="name" onChange={handleChange} style={{ borderRadius: '20px' }} />
               </Form.Group>
               <p>제출 시 관리자 승인 후 로그인 가능합니다.</p>
-              <Button as="input" type="submit" value="Submit!" style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
             </Form>
+            <Button as="input" type="button" value="회원가입" onClick={handleSubmit} style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
           </LoginFormRight>
         </LoginFormDiv>
       </ContainerDiv>
