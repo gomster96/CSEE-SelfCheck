@@ -92,8 +92,8 @@ public class UserService {
             return null;
         } else {
             System.out.println("체크 요청 성공!");
-            //user.insertUserData(data);
-            //userRepository.save(user);
+            user.insertUserData(data);
+            userRepository.save(user);
             System.out.println("회원가입 성공!");
             return userDatas.stream()
                     .map(UserResponseDto::new)
