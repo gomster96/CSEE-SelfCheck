@@ -33,7 +33,7 @@ export default function LoginGoogle(props) {
     console.log('response is ', response);
     adminId = response;
     console.log('adminId is ', adminId);
-
+    //const response = service.checkAdminInfo(formData);
     if (!adminId) {
       navigate('/adminregister', {
         state: { email: userEmail },
