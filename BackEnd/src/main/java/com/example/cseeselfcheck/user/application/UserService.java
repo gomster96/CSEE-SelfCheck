@@ -1,8 +1,6 @@
 package com.example.cseeselfcheck.user.application;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -16,10 +14,14 @@ import com.example.cseeselfcheck.major.domain.Major;
 import com.example.cseeselfcheck.major.domain.repository.MajorRepository;
 import com.example.cseeselfcheck.user.application.dto.UserDataSaveResponseDto;
 import com.example.cseeselfcheck.user.application.dto.UserFullDataResponseDto;
+import com.example.cseeselfcheck.user.application.dto.UserResponseDto;
 import com.example.cseeselfcheck.user.domain.User;
+import com.example.cseeselfcheck.user.domain.dto.UserCheckDto;
 import com.example.cseeselfcheck.user.domain.dto.UserDataDto;
 import com.example.cseeselfcheck.user.domain.dto.UserIndividualDataDto;
+import com.example.cseeselfcheck.user.domain.repository.ReferenceUserRepository;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
+import com.example.cseeselfcheck.user.presentation.dto.UserCheckRequestDto;
 import com.example.cseeselfcheck.user.presentation.dto.UserDataSaveRequest;
 
 import org.springframework.stereotype.Service;
@@ -27,13 +29,12 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final ReferenceUserRepository referenceUserRepository;
     private final LectureRepository lectureRepository;
     private final MajorRepository majorRepository;
 
@@ -82,18 +83,21 @@ public class UserService {
         return new UserDataSaveResponseDto(user);
     }
 
-    /*
-    @Transactional(readOnly = true)
-    public Map<String, String> validateHandling(Errors errors) {
-        Map<String, String> validatorResult = new HashMap<>();
-
-
-        for (FieldError error : errors.getFieldErrors()) {
-            String validKeyName = String.format("valid_%s", error.getField());
-            validatorResult.put(validKeyName, error.getDefaultMessage());
+    @Transactional
+    public List<UserResponseDto> checkUserInfo(UserCheckRequestDto data) {
+        List<UserCheckDto> userDatas = referenceUserRepository.findByStudentNumber(data.getStudentNumber());
+        User user = new User();
+        if(userDatas.isEmpty()) {
+            System.out.println("체크 요청 실패!");
+            return null;
+        } else {
+            System.out.println("체크 요청 성공!");
+            //user.insertUserData(data);
+            //userRepository.save(user);
+            System.out.println("회원가입 성공!");
+            return userDatas.stream()
+                    .map(UserResponseDto::new)
+                    .collect(Collectors.toList());
         }
-        return validatorResult;
-    }*/
-
-
+    }
 }
