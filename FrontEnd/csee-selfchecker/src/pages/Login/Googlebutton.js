@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
@@ -6,17 +6,16 @@ import service from '../../util/service';
 
 export default function LoginGoogle(props) {
   const clientId = '783610138228-anpgvtcc326gk47gpiuospu35mvgcckl.apps.googleusercontent.com';
-  const [isUserId, setIsUserId] = useState();
   const isUserType = props.isUserSelect;
-  const [userIdLoading, setUserIdLoading] = useState(false);
+  const navigate = useNavigate();
   var userEmail;
   var userId;
+  var adminId;
   const checkIsUser = async () => {
     const response = await service.checkUserByEmail(userEmail);
     console.log('response is ', response);
     userId = response;
     console.log('userid is ', userId);
-    setUserIdLoading(true);
 
     if (!userId) {
       navigate('/register', {
@@ -28,32 +27,33 @@ export default function LoginGoogle(props) {
       });
     }
   };
-  const navigate = useNavigate();
+
+  const checkIsAdmin = async () => {
+    const response = await service.checkAdminByEmail(userEmail);
+    console.log('response is ', response);
+    adminId = response;
+    console.log('adminId is ', adminId);
+
+    if (!adminId) {
+      navigate('/adminregister', {
+        state: { email: userEmail },
+      });
+    } else {
+      navigate('/admin', {
+        state: { userId: adminId },
+      });
+    }
+  };
 
   async function onSuccess(res) {
     var regExp = '@handong.ac.kr';
     var regExp2 = '@handong.edu';
     userEmail = res.profileObj.email;
-    console.log('userEmail is ', userEmail);
+    console.log('userType is ' + isUserType + ' userEmail is ', userEmail);
 
-    var adminId = '';
-    console.log('UserType: ' + isUserType + ' UserEmail: ' + userEmail);
     if (isUserType.match('0')) {
       if (userEmail.match(regExp) != null) {
         checkIsUser();
-
-        if (userIdLoading) {
-          console.log('user id is ', userId);
-          if (!userId) {
-            navigate('/register', {
-              state: { email: userEmail },
-            });
-          } else {
-            navigate('/main', {
-              state: { userId: userId },
-            });
-          }
-        }
       } else {
         alert('handong.ac.kr 계정으로 로그인하세요.');
         console.error('비인증 계정입니다.');
@@ -61,20 +61,7 @@ export default function LoginGoogle(props) {
       }
     } else {
       if (userEmail.match(regExp) || userEmail.match(regExp2) != null) {
-        const checkIsAdmin = async () => {
-          adminId = await service.checkAdminByEmail(userEmail);
-          console.log('userId: ' + adminId);
-        };
         checkIsAdmin();
-        if (!adminId) {
-          navigate('/adminregister', {
-            state: { email: userEmail },
-          });
-        } else {
-          navigate('/admin', {
-            state: { id: adminId },
-          });
-        }
       } else {
         alert('handong.ac.kr / handong.edu 계정으로 로그인하세요.');
         console.error('비인증 계정입니다.');
