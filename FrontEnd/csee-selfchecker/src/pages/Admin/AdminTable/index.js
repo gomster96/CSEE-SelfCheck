@@ -11,19 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
 import service from '../../../util/service';
 
-function createData(name, major, semester, result, reason) {
-  return { name, major, semester, result, reason };
-}
-
-const rows = [
-  createData('안병웅', '컴퓨터공학 심화', 7, '불합격', '운영체제'),
-  createData('이선경', '콘텐츠융합디자인', 7, '불합격', '운영체제'),
-  createData('김주은', '전자공학 심화', 7, '합격', ''),
-  createData('김광', '국제어문학부', 8, '불합격', '운영체제, 데이터구조, 공학설계입문'),
-  createData('안병웅', '컴퓨터공학 심화', 7, '합격', '운영체제'),
-  createData('이선경', '콘텐츠융합디자인', 7, '불합격', '운영체제'),
-];
-
 export default function AdminTable(props) {
   const classes = useStyles();
 
@@ -58,6 +45,7 @@ export default function AdminTable(props) {
         <Table className={classes.table} aria-label="customized table" size="small">
           <TableHead>
             <TableRow>
+              <StyledTableCell align="center">학번</StyledTableCell>
               <StyledTableCell align="center">학생명</StyledTableCell>
               <StyledTableCell align="center">전공</StyledTableCell>
               <StyledTableCell align="center">학기수</StyledTableCell>
@@ -69,11 +57,12 @@ export default function AdminTable(props) {
             {studentDatas.map((student) => (
               <StyledTableRow key={student.studentNumber}>
                 <StyledTableCell component="th" scope="row" align="center" size="small">
-                  {student.name}
+                  {student.studentNumber}
                 </StyledTableCell>
+                <StyledTableCell align="center">{student.name}</StyledTableCell>
                 <StyledTableCell align="center">{student.majorName}</StyledTableCell>
                 <StyledTableCell align="center">{student.semester}</StyledTableCell>
-                <StyledTableCell align="center">{student.result === 1 ? '만족' : '불만족'}</StyledTableCell>
+                <StyledTableCell align="center">{student.result === 1 ? '가능' : '불가능'}</StyledTableCell>
                 <StyledTableCell align="center">{student.takenStatus ? parseTakenStatus(student.takenStatus) : ''}</StyledTableCell>
               </StyledTableRow>
             ))}

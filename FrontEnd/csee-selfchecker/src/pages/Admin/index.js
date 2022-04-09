@@ -28,7 +28,7 @@ export default function Admin() {
         <LoginFormDiv>
           <InnerLayout>
             <TextLayout>
-              <h1>Admin Page</h1>
+              <h1>학생 정보 조회</h1>
             </TextLayout>
             <InnerLayout>
               <HeaderFilter filterStatus={filterStatus} setFilterStatus={setFilterStatus} setFetchBody={setFetchBody} lectureList={lectureList} setLectureList={setLectureList} />
