@@ -58,8 +58,10 @@ public class UserController {
 
     @PostMapping("/user/checkemail")
     public ResponseEntity<Object> checkUserByEmail(@RequestBody String email){
-        System.out.println("중복 확인 요청된 이메일: "+email);
-        return ResponseEntity.ok(userService.checkUserByEmail(email));
+        String e = email.replace("\"", "");
+        System.out.println("중복 확인 요청된 이메일: "+e);
+
+        return ResponseEntity.ok(userService.checkUserByEmail(e));
     }
 
     @PostMapping("/user/checkInfo")
