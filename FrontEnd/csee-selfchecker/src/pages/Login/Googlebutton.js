@@ -11,6 +11,7 @@ export default function LoginGoogle(props) {
   var userEmail;
   var userId;
   var adminId;
+  var isActive;
   const checkIsUser = async () => {
     const response = await service.checkUserByEmail(userEmail);
     console.log('response is ', response);
@@ -39,9 +40,17 @@ export default function LoginGoogle(props) {
         state: { email: userEmail },
       });
     } else {
-      navigate('/admin', {
-        state: { userId: adminId },
-      });
+      const check = await service.checkAdminIsActive(adminId);
+      console.log('isactive check is ', check);
+      isActive = check;
+      if (check) {
+        navigate('/admin', {
+          state: { userId: adminId },
+        });
+      } else {
+        alert('관리자 승인 대기 중입니다.');
+        navigate('/');
+      }
     }
   };
 

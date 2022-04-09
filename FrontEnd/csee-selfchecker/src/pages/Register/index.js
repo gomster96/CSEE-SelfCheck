@@ -37,13 +37,6 @@ export default function Register() {
     console.log('response is ', res);
     userId = res;
     console.log('userid is ', userId);
-  };
-
-  const handleSubmit = async () => {
-    console.log(formData);
-    const response = await service.checkUserInfo(formData);
-
-    checkIsUser();
 
     if (!userId) {
       alert('[공학 프로젝트 기획] 수강 가능 명단에 입력하신 정보가 존재하지 않습니다. 모든 정보를 정확하게 입력해주세요.');
@@ -53,6 +46,13 @@ export default function Register() {
         state: { userId: userId },
       });
     }
+  };
+
+  const handleSubmit = async () => {
+    console.log(formData);
+    const response = await service.checkUserInfo(formData);
+
+    checkIsUser();
   };
 
   return (

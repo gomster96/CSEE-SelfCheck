@@ -69,6 +69,13 @@ const signupAdmin = async (body) => {
   return await handleResult(response);
 };
 
+const checkAdminIsActive = async (body) => {
+  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/isActive`;
+  const response = await fetch(getStudentUrl, postOptions(body));
+  console.log(response);
+  return await handleResult(response);
+};
+
 const service = {
   getLectures,
   getStudents,
@@ -76,6 +83,7 @@ const service = {
   checkAdminByEmail,
   checkUserInfo,
   signupAdmin,
+  checkAdminIsActive,
 };
 
 export default service;
