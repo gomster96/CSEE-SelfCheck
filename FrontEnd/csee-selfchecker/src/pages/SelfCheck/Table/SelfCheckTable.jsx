@@ -37,13 +37,22 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MyPageResultTable(lecture) {
+export default function ResultTable(lecture) {
   const classes = useStyles();
   const [userData, setUserData] = useState({});
   const { state } = useLocation({});
+  const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
+  const [radioValue, setRadioValue] = useState(['']);
 
-  console.log({ state });
+  const handleClickedRadioBtn = (e) => {
+    console.log(e.target.value);
+    console.log(e.target.value.slice(0, 1));
+    console.log(e.target.value.slice(1, 2));
+    console.log('radioValue is');
+    setRadioValue(e.target.value);
 
+    console.log(radioValue);
+  };
   useEffect(() => {
     fetch(`http://localhost:8080/api/user/info?userId=1`, requestOptions)
       .then((response) => response.json())
@@ -54,6 +63,9 @@ export default function MyPageResultTable(lecture) {
         console.log('result is');
         console.log(result);
         setUserData(result);
+        console.log('setRadioValue is');
+        setRadioValue(userData.lectures);
+        console.log(radioValue);
       })
       .catch((error) => console.log('error', error));
   }, []);
@@ -85,13 +97,25 @@ export default function MyPageResultTable(lecture) {
                       <StyledTableCell align="center">
                         {
                           <Form>
-                            {['radio'].map((type) => (
-                              <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check inline label="이수" name="takenSemester" value="1" type={type} id={`inline-${type}-1`} onChange="checkRadio" />
-                                <Form.Check inline label="미이수" name="takenSemester" value="0" type={type} id={`inline-${type}-2`} />
-                                <Form.Check inline label="이수중" name="takenSemester" value="2" type={type} id={`inline-${type}-3`} />
-                                <Form.Check inline label="병수예정" name="takenSemester" value="3" type={type} id={`inline-${type}-4`} />
-                              </div>
+                            {radioBtns.map((radio, idx2) => (
+                              <Form.Label key={idx2} inline className="m-0">
+                                <h>
+                                  {idx}
+                                  {idx2}
+                                </h>
+                                <Form.Check
+                                  key={idx + '' + idx2}
+                                  className="m-2"
+                                  inline
+                                  name={userData.lectures[idx].lectureName}
+                                  value={idx + '' + idx2}
+                                  type="radio"
+                                  id={`${idx}`}
+                                  checked={radioValue === { idx2 }}
+                                  onChange={handleClickedRadioBtn}
+                                />
+                                {radio}
+                              </Form.Label>
                             ))}
                           </Form>
                         }
@@ -100,7 +124,7 @@ export default function MyPageResultTable(lecture) {
                         <Form.Select aria-label="Default select example" size="sm">
                           <option>이수 학기</option>
                           {userData.lectures[idx].openYear.map((lecture, idx2) => (
-                            <option> {Object.values(userData.lectures[idx].openYear[idx2])}</option>
+                            <option key={idx2}> {Object.values(userData.lectures[idx].openYear[idx2])}</option>
                           ))}
                         </Form.Select>
                       </StyledTableCell>
