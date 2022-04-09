@@ -73,8 +73,9 @@ public class AdminController {
 
     @PostMapping("/checkemail")
     public ResponseEntity<Object> checkAdminByEmail(@RequestBody String adminEmail) {
-        System.out.println("중복 확인 요청된 이메일: " + adminEmail);
-        return ResponseEntity.ok(adminService.checkAdminByEmail(adminEmail));
+        String ae = adminEmail.replace("\"", "");
+        System.out.println("중복 확인 요청된 이메일: " + ae);
+        return ResponseEntity.ok(adminService.checkAdminByEmail(ae));
     }
 
     @GetMapping("/list")

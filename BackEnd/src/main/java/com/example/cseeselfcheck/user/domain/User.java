@@ -52,7 +52,7 @@ public class User extends BaseEntity{
         this.studentNumber = newUser.getStudentNumber();
         this.email = newUser.getEmail();
         this.result = 0;
-        this.takenStatus = "11110";
+        this.takenStatus = "00000";
         this.takenSemesterStatus = null;
     }
 }
