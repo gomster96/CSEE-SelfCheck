@@ -18,4 +18,6 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
     @Query("select a from Admin a where a.isActive = :isActive")
     List<Admin> findAllByActiveStatus(boolean isActive);
 
+    @Query("select a.isActive as isActive from Admin a where a.id = :adminId")
+    Optional<Admin> findIsActiveById(Long adminId);
 }

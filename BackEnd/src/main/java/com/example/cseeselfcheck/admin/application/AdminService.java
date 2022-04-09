@@ -55,4 +55,9 @@ public class AdminService {
         System.out.println("관리자 회원가입 성공!");
         return null;
     }
+
+    public Optional<Admin> checkIsActive(Long adminId) {
+        System.out.println(adminId + " isActive 검사");
+        return adminRepository.findIsActiveById(adminId);
+    }
 }

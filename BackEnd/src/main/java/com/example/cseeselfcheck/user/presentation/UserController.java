@@ -67,6 +67,7 @@ public class UserController {
     @PostMapping("/user/checkInfo")
     public ResponseEntity<Object> checkUserInfo(@RequestBody UserCheckRequestDto data){
         List<UserResponseDto> userDatas = userService.checkUserInfo(data);
-        return ResponseEntity.ok(userDatas);
+        Long idd = 1L;
+        return ResponseEntity.ok(idd);
     }
 }

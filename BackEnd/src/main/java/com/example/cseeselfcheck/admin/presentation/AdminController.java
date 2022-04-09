@@ -95,4 +95,9 @@ public class AdminController {
         List<AdminInsertResponseDto> admins = adminService.insertAdmin(data);
         return ResponseEntity.ok(admins);
     }
+
+    @PostMapping("/isActive")
+    public ResponseEntity<Object> checkIsActive(@RequestBody Long adminId){
+        return ResponseEntity.ok(adminService.checkIsActive(adminId));
+    }
 }
