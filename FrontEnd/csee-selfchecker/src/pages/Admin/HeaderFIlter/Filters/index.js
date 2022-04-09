@@ -7,9 +7,8 @@ import { fontSize, style } from '@mui/system';
 import service from '../../../../util/service';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 
-// const lectureData = ['공학설계입문', '데이터구조', '컴퓨터구조', '운영체제', '공학설계입문', '데이터구조', '컴퓨터구조', '운영체제'];
-const semester = ['6학기', '7학기', '8학기', '9학기', '10학기'];
-const possibleStudent = ['만족', '불만족'];
+const semester = ['5학기', '6학기', '7학기', '8학기', '9학기', '10학기'];
+const possibleStudent = ['가능', '불가능'];
 
 export default function Filters(props) {
   const lectureBoxClicked = (idx) => {
@@ -84,10 +83,11 @@ export default function Filters(props) {
     <FiltersLayout>
       <FormGroup>
         <CheckBoxAlignDiv>
-          <CheckBoxesTitle>과목별 </CheckBoxesTitle>
+          <CheckBoxesTitle>미이수 과목</CheckBoxesTitle>
           {props.lectureList.map((lecture, idx) => {
             return (
               <FormControlLabel
+                key={lecture.lectureName}
                 control={<Checkbox name={lecture.lectureName} style={{ transform: 'scale(0.8)' }} />}
                 label={<span style={{ fontSize: '0.8vw', width: '7vw' }}>{lecture.lectureName}</span>}
                 sx={{ marginRight: '0.8vw' }}
@@ -97,10 +97,11 @@ export default function Filters(props) {
           })}
         </CheckBoxAlignDiv>
         <CheckBoxAlignDiv>
-          <CheckBoxesTitle>학기수 </CheckBoxesTitle>
+          <CheckBoxesTitle>학기수 조회</CheckBoxesTitle>
           {semester.map((semes, idx) => {
             return (
               <FormControlLabel
+                key={idx}
                 control={<Checkbox name={semes} style={{ transform: 'scale(0.8)' }} />}
                 label={<span style={{ fontSize: '0.8vw', width: '7vw' }}>{semes}</span>}
                 onClick={semesterBoxClicked.bind(this, idx)}
@@ -109,10 +110,11 @@ export default function Filters(props) {
           })}
         </CheckBoxAlignDiv>
         <CheckBoxAlignDiv>
-          <CheckBoxesTitle>판정별 </CheckBoxesTitle>
+          <CheckBoxesTitle>가능/불가능</CheckBoxesTitle>
           {possibleStudent.map((student, idx) => {
             return (
               <FormControlLabel
+                key={idx}
                 control={<Checkbox name={student} style={{ transform: 'scale(0.8)' }} />}
                 label={<span style={{ fontSize: '0.8vw', width: '7vw' }}>{student}</span>}
                 onClick={resultBoxClicked.bind(this, idx)}

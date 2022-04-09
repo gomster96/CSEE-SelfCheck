@@ -17,7 +17,7 @@ export default function SearchBar(props) {
   };
   return (
     <SearchBarLayout>
-      <TextField sx={{ width: '15vw', fontSize: '14' }} label="Search" variant="outlined" size="small" onChange={onChange} />
+      <TextField sx={{ width: '15vw', fontSize: '14', zIndex: '0' }} label="학번, 이름 검색" variant="outlined" size="small" onChange={onChange} />
       <Button sx={{ width: '3vw' }} variant="contained" onClick={onClick}>
         검색
       </Button>
@@ -31,4 +31,5 @@ const SearchBarLayout = styled.div`
   justify-content: center;
   margin-bottom: 5vh;
   font-size: 16px;
+  z-index: -1;
 `;
