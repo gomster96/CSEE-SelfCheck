@@ -7,14 +7,15 @@ import UserTable from './Table/SelfCheckUserTable';
 import SelfCheckTable from './Table/SelfCheckTable';
 import Header from '../Common/Header/header';
 import Footer from '../Common/Footer/footer';
-export default class SelfCheck extends Component {
-  render() {
-    return (
-      <>
+
+export default function Index(props) {
+  return (
+          <>
         <Header />
         <ContainerDiv>
           <RoundBackgroundDiv>
             <InnerLayout>
+    
               <h1>Self Check</h1>
               <UserTable />
               <SelfCheckTable />
@@ -27,6 +28,5 @@ export default class SelfCheck extends Component {
         </ContainerDiv>
         <Footer />
       </>
-    );
-  }
+  );
 }

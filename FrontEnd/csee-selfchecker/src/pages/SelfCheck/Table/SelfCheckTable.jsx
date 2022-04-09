@@ -37,22 +37,43 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ResultTable(lecture) {
+export default function ResultTable() {
   const classes = useStyles();
   const [userData, setUserData] = useState({});
   const { state } = useLocation({});
   const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
-  const [radioValue, setRadioValue] = useState(['']);
+  const [radioValue, setRadioValue] = useState({lectures: []});
 
+  const [selectSemester, setSelectSemester] = useState({lectures2: []});
   const handleClickedRadioBtn = (e) => {
-    console.log(e.target.value);
-    console.log(e.target.value.slice(0, 1));
-    console.log(e.target.value.slice(1, 2));
-    console.log('radioValue is');
-    setRadioValue(e.target.value);
-
-    console.log(radioValue);
+    const idx = e.target.value.slice(0, 1);
+    const val = e.target.value.slice(1, 2);
+     
+    radioValue[idx] = val;
+        setRadioValue((prevState) => {
+          return {...prevState, radioValue: radioValue}
+        })
   };
+
+  const handleClickedSelectBox = (e) => {
+ 
+    const idx = e.target.value.slice(0,1);
+    console.log(e.target.value.slice(1,7));
+    selectSemester[idx] = e.target.value;
+        setSelectSemester((prevState) => {
+          return {...prevState, selectSemester: selectSemester}
+        })
+    console.log(selectSemester);
+    // selectSemester='';
+  };
+  useEffect(() =>{
+    console.log(radioValue);
+  },[radioValue])
+
+    useEffect(() =>{
+    console.log(selectSemester);
+  },[selectSemester])
+
   useEffect(() => {
     fetch(`http://localhost:8080/api/user/info?userId=1`, requestOptions)
       .then((response) => response.json())
@@ -63,9 +84,6 @@ export default function ResultTable(lecture) {
         console.log('result is');
         console.log(result);
         setUserData(result);
-        console.log('setRadioValue is');
-        setRadioValue(userData.lectures);
-        console.log(radioValue);
       })
       .catch((error) => console.log('error', error));
   }, []);
@@ -97,12 +115,8 @@ export default function ResultTable(lecture) {
                       <StyledTableCell align="center">
                         {
                           <Form>
-                            {radioBtns.map((radio, idx2) => (
-                              <Form.Label key={idx2} inline className="m-0">
-                                <h>
-                                  {idx}
-                                  {idx2}
-                                </h>
+                            {radioBtns.map((radio, idx2) => (          
+                              <Form.Label key={idx + '' + idx2} inline className="m-0">     
                                 <Form.Check
                                   key={idx + '' + idx2}
                                   className="m-2"
@@ -111,9 +125,10 @@ export default function ResultTable(lecture) {
                                   value={idx + '' + idx2}
                                   type="radio"
                                   id={`${idx}`}
-                                  checked={radioValue === { idx2 }}
                                   onChange={handleClickedRadioBtn}
                                 />
+                    
+                          
                                 {radio}
                               </Form.Label>
                             ))}
@@ -121,11 +136,22 @@ export default function ResultTable(lecture) {
                         }
                       </StyledTableCell>
                       <StyledTableCell align="center" key={userData.lectures.openYear}>
-                        <Form.Select aria-label="Default select example" size="sm">
-                          <option>이수 학기</option>
+                        <Form.Select aria-label="Default select example" size="sm" onChange={handleClickedSelectBox}>
+                          <option value="00">이수 학기</option>
                           {userData.lectures[idx].openYear.map((lecture, idx2) => (
-                            <option key={idx2}> {Object.values(userData.lectures[idx].openYear[idx2])}</option>
+                            (() => {
+                              if (radioValue[idx] === "1") return (<option key={idx2} value={idx + userData.lectures[idx].openYear[idx2]}> {userData.lectures[idx].openYear[idx2]}</option>);
+                            })()
                           ))}
+                          <>
+                            {
+                              (() => {
+                                if (radioValue[idx] === "0" || userData.lectures[idx].lecturePosition==="2" || userData.lectures[idx].lecturePosition==="0") return (<option value="" disabled />);
+                                if (radioValue[idx] === "2" ) return (<option value={idx + '' +"2022-1"}>2022-1</option>);
+                                if (radioValue[idx] === "3") return (<option value={idx + '' +"2022-2"}>2022-2</option>);
+                              })()
+                            }
+                          </>
                         </Form.Select>
                       </StyledTableCell>
                     </StyledTableRow>
