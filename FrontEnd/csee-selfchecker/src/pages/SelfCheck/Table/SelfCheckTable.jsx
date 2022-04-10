@@ -74,21 +74,27 @@ export default function ResultTable() {
         return { ...prevState, selectSemester };
       });
     } else {
-      console.log(val);
+      // console.log(val);
       selectSemester[idx] = val;
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
       });
     }
-    console.log(selectSemester);
+    // console.log(selectSemester);
   };
 
   const onSaved = (e) => {
+    for (var p = 0; p < 5; p++) {
+      if (selectSemester[p] === '' && (radioValue[p] === '1' || radioValue[p] === '2' || radioValue[p] === '3')) {
+        alert('이수학기를 선택해주세요');
+        return;
+      }
+    }
     const takenStatus = objToString(radioValue, 5);
     const takenSemester = objToString2(selectSemester, 5);
-    console.log(userData.userId);
-    console.log(takenStatus);
-    console.log(takenSemester);
+    // console.log(userData.userId);
+    // console.log(takenStatus);
+    // console.log(takenSemester);
     fetch('http://localhost:8080/api/user/save', {
       method: 'POST',
       headers: {
@@ -106,12 +112,12 @@ export default function ResultTable() {
         userId: userData.userId,
       },
     });
-    alert('저장되었습니다.');
+    if (takenStatus) alert('저장되었습니다.');
   };
 
   function objToString(obj, idx) {
     var str = '';
-    console.log(idx);
+    // console.log(idx);
     for (var p = 0; p < idx; p++) {
       if (!obj.hasOwnProperty(p)) {
         str += '0';
@@ -136,22 +142,22 @@ export default function ResultTable() {
     return str;
   }
   useEffect(() => {
-    console.log(radioValue);
+    // console.log(radioValue);
   }, [radioValue]);
 
   useEffect(() => {
-    console.log(selectSemester);
+    // console.log(selectSemester);
   }, [selectSemester]);
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.res);
-        console.log('state is');
-        console.log({ state });
-        console.log('result is');
-        console.log(result);
+        // console.log(result.res);
+        // console.log('state is');
+        // console.log({ state });
+        // console.log('result is');
+        // console.log(result);
         setUserData(result);
       })
       .catch((error) => console.log('error', error));
@@ -169,7 +175,7 @@ export default function ResultTable() {
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="customized table" size="small">
                 <TableHead>
-                  <TableRow>
+                  <TableRow key="uniq123">
                     <StyledTableCell align="center">과목명</StyledTableCell>
                     <StyledTableCell align="center">이수여부</StyledTableCell>
                     <StyledTableCell align="center">이수학기</StyledTableCell>
@@ -178,7 +184,7 @@ export default function ResultTable() {
                 <TableBody key={userData.lectures.lectureName}>
                   {Object.keys(userData.lectures).map((lecture, idx) => (
                     <>
-                      <StyledTableRow>
+                      <StyledTableRow key={userData.studentNumber}>
                         <StyledTableCell component="th" scope="row" align="center">
                           {Object.values(userData.lectures[idx].lectureName)}
                         </StyledTableCell>
@@ -186,10 +192,9 @@ export default function ResultTable() {
                           {
                             <Form>
                               {radioBtns.map((radio, idx2) => (
-                                <Form.Label key={idx + '' + idx2} inline className="m-0">
+                                <Form.Label className="m-0">
                                   {/* <h>{userData.lectures[idx].lecturePosition + '' + idx2}</h> */}
                                   <Form.Check
-                                    key={idx + '' + idx2}
                                     className="m-2"
                                     inline
                                     defaultChecked={idx2 == 0}
@@ -212,7 +217,7 @@ export default function ResultTable() {
                             </Form>
                           }
                         </StyledTableCell>
-                        <StyledTableCell align="center" key={userData.lectures}>
+                        <StyledTableCell align="center">
                           <Form.Select
                             aria-label="SelectBox"
                             size="sm"
@@ -265,7 +270,13 @@ export default function ResultTable() {
         ) : null}
       </TableLayout>
       <ButtonStyle>
-        <Button type="button" value="저장하기" className="rounded-pill m-2" onClick={onSaved}>
+        <Button
+          type="button"
+          value="저장하기"
+          className="rounded-pill m-2"
+          onClick={onSaved}
+          // disabled={radioValue[userData.lectures[idx].lecturePosition] === '1' && selectSemester[userData.lectures[idx].lecturePosition] === null}
+        >
           저장하기
         </Button>
       </ButtonStyle>
