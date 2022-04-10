@@ -42,6 +42,7 @@ export default function ImportButton() {
           <LectureButton clickUploadButton={clickUploadButton} />
           <UserButton clickUploadButton={clickUploadButton} />
         </ImportButtonsLayout>
+        <ExplainDiv>엑셀 데이터 Import는 반드시 Major, Lecture, Student 순서대로 진행해주세요.</ExplainDiv>
       </Modal>
       <Button className="rounded-pill m-2" onClick={openModal}>
         Excel Import
@@ -49,7 +50,12 @@ export default function ImportButton() {
     </>
   );
 }
-
+const ExplainDiv = styled.div`
+  text-align: center;
+  color: #797979;
+  margin-top: 1vh;
+  font-size: 0.8vw;
+`;
 const ModalTitle = styled.div`
   font-size: 4vh;
   text-align: center;
