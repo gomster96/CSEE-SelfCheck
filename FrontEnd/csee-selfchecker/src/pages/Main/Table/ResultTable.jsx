@@ -7,10 +7,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { TableLayout } from '../main.styled';
+import { TableLayout, TextLayout } from '../main.styled';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
-import { useRef } from 'react';
+import { ButtonStyle } from '../main.styled';
+import { Button } from 'react-bootstrap';
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: '#2E75B6',
@@ -37,10 +38,18 @@ const useStyles = makeStyles({
 
 export default function ResultTable(props) {
   const { state } = useLocation();
-  const history = useNavigate();
   const classes = useStyles();
-  const user = [];
   const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+
+  const onRetry = () => {
+    navigate('../Selfcheck', {
+      state: {
+        userId: userData.userId,
+      },
+    });
+  };
+
   useEffect(() => {
     fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
@@ -91,11 +100,16 @@ export default function ResultTable(props) {
           </TableContainer>
         </>
       ) : null}
-      <h5 className="m-5">
+      <TextLayout>
         공학 프로젝트 기획 수강 요건을
         <span className="text-danger">{userData.result === 0 ? ' 미충족' : ' 충족'}</span>
         하셨습니다
-      </h5>
+      </TextLayout>
+      <ButtonStyle>
+        <Button className="rounded-pill m-0" onClick={onRetry}>
+          다시하기
+        </Button>
+      </ButtonStyle>
     </TableLayout>
   );
 }

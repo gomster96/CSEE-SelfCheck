@@ -80,7 +80,7 @@ export const InnerLayout = styled.div`
   }
 `;
 export const MarginLayout = styled.div`
-  margin-bottom: 6vh;
+  margin-bottom: 3vh;
 `;
 export const TableLayout = styled.div`
   margin-bottom: 6vh;
@@ -88,6 +88,8 @@ export const TableLayout = styled.div`
 
 export const TextLayout = styled.div`
   padding: 0.5rem;
+  margin: 2.5rem;
+  font-size: 1.5rem;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
     font-size: ${({ sm }) => sm && `${calcWidthPercent(sm)}rem`};
   }

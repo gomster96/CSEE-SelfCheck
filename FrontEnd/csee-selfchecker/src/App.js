@@ -16,7 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/adminregister" element={<AdminRegister />} />
         <Route path="/main" element={<Main />} />
-        <Route path="/selfcheck" element={<SelfCheck />} />
+        <Route path="/SelfCheck" element={<SelfCheck />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/google-login" element={<LoginGoogle />} />
       </Routes>

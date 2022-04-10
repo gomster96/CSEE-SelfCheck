@@ -9,7 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { TableLayout } from '../main.styled';
 import { useLocation } from 'react-router';
-import { useNavigate } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -43,7 +42,7 @@ export default function MyPageTable() {
   console.log({ state });
   console.log(userData.userId);
   useEffect(() => {
-    fetch(`http://localhost:8080/api/user/info?userId=1`, requestOptions)
+    fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result.res);
