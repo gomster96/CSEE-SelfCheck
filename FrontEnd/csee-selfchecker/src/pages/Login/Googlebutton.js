@@ -35,8 +35,8 @@ export default function LoginGoogle(props) {
     console.log('response is ', response);
     adminId = response;
     console.log('adminId is ', adminId);
-    window.sessionStorage.setItem('user_id', clientId);
-    console.log('session userId is ' + sessionStorage.getItem('user_id'));
+    window.sessionStorage.setItem('admin_id', clientId);
+    console.log('session admin_id is ' + sessionStorage.getItem('admin_id'));
     //const response = service.checkAdminInfo(formData);
     if (!adminId) {
       navigate('/adminregister', {
