@@ -54,11 +54,11 @@ export default function ResultTable(props) {
     fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.res);
-        console.log('state is');
-        console.log(state);
-        console.log('result is');
-        console.log(result);
+        // console.log(result.res);
+        // console.log('state is');
+        // console.log(state);
+        // console.log('result is');
+        // console.log(result);
         setUserData(result);
       })
       .catch((error) => console.log('error', error));
@@ -77,21 +77,28 @@ export default function ResultTable(props) {
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table" size="small">
               <TableHead>
-                <TableRow>
+                <TableRow key="uniq1">
                   <StyledTableCell align="center">과목명</StyledTableCell>
                   <StyledTableCell align="center">이수학기</StyledTableCell>
                   <StyledTableCell align="center">이수여부</StyledTableCell>
                 </TableRow>
               </TableHead>
-              <TableBody key={userData.lectures.lectureName}>
+              <TableBody>
                 {Object.keys(userData.lectures).map((user, idx) => (
                   <>
-                    <StyledTableRow>
+                    <StyledTableRow key={idx + 'a'}>
                       <StyledTableCell component="th" scope="row" align="center">
                         {Object.values(userData.lectures[idx].lectureName)}
                       </StyledTableCell>
                       <StyledTableCell align="center">{userData.takenSemesters[userData.lectures[idx].lecturePosition]}</StyledTableCell>
-                      <StyledTableCell align="center">{userData.takenStatus[idx] === '1' ? '이수' : '미이수'}</StyledTableCell>
+                      <StyledTableCell align="center">
+                        {(() => {
+                          if (userData.takenStatus[idx] === '1') return '이수';
+                          else if (userData.takenStatus[idx] === '0') return '미이수';
+                          else if (userData.takenStatus[idx] === '2') return '이수중';
+                          else if (userData.takenStatus[idx] === '3') return '병수예정';
+                        })()}
+                      </StyledTableCell>
                     </StyledTableRow>
                   </>
                 ))}
@@ -101,7 +108,7 @@ export default function ResultTable(props) {
         </>
       ) : null}
       <TextLayout>
-        공학 프로젝트 기획 수강 요건을
+        공학프로젝트기획 수강 기준을
         <span className="text-danger">{userData.result === 0 ? ' 미충족' : ' 충족'}</span>
         하셨습니다
       </TextLayout>
