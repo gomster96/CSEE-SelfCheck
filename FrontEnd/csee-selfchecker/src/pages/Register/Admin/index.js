@@ -210,5 +210,5 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding: 60% 0px 10px 0px;
+  padding: 35% 0px 10px 0px;
 `;

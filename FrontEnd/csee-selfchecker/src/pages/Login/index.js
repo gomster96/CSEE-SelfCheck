@@ -4,6 +4,7 @@ import logo from '../../asset/img/loginImage.png';
 import background from '../../asset/img/backgroundImg.png';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import Googlebutton from './Googlebutton';
+import Footer from '../Common/Footer/footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Navbar, Container } from 'react-bootstrap';
 
@@ -19,7 +20,7 @@ export default function Login() {
       <Navbar bg="light">
         <Container>
           <Navbar.Brand href="/">
-            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
+            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> 공학프로젝트기획 Self-Checker
           </Navbar.Brand>
         </Container>
       </Navbar>
@@ -53,16 +54,7 @@ export default function Login() {
         </LoginFormDiv>
       </ContainerDiv>
       <>
-        <FooterDiv className="bg-gray">
-          <Navbar>
-            <Container>
-              <Footer>
-                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
-                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
-              </Footer>
-            </Container>
-          </Navbar>
-        </FooterDiv>
+        <Footer />
       </>
     </>
   );
@@ -227,20 +219,4 @@ const ItemContainer = styled.div`
   display: flex;
   margin: 5vh 20px 10px 0px;
   padding-left: 10%;
-`;
-const FooterDiv = styled.div`
-  display: flex;
-  align-itmes: center;
-  justify-content: center;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  align-itmes: center;
-`;
-
-const FooterTextLayout = styled.div`
-  color: gray;
-  font-size: 14px;
-  padding: 0.5rem;
 `;
