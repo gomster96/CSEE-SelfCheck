@@ -9,12 +9,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form } from 'react-bootstrap';
-import { TableLayout } from '../main.styled';
+import { TableLayout, ButtonStyle } from '../main.styled';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-import service from '../../../util/service';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -47,7 +46,7 @@ export default function ResultTable() {
   const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
   let [radioValue, setRadioValue] = useState({ radios: ['', '', '', '', ''] });
   const [selectSemester, setSelectSemester] = useState({ semesters: ['', '', '', '', ''] });
-
+  const navigate = useNavigate();
   const handleClickedRadioBtn = (e) => {
     // console.log(e.target.value);
     const idx = e.target.value.slice(0, 1);
@@ -101,6 +100,12 @@ export default function ResultTable() {
         takenSemester: takenSemester,
       }),
     }).then((response) => response.json());
+
+    navigate('../main', {
+      state: {
+        userId: userData.userId,
+      },
+    });
     alert('저장되었습니다.');
   };
 
@@ -139,7 +144,7 @@ export default function ResultTable() {
   }, [selectSemester]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/user/info?userId=1`, requestOptions)
+    fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result.res);
@@ -157,111 +162,113 @@ export default function ResultTable() {
     redirect: 'follow',
   };
   return (
-    <TableLayout>
-      {userData.lectures ? (
-        <>
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table" size="small">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell align="center">과목명</StyledTableCell>
-                  <StyledTableCell align="center">이수여부</StyledTableCell>
-                  <StyledTableCell align="center">이수학기</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody key={userData.lectures.lectureName}>
-                {Object.keys(userData.lectures).map((lecture, idx) => (
-                  <>
-                    <StyledTableRow>
-                      <StyledTableCell component="th" scope="row" align="center">
-                        {Object.values(userData.lectures[idx].lectureName)}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {
-                          <Form>
-                            {radioBtns.map((radio, idx2) => (
-                              <Form.Label key={idx + '' + idx2} inline className="m-0">
-                                <h>{userData.lectures[idx].lecturePosition + '' + idx2}</h>
-                                <Form.Check
-                                  key={idx + '' + idx2}
-                                  className="m-2"
-                                  inline
-                                  defaultChecked={idx2 == 0}
-                                  name={userData.lectures[idx].lectureName}
-                                  value={userData.lectures[idx].lecturePosition + '' + idx2}
-                                  type="radio"
-                                  id={`${userData.lectures[idx].lecturePosition}`}
-                                  // disabled={
-                                  //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 0) ||
-                                  //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2) ||
-                                  //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 3) ||
-                                  //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 4)
-                                  // }
-                                  onClick={() => userData.lectures[idx].lecturePosition + '' + idx2}
-                                  onChange={handleClickedRadioBtn}
-                                />
-                                {radio}
-                              </Form.Label>
-                            ))}
-                          </Form>
-                        }
-                      </StyledTableCell>
-                      <StyledTableCell align="center" key={userData.lectures}>
-                        <Form.Select
-                          aria-label="SelectBox"
-                          size="sm"
-                          disabled={
-                            radioValue[userData.lectures[idx].lecturePosition] === '0' ||
-                            (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 0) ||
-                            (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 2) ||
-                            (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 3) ||
-                            (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 4)
+    <>
+      <TableLayout>
+        {userData.lectures ? (
+          <>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="customized table" size="small">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell align="center">과목명</StyledTableCell>
+                    <StyledTableCell align="center">이수여부</StyledTableCell>
+                    <StyledTableCell align="center">이수학기</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody key={userData.lectures.lectureName}>
+                  {Object.keys(userData.lectures).map((lecture, idx) => (
+                    <>
+                      <StyledTableRow>
+                        <StyledTableCell component="th" scope="row" align="center">
+                          {Object.values(userData.lectures[idx].lectureName)}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {
+                            <Form>
+                              {radioBtns.map((radio, idx2) => (
+                                <Form.Label key={idx + '' + idx2} inline className="m-0">
+                                  {/* <h>{userData.lectures[idx].lecturePosition + '' + idx2}</h> */}
+                                  <Form.Check
+                                    key={idx + '' + idx2}
+                                    className="m-2"
+                                    inline
+                                    defaultChecked={idx2 == 0}
+                                    name={userData.lectures[idx].lectureName}
+                                    value={userData.lectures[idx].lecturePosition + '' + idx2}
+                                    type="radio"
+                                    id={`${userData.lectures[idx].lecturePosition}`}
+                                    // disabled={
+                                    //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 0) ||
+                                    //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                                    //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                                    //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 4)
+                                    // }
+                                    onClick={() => userData.lectures[idx].lecturePosition + '' + idx2}
+                                    onChange={handleClickedRadioBtn}
+                                  />
+                                  {radio}
+                                </Form.Label>
+                              ))}
+                            </Form>
                           }
-                          onChange={handleClickedSelectBox}
-                        >
-                          <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
-                            이수 학기
-                          </option>
-                          {userData.lectures[idx].openYear.map((lecture, idx2) =>
-                            (() => {
-                              if (radioValue[userData.lectures[idx].lecturePosition] === '1')
+                        </StyledTableCell>
+                        <StyledTableCell align="center" key={userData.lectures}>
+                          <Form.Select
+                            aria-label="SelectBox"
+                            size="sm"
+                            disabled={
+                              radioValue[userData.lectures[idx].lecturePosition] === '0' ||
+                              (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 0) ||
+                              (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                              (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                              (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 4)
+                            }
+                            onChange={handleClickedSelectBox}
+                          >
+                            <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
+                              이수 학기
+                            </option>
+                            {userData.lectures[idx].openYear.map((lecture, idx2) =>
+                              (() => {
+                                if (radioValue[userData.lectures[idx].lecturePosition] === '1')
+                                  return (
+                                    <option key={idx2} value={userData.lectures[idx].lecturePosition + userData.lectures[idx].openYear[idx2]}>
+                                      {userData.lectures[idx].openYear[idx2]}
+                                    </option>
+                                  );
+                              })()
+                            )}
+
+                            {(() => {
+                              if (radioValue[userData.lectures[idx].lecturePosition] === '2')
                                 return (
-                                  <option key={idx2} value={userData.lectures[idx].lecturePosition + userData.lectures[idx].openYear[idx2]}>
-                                    {userData.lectures[idx].openYear[idx2]}
+                                  <option key={userData.lectures[idx].lecturePosition + '' + '2022-1'} value={userData.lectures[idx].lecturePosition + '' + '2022-1'}>
+                                    2022-1
                                   </option>
                                 );
-                            })()
-                          )}
-
-                          {(() => {
-                            if (radioValue[userData.lectures[idx].lecturePosition] === '2')
-                              return (
-                                <option key={userData.lectures[idx].lecturePosition + '' + '2022-1'} value={userData.lectures[idx].lecturePosition + '' + '2022-1'}>
-                                  2022-1
-                                </option>
-                              );
-                            if (radioValue[userData.lectures[idx].lecturePosition] === '3')
-                              return (
-                                <option key={userData.lectures[idx].lecturePosition + '' + '2022-2'} value={userData.lectures[idx].lecturePosition + '' + '2022-2'}>
-                                  2022-2
-                                </option>
-                              );
-                          })()}
-                        </Form.Select>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  </>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <>
-            <Button type="button" value="저장하기" className="rounded-pill m-2" onClick={onSaved}>
-              저장하기
-            </Button>
+                              if (radioValue[userData.lectures[idx].lecturePosition] === '3')
+                                return (
+                                  <option key={userData.lectures[idx].lecturePosition + '' + '2022-2'} value={userData.lectures[idx].lecturePosition + '' + '2022-2'}>
+                                    2022-2
+                                  </option>
+                                );
+                            })()}
+                          </Form.Select>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    </>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </>
-        </>
-      ) : null}
-    </TableLayout>
+        ) : null}
+      </TableLayout>
+      <ButtonStyle>
+        <Button type="button" value="저장하기" className="rounded-pill m-2" onClick={onSaved}>
+          저장하기
+        </Button>
+      </ButtonStyle>
+    </>
   );
 }
