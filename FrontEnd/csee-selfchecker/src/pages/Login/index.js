@@ -13,7 +13,6 @@ export default function Login() {
   const handleUserChange = (e) => {
     const value = e.target.value;
     setIsUserSelect(value);
-    console.log(value);
   };
   return (
     <>

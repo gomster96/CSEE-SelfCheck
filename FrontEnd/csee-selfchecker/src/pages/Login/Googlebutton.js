@@ -14,11 +14,8 @@ export default function LoginGoogle(props) {
   var isActive;
   const checkIsUser = async () => {
     const response = await service.checkUserByEmail(userEmail);
-    console.log('response is ', response);
     userId = response;
-    console.log('userid is ', userId);
     window.sessionStorage.setItem('user_id', clientId);
-    console.log('session userId is ' + sessionStorage.getItem('user_id'));
     if (!userId) {
       navigate('/register', {
         state: { email: userEmail },
@@ -32,19 +29,14 @@ export default function LoginGoogle(props) {
 
   const checkIsAdmin = async () => {
     const response = await service.checkAdminByEmail(userEmail);
-    console.log('response is ', response);
     adminId = response;
-    console.log('adminId is ', adminId);
     window.sessionStorage.setItem('admin_id', clientId);
-    console.log('session admin_id is ' + sessionStorage.getItem('admin_id'));
-    //const response = service.checkAdminInfo(formData);
     if (!adminId) {
       navigate('/adminregister', {
         state: { email: userEmail },
       });
     } else {
       const check = await service.checkAdminIsActive(adminId);
-      console.log('isactive check is ', check);
       isActive = check;
       if (check) {
         navigate('/admin', {
@@ -61,14 +53,12 @@ export default function LoginGoogle(props) {
     var regExp = '@handong.ac.kr';
     var regExp2 = '@handong.edu';
     userEmail = res.profileObj.email;
-    console.log('userType is ' + isUserType + ' userEmail is ', userEmail);
 
     if (isUserType.match('0')) {
       if (userEmail.match(regExp) != null) {
         checkIsUser();
       } else {
         alert('handong.ac.kr 계정으로 로그인하세요.');
-        console.error('비인증 계정입니다.');
         window.location.reload();
       }
     } else {
@@ -76,7 +66,6 @@ export default function LoginGoogle(props) {
         checkIsAdmin();
       } else {
         alert('handong.ac.kr / handong.edu 계정으로 로그인하세요.');
-        console.error('비인증 계정입니다.');
         window.location.reload();
       }
     }
