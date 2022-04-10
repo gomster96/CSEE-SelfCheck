@@ -6,12 +6,6 @@ import { Button } from 'react-bootstrap';
 import service from '../../../util/service';
 
 function SaveButton(props) {
-  // const [userDatas, setUserDatas] = useState([]);
-  // const handleSubmit = () => {
-  //   console.log(props.userDatas);
-  //   const response = service.postUserResult(props.userDatas);
-  //   setUserDatas(response);
-  // };
   return (
     <>
       <Link to="../main">

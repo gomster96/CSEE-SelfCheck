@@ -18,9 +18,9 @@ export default function Index(props) {
             <h1>Self Check</h1>
             <UserTable />
             <SelfCheckTable />
-            <ButtonStyle>
+            {/* <ButtonStyle>
               <SaveButton />
-            </ButtonStyle>
+            </ButtonStyle> */}
           </InnerLayout>
         </RoundBackgroundDiv>
       </ContainerDiv>
