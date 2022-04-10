@@ -7,26 +7,29 @@ import SearchBar from './SearchBar';
 import { useNavigate, useLocation } from 'react-router';
 import headerImg from '../../asset/img/csee-logo-symbol.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 import ImportButton from './ImportButton';
 import ExportButton from './ExportButton';
 import Loading from '../Common/Loading';
+import Header from '../Common/Header/header';
+import Footer from '../Common/Footer/footer';
 
 export default function Admin() {
+  const navigate = useNavigate();
   const [filterStatus, setFilterStatus] = useState({ lectures: [], semesters: [], possibleStatus: [] });
   const [fetchBody, setFetchBody] = useState({ lectures: [], semesters: [], takePossible: 2, searchWord: '' });
   const [lectureList, setLectureList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { state } = useLocation();
 
+  useEffect(() => {
+    if (state === null) {
+      alert('잘못된 접근입니다.');
+      navigate('/');
+    }
+  }, []);
   return (
     <>
-      <Navbar bg="light">
-        <Container>
-          <Navbar.Brand href="/">
-            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+      <Header />
       <ContainerDiv>
         <LoginFormDiv>
           <InnerLayout>
@@ -51,18 +54,8 @@ export default function Admin() {
           </InnerLayout>
         </LoginFormDiv>
       </ContainerDiv>
-      <>
-        <FooterDiv className="bg-gray">
-          <Navbar>
-            <Container>
-              <Footer>
-                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
-                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
-              </Footer>
-            </Container>
-          </Navbar>
-        </FooterDiv>
-      </>
+
+      <Footer />
     </>
   );
 }
@@ -162,20 +155,4 @@ const ButtonStyle = styled.div`
   @media only screen and (min-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
-`;
-const FooterDiv = styled.div`
-  display: flex;
-  align-itmes: center;
-  justify-content: center;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  align-itmes: center;
-`;
-
-const FooterTextLayout = styled.div`
-  color: gray;
-  font-size: 14px;
-  padding: 0.5rem;
 `;
