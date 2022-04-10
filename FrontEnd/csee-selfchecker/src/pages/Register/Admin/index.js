@@ -31,7 +31,6 @@ export default function AdminRegister() {
   };
 
   const handleSubmit = () => {
-    console.log(formData);
     const response = service.signupAdmin(formData);
     setUserDatas(response);
 

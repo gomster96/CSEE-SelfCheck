@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 function Header(props) {
   const onLogout = () => {
     window.sessionStorage.removeItem('user_id');
-    console.log('로그아웃 성공!');
-    console.log('session userId is ' + sessionStorage.getItem('user_id'));
   };
   return (
     <>

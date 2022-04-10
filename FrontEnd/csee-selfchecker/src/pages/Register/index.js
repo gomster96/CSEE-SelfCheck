@@ -35,9 +35,7 @@ export default function Register() {
 
   const checkIsUser = async () => {
     const res = await service.checkUserByEmail(formData.email);
-    console.log('response is ', res);
     userId = res;
-    console.log('userid is ', userId);
 
     if (!userId) {
       alert('[공학 프로젝트 기획] 수강 가능 명단에 입력하신 정보가 존재하지 않습니다. 모든 정보를 정확하게 입력해주세요.');
@@ -50,7 +48,6 @@ export default function Register() {
   };
 
   const handleSubmit = async () => {
-    console.log(formData);
     const response = await service.checkUserInfo(formData);
 
     checkIsUser();
