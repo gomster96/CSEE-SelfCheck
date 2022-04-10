@@ -46,11 +46,11 @@ export default function MyPageTable() {
     fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.res);
-        console.log('state is');
-        console.log(state);
-        console.log('result is');
-        console.log(result);
+        // console.log(result.res);
+        // console.log('state is');
+        // console.log(state);
+        // console.log('result is');
+        // console.log(result);
         setUserData(result);
       })
       .catch((error) => console.log('error', error));
@@ -66,28 +66,28 @@ export default function MyPageTable() {
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="customized table" size="small">
             <TableHead>
-              <TableRow>
+              <TableRow key="unique1">
                 <StyledTableCell align="center">이름</StyledTableCell>
                 <StyledTableCell align="center">학번</StyledTableCell>
                 <StyledTableCell align="center">이메일</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow key={userData.userId}>
+              <StyledTableRow key="unique2">
                 <StyledTableCell align="center">{userData.name}</StyledTableCell>
                 <StyledTableCell align="center">{userData.studentNumber}</StyledTableCell>
                 <StyledTableCell align="center">{userData.email}</StyledTableCell>
               </StyledTableRow>
             </TableBody>
             <TableHead>
-              <TableRow>
+              <TableRow key="unique3">
                 <StyledTableCell align="center">학기수</StyledTableCell>
                 <StyledTableCell align="center">전공</StyledTableCell>
                 <StyledTableCell align="center">연락처 뒷자리</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow>
+              <StyledTableRow key="unique4">
                 <StyledTableCell align="center">{userData.semester}</StyledTableCell>
                 <StyledTableCell align="center">{userData.majorName}</StyledTableCell>
                 <StyledTableCell align="center">{userData.phone}</StyledTableCell>

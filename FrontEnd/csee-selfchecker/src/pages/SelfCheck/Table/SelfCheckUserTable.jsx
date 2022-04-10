@@ -39,17 +39,17 @@ export default function MyPageTable() {
   const classes = TableStyles();
   const { state } = useLocation({});
   const [userData, setUserData] = useState({});
-  console.log({ state });
-  console.log(userData.userId);
+  // console.log({ state });
+  // console.log(userData.userId);
   useEffect(() => {
     fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.res);
-        console.log('state is');
-        console.log({ state });
-        console.log('result is');
-        console.log(result);
+        // console.log(result.res);
+        // console.log('state is');
+        // console.log({ state });
+        // console.log('result is');
+        // console.log(result);
         setUserData(result);
       })
       .catch((error) => console.log('error', error));
@@ -72,7 +72,7 @@ export default function MyPageTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow key={userData.userId}>
+              <StyledTableRow key={userData.studentNumber}>
                 <StyledTableCell align="center">{userData.name}</StyledTableCell>
                 <StyledTableCell align="center">{userData.studentNumber}</StyledTableCell>
                 <StyledTableCell align="center">{userData.email}</StyledTableCell>
@@ -86,7 +86,7 @@ export default function MyPageTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow>
+              <StyledTableRow key={userData.studentNumber}>
                 <StyledTableCell align="center">{userData.semester}</StyledTableCell>
                 <StyledTableCell align="center">{userData.majorName}</StyledTableCell>
                 <StyledTableCell align="center">{userData.phone}</StyledTableCell>

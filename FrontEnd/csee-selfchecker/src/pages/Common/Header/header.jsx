@@ -20,13 +20,13 @@ function Header(props) {
           </Navbar.Brand>
           <Link to="../">
             {sessionStorage.getItem('user_id') === null ? (
-              <button type="button" onClick={onLogout}>
+              <Button type="button" onClick={onLogout}>
                 로그인
-              </button>
+              </Button>
             ) : (
-              <button type="button" onClick={onLogout}>
+              <Button type="button" onClick={onLogout}>
                 로그아웃
-              </button>
+              </Button>
             )}
           </Link>
         </Container>
