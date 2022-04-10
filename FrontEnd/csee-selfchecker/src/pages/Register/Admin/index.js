@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../../asset/img/loginImage.png';
 import background from '../../../asset/img/backgroundImg.png';
-import headerImg from '../../../asset/img/csee-logo-symbol.png';
+import Header from '../../Common/Header/header';
+import Footer from '../../Common/Footer/footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Navbar, Container, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router';
 import service from '../../../util/service';
 
@@ -39,13 +40,7 @@ export default function AdminRegister() {
   };
   return (
     <>
-      <Navbar bg="light">
-        <Container>
-          <Navbar.Brand href="/">
-            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> CSEE Self-Checker
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+      <Header />
       <ContainerDiv>
         <LoginFormDiv>
           <LoginFormLeft1></LoginFormLeft1>
@@ -75,16 +70,7 @@ export default function AdminRegister() {
         </LoginFormDiv>
       </ContainerDiv>
       <>
-        <FooterDiv className="bg-gray">
-          <Navbar>
-            <Container>
-              <Footer>
-                <FooterTextLayout>©WALAB 2022 </FooterTextLayout>
-                <FooterTextLayout> 안병웅, 이선경, 김주은</FooterTextLayout>
-              </Footer>
-            </Container>
-          </Navbar>
-        </FooterDiv>
+        <Footer />
       </>
     </>
   );
@@ -225,18 +211,4 @@ const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
   padding: 60% 0px 10px 0px;
-`;
-const FooterDiv = styled.div`
-  display: flex;
-  align-itmes: center;
-  justify-content: center;
-`;
-const Footer = styled.div`
-  display: flex;
-  align-itmes: center;
-`;
-const FooterTextLayout = styled.div`
-  color: gray;
-  font-size: 14px;
-  padding: 0.5rem;
 `;
