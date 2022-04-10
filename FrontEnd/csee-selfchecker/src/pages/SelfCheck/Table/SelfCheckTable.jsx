@@ -12,6 +12,9 @@ import { Form } from 'react-bootstrap';
 import { TableLayout } from '../main.styled';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     // backgroundColor: theme.palette.common.black,
@@ -42,9 +45,8 @@ export default function ResultTable() {
   const [userData, setUserData] = useState({});
   const { state } = useLocation({});
   const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
-  const [radioValue, setRadioValue] = useState({ lectures: [] });
-
-  const [selectSemester, setSelectSemester] = useState({ lectures2: [] });
+  let [radioValue, setRadioValue] = useState({ radios: [] });
+  const [selectSemester, setSelectSemester] = useState({ semesters: [] });
   const handleClickedRadioBtn = (e) => {
     const idx = e.target.value.slice(0, 1);
     const val = e.target.value.slice(1, 2);
@@ -52,7 +54,7 @@ export default function ResultTable() {
     }
     radioValue[idx] = val;
     setRadioValue((prevState) => {
-      return { ...prevState, radioValue: radioValue };
+      return { ...prevState, radioValue };
     });
   };
 
@@ -61,9 +63,13 @@ export default function ResultTable() {
     console.log(e.target.value.slice(1, 7));
     selectSemester[idx] = e.target.value;
     setSelectSemester((prevState) => {
-      return { ...prevState, selectSemester: selectSemester };
+      return { ...prevState, selectSemester };
     });
     console.log(selectSemester);
+  };
+  const onReset = (e) => {
+    setRadioValue({ radios: '' });
+    setSelectSemester({ semesters: '' });
   };
   useEffect(() => {
     console.log(radioValue);
@@ -120,10 +126,12 @@ export default function ResultTable() {
                                   key={idx + '' + idx2}
                                   className="m-2"
                                   inline
+                                  defaultChecked={idx2 == 0}
                                   name={userData.lectures[idx].lectureName}
                                   value={idx + '' + idx2}
                                   type="radio"
                                   id={`${idx}`}
+                                  onClick={() => idx + '' + idx2}
                                   onChange={handleClickedRadioBtn}
                                 />
                                 {radio}
@@ -134,12 +142,14 @@ export default function ResultTable() {
                       </StyledTableCell>
                       <StyledTableCell align="center" key={userData.lectures}>
                         <Form.Select
-                          aria-label="Default select example"
+                          aria-label="SelectBox"
                           size="sm"
                           disabled={
                             radioValue[idx] === '0' ||
                             (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 0) ||
-                            (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2)
+                            (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                            (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                            (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 4)
                           }
                           onChange={handleClickedSelectBox}
                         >
@@ -156,8 +166,6 @@ export default function ResultTable() {
                           )}
 
                           {(() => {
-                            // if (radioValue[idx] === '0' || userData.lectures[idx].lecturePosition === '2' || userData.lectures[idx].lecturePosition === '0')
-                            //   return <option key={idx + 'null'} value="" disabled />;
                             if (radioValue[idx] === '2')
                               return (
                                 <option key={idx + '' + '2022-1'} value={idx + '' + '2022-1'}>
@@ -181,6 +189,13 @@ export default function ResultTable() {
           </TableContainer>
         </>
       ) : null}
+      {/* <button onClick={() => setRadioValue({ radios: [] })}>Reset</button> */}
+      {/* <Button type="reset" className="rounded-pill m-2" onClick={onReset}>
+        초기화
+      </Button> */}
+      {/* <form>
+        <input type="reset" value="reset" />
+      </form> */}
     </TableLayout>
   );
 }

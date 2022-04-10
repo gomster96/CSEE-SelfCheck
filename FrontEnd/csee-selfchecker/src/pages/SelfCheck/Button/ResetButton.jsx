@@ -5,9 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 
 function ResetButton(props) {
+  const onReset = () => {
+    console.log(props.radioValue);
+  };
   return (
     <>
-      <Button className="rounded-pill m-2">초기화</Button>
+      {/* <Button className="rounded-pill m-2" onClick={onReset}>
+        초기화
+      </Button> */}
     </>
   );
 }

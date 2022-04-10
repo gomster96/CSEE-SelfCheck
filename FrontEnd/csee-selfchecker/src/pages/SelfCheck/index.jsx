@@ -10,23 +10,21 @@ import Footer from '../Common/Footer/footer';
 
 export default function Index(props) {
   return (
-          <>
-        <Header />
-        <ContainerDiv>
-          <RoundBackgroundDiv>
-            <InnerLayout>
-    
-              <h1>Self Check</h1>
-              <UserTable />
-              <SelfCheckTable />
-              <ButtonStyle>
-                <ResetButton />
-                <SaveButton />
-              </ButtonStyle>
-            </InnerLayout>
-          </RoundBackgroundDiv>
-        </ContainerDiv>
-        <Footer />
-      </>
+    <>
+      <Header />
+      <ContainerDiv>
+        <RoundBackgroundDiv>
+          <InnerLayout>
+            <h1>Self Check</h1>
+            <UserTable />
+            <SelfCheckTable />
+            <ButtonStyle>
+              <SaveButton />
+            </ButtonStyle>
+          </InnerLayout>
+        </RoundBackgroundDiv>
+      </ContainerDiv>
+      <Footer />
+    </>
   );
 }

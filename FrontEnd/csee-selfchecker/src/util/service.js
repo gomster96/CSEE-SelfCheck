@@ -62,6 +62,13 @@ const checkUserInfo = async (body) => {
   return await handleResult(response);
 };
 
+const postUserResult = async (body) => {
+  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/save`;
+  const response = await fetch(getStudentUrl, postOptions(body));
+  console.log(response);
+  return await handleResult(response);
+};
+
 const signupAdmin = async (body) => {
   const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/signup`;
   const response = await fetch(getStudentUrl, postOptions(body));
@@ -75,6 +82,7 @@ const service = {
   checkUserByEmail,
   checkAdminByEmail,
   checkUserInfo,
+  postUserResult,
   signupAdmin,
 };
 
