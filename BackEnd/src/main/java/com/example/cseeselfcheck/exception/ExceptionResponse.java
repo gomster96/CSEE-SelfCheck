@@ -1,5 +1,8 @@
 package com.example.cseeselfcheck.exception;
 
+import lombok.Getter;
+
+@Getter
 public class ExceptionResponse {
     private final String message;
 
