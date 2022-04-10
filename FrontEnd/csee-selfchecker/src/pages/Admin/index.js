@@ -10,11 +10,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form, Button, Container, FormControl } from 'react-bootstrap';
 import ImportButton from './ImportButton';
 import ExportButton from './ExportButton';
+import Loading from '../Common/Loading';
 
 export default function Admin() {
   const [filterStatus, setFilterStatus] = useState({ lectures: [], semesters: [], possibleStatus: [] });
-  const [fetchBody, setFetchBody] = useState({ lectures: [], semesters: [], takePossible: '', searchWord: '' });
+  const [fetchBody, setFetchBody] = useState({ lectures: [], semesters: [], takePossible: 2, searchWord: '' });
   const [lectureList, setLectureList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <>
       <Navbar bg="light">
@@ -31,10 +34,12 @@ export default function Admin() {
               <h1>학생 정보 조회</h1>
             </TextLayout>
             <InnerLayout>
+              {isLoading ? <Loading /> : null}
               <HeaderFilter filterStatus={filterStatus} setFilterStatus={setFilterStatus} setFetchBody={setFetchBody} lectureList={lectureList} setLectureList={setLectureList} />
-              <SearchBar setFetchBody={setFetchBody} />
+
+              <SearchBar setFetchBody={setFetchBody} lectureList={lectureList} filterStatus={filterStatus} setIsLoading={setIsLoading} />
               <TableLayout>
-                <AdminTable fetchBody={fetchBody} lectureList={lectureList} />
+                <AdminTable fetchBody={fetchBody} lectureList={lectureList} setIsLoading={setIsLoading} />
               </TableLayout>
             </InnerLayout>
             <TextLayout>

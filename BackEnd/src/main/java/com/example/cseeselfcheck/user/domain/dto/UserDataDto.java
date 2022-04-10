@@ -10,7 +10,7 @@ public interface UserDataDto {
     String getTakenStatus();
 
     default boolean isTakenLecture(int lectureIdx){
-        return getTakenStatus().charAt(lectureIdx) == '1';
+        return getTakenStatus().charAt(lectureIdx) != '0';
     }
 
     default boolean isSameSemester(String semester){

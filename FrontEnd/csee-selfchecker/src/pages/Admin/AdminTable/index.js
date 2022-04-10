@@ -22,6 +22,8 @@ export default function AdminTable(props) {
       if (props.lectureList.length === 0) break;
       if (takenStatus[i] === '-') {
         parsedStatus += props.lectureList[i].lectureName + ', ';
+      } else if (takenStatus[i] === '*') {
+        parsedStatus += props.lectureList[i].lectureName + ' 이수중, ';
       } else if (takenStatus[i] === '+') {
         parsedStatus += props.lectureList[i].lectureName + ' 병수예정, ';
       }
@@ -31,14 +33,15 @@ export default function AdminTable(props) {
   };
 
   useEffect(() => {
-    // craeteFetchBody(props.filterStatus);
     const fetchLectures = async () => {
       const data = await service.getStudents(props.fetchBody);
       setStudentDatas(data);
     };
     fetchLectures();
   }, [props.fetchBody]);
-
+  useEffect(() => {
+    props.setIsLoading(false);
+  }, [studentDatas]);
   return (
     <TableLayout>
       <TableContainer component={Paper}>

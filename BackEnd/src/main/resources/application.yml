@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/csee
-    username: sa
-    password: 1234
-    driver-class-name: org.h2.Driver
-#    url: jdbc:Mysql://walab.handong.edu:3306/cseeselfchecker
-#    username: cseeselfchecker
-#    password: kimleean
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:h2:tcp://localhost/~/csee
+#    username: sa
+#    password: 1234
+#    driver-class-name: org.h2.Driver
+    url: jdbc:Mysql://walab.handong.edu:3306/cseeselfchecker
+    username: cseeselfchecker
+    password: kimleean
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: none

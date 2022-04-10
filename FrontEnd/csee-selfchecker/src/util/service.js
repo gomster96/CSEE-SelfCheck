@@ -25,7 +25,7 @@ const postOptions = (body) => {
 
 const handleResult = async (response) => {
   const result = await response.json();
-  if (response.status !== 200) throw new Error(result);
+  if (response.status !== 200) alert(result.message);
   return result;
 };
 
@@ -48,7 +48,12 @@ const uploadLectures = async (formData) => {
     body: formData,
   };
   const response = await fetch(uploadUrl, options);
-  if (response.status !== 200) console.log('Error Occur');
+  if (response.status !== 200) {
+    const result = await response.json();
+    alert(result.message);
+  } else {
+    alert('Excel 등록이 정상적으로 완료되었습니다.');
+  }
 };
 
 const uploadMajors = async (formData) => {
@@ -58,7 +63,12 @@ const uploadMajors = async (formData) => {
     body: formData,
   };
   const response = await fetch(uploadUrl, options);
-  if (response.status !== 200) console.log('Error Occur');
+  if (response.status !== 200) {
+    const result = await response.json();
+    alert(result.message);
+  } else {
+    alert('Excel 등록이 정상적으로 완료되었습니다.');
+  }
 };
 
 const uploadUsers = async (formData) => {
@@ -68,7 +78,12 @@ const uploadUsers = async (formData) => {
     body: formData,
   };
   const response = await fetch(uploadUrl, options);
-  if (response.status !== 200) console.log('Error Occur');
+  if (response.status !== 200) {
+    const result = await response.json();
+    alert(result.message);
+  } else {
+    alert('Excel 등록이 정상적으로 완료되었습니다.');
+  }
 };
 
 const checkUserByEmail = async (body) => {
