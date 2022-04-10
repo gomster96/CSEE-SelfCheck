@@ -29,7 +29,8 @@ public class AdminUserResponseDto {
         StringBuilder sb = new StringBuilder("");
         for(int i=0; i<checker.length(); i++){
             if(checker.charAt(i)=='1' && takenStatus.charAt(i)=='0') sb.append('-');
-            else if(checker.charAt(i)=='1' && takenStatus.charAt(i)=='2') sb.append('+');
+            else if(checker.charAt(i)=='1' && takenStatus.charAt(i)=='2') sb.append('*');
+            else if(checker.charAt(i)=='1' && takenStatus.charAt(i)=='3') sb.append('+');
             else sb.append(takenStatus.charAt(i));
         }
         takenStatus = sb.toString();
