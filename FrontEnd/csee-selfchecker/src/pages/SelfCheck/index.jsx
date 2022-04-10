@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { ContainerDiv, RoundBackgroundDiv, InnerLayout, TextLayout, ButtonStyle } from './main.styled';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate, useLocation } from 'react-router';
 import ResetButton from './Button/ResetButton';
 import SaveButton from './Button/SaveButton';
 import UserTable from './Table/SelfCheckUserTable';
 import SelfCheckTable from './Table/SelfCheckTable';
+import Header from '../Common/Header/header';
+import Footer from '../Common/Footer/footer';
 
-export default function Main() {
+export default function Index(props) {
   return (
     <>
+      <Header />
       <ContainerDiv>
         <RoundBackgroundDiv>
           <InnerLayout>
@@ -17,12 +19,12 @@ export default function Main() {
             <UserTable />
             <SelfCheckTable />
             <ButtonStyle>
-              <ResetButton />
               <SaveButton />
             </ButtonStyle>
           </InnerLayout>
         </RoundBackgroundDiv>
       </ContainerDiv>
+      <Footer />
     </>
   );
 }

@@ -12,6 +12,9 @@ import { Form } from 'react-bootstrap';
 import { TableLayout } from '../main.styled';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     // backgroundColor: theme.palette.common.black,
@@ -37,12 +40,44 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MyPageResultTable(lecture) {
+export default function ResultTable() {
   const classes = useStyles();
   const [userData, setUserData] = useState({});
   const { state } = useLocation({});
+  const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
+  let [radioValue, setRadioValue] = useState({ radios: [] });
+  const [selectSemester, setSelectSemester] = useState({ semesters: [] });
+  const handleClickedRadioBtn = (e) => {
+    const idx = e.target.value.slice(0, 1);
+    const val = e.target.value.slice(1, 2);
+    if (val === '0') {
+    }
+    radioValue[idx] = val;
+    setRadioValue((prevState) => {
+      return { ...prevState, radioValue };
+    });
+  };
 
-  console.log({ state });
+  const handleClickedSelectBox = (e) => {
+    const idx = e.target.value.slice(0, 1);
+    console.log(e.target.value.slice(1, 7));
+    selectSemester[idx] = e.target.value;
+    setSelectSemester((prevState) => {
+      return { ...prevState, selectSemester };
+    });
+    console.log(selectSemester);
+  };
+  const onReset = (e) => {
+    setRadioValue({ radios: '' });
+    setSelectSemester({ semesters: '' });
+  };
+  useEffect(() => {
+    console.log(radioValue);
+  }, [radioValue]);
+
+  useEffect(() => {
+    console.log(selectSemester);
+  }, [selectSemester]);
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/user/info?userId=1`, requestOptions)
@@ -85,23 +120,65 @@ export default function MyPageResultTable(lecture) {
                       <StyledTableCell align="center">
                         {
                           <Form>
-                            {['radio'].map((type) => (
-                              <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check inline label="이수" name="takenSemester" value="1" type={type} id={`inline-${type}-1`} onChange="checkRadio" />
-                                <Form.Check inline label="미이수" name="takenSemester" value="0" type={type} id={`inline-${type}-2`} />
-                                <Form.Check inline label="이수중" name="takenSemester" value="2" type={type} id={`inline-${type}-3`} />
-                                <Form.Check inline label="병수예정" name="takenSemester" value="3" type={type} id={`inline-${type}-4`} />
-                              </div>
+                            {radioBtns.map((radio, idx2) => (
+                              <Form.Label key={idx + '' + idx2} inline className="m-0">
+                                <Form.Check
+                                  key={idx + '' + idx2}
+                                  className="m-2"
+                                  inline
+                                  defaultChecked={idx2 == 0}
+                                  name={userData.lectures[idx].lectureName}
+                                  value={idx + '' + idx2}
+                                  type="radio"
+                                  id={`${idx}`}
+                                  onClick={() => idx + '' + idx2}
+                                  onChange={handleClickedRadioBtn}
+                                />
+                                {radio}
+                              </Form.Label>
                             ))}
                           </Form>
                         }
                       </StyledTableCell>
-                      <StyledTableCell align="center" key={userData.lectures.openYear}>
-                        <Form.Select aria-label="Default select example" size="sm">
-                          <option>이수 학기</option>
-                          {userData.lectures[idx].openYear.map((lecture, idx2) => (
-                            <option> {Object.values(userData.lectures[idx].openYear[idx2])}</option>
-                          ))}
+                      <StyledTableCell align="center" key={userData.lectures}>
+                        <Form.Select
+                          aria-label="SelectBox"
+                          size="sm"
+                          disabled={
+                            radioValue[idx] === '0' ||
+                            (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 0) ||
+                            (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                            (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                            (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 4)
+                          }
+                          onChange={handleClickedSelectBox}
+                        >
+                          <option key={idx}>이수 학기</option>
+                          {userData.lectures[idx].openYear.map((lecture, idx2) =>
+                            (() => {
+                              if (radioValue[idx] === '1')
+                                return (
+                                  <option key={idx2} value={idx + userData.lectures[idx].openYear[idx2]}>
+                                    {userData.lectures[idx].openYear[idx2]}
+                                  </option>
+                                );
+                            })()
+                          )}
+
+                          {(() => {
+                            if (radioValue[idx] === '2')
+                              return (
+                                <option key={idx + '' + '2022-1'} value={idx + '' + '2022-1'}>
+                                  2022-1
+                                </option>
+                              );
+                            if (radioValue[idx] === '3')
+                              return (
+                                <option key={idx + '' + '2022-2'} value={idx + '' + '2022-2'}>
+                                  2022-2
+                                </option>
+                              );
+                          })()}
                         </Form.Select>
                       </StyledTableCell>
                     </StyledTableRow>
@@ -112,6 +189,13 @@ export default function MyPageResultTable(lecture) {
           </TableContainer>
         </>
       ) : null}
+      {/* <button onClick={() => setRadioValue({ radios: [] })}>Reset</button> */}
+      {/* <Button type="reset" className="rounded-pill m-2" onClick={onReset}>
+        초기화
+      </Button> */}
+      {/* <form>
+        <input type="reset" value="reset" />
+      </form> */}
     </TableLayout>
   );
 }
