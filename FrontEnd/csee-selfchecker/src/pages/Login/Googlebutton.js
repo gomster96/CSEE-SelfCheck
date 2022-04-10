@@ -17,7 +17,8 @@ export default function LoginGoogle(props) {
     console.log('response is ', response);
     userId = response;
     console.log('userid is ', userId);
-
+    window.sessionStorage.setItem('user_id', clientId);
+    console.log('session userId is ' + sessionStorage.getItem('user_id'));
     if (!userId) {
       navigate('/register', {
         state: { email: userEmail },
@@ -34,6 +35,8 @@ export default function LoginGoogle(props) {
     console.log('response is ', response);
     adminId = response;
     console.log('adminId is ', adminId);
+    window.sessionStorage.setItem('user_id', clientId);
+    console.log('session userId is ' + sessionStorage.getItem('user_id'));
     //const response = service.checkAdminInfo(formData);
     if (!adminId) {
       navigate('/adminregister', {
@@ -86,7 +89,7 @@ export default function LoginGoogle(props) {
 
   return (
     <Container>
-      <GoogleLogin clientId={clientId} buttonText="구글로 로그인하기" onSuccess={onSuccess} onFailure={onFailure} />
+      <GoogleLogin clientId={clientId} buttonText="구글로 로그인하기" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'} />
     </Container>
   );
 }
