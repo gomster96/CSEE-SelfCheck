@@ -96,7 +96,7 @@ export default function ResultTable(props) {
                           if (userData.takenStatus[idx] === '1') return '이수';
                           else if (userData.takenStatus[idx] === '0') return '미이수';
                           else if (userData.takenStatus[idx] === '2') return '이수중';
-                          else if (userData.takenStatus[idx] === '3') return '';
+                          else if (userData.takenStatus[idx] === '3') return '병수예정';
                         })()}
                       </StyledTableCell>
                     </StyledTableRow>
