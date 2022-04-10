@@ -14,10 +14,10 @@ import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
+import service from '../../../util/service';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    // backgroundColor: theme.palette.common.black,
     backgroundColor: '#2E75B6',
     color: theme.palette.common.white,
   },
@@ -45,32 +45,91 @@ export default function ResultTable() {
   const [userData, setUserData] = useState({});
   const { state } = useLocation({});
   const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
-  let [radioValue, setRadioValue] = useState({ radios: [] });
-  const [selectSemester, setSelectSemester] = useState({ semesters: [] });
+  let [radioValue, setRadioValue] = useState({ radios: ['', '', '', '', ''] });
+  const [selectSemester, setSelectSemester] = useState({ semesters: ['', '', '', '', ''] });
+
   const handleClickedRadioBtn = (e) => {
+    // console.log(e.target.value);
     const idx = e.target.value.slice(0, 1);
     const val = e.target.value.slice(1, 2);
-    if (val === '0') {
-    }
-    radioValue[idx] = val;
+    // radio click change 시 selectbox 값 reset
+    selectSemester[idx] = '';
+    setSelectSemester((prevState) => {
+      return { ...prevState, selectSemester };
+    });
+    // radioBtn value array에 save
+    if (((idx === '0' || idx === '2') && val === '2') || ((idx === '3' || idx === '4') && val === '3')) radioValue[idx] = '0';
+    else radioValue[idx] = val;
     setRadioValue((prevState) => {
       return { ...prevState, radioValue };
     });
   };
 
   const handleClickedSelectBox = (e) => {
+    // console.log(e.target.value);
     const idx = e.target.value.slice(0, 1);
-    console.log(e.target.value.slice(1, 7));
-    selectSemester[idx] = e.target.value;
-    setSelectSemester((prevState) => {
-      return { ...prevState, selectSemester };
-    });
+    const val = e.target.value.slice(1, 7);
+    if (e.target.value === '이수 학기') {
+      selectSemester[idx] = ' ';
+      setSelectSemester((prevState) => {
+        return { ...prevState, selectSemester };
+      });
+    } else {
+      console.log(val);
+      selectSemester[idx] = val;
+      setSelectSemester((prevState) => {
+        return { ...prevState, selectSemester };
+      });
+    }
     console.log(selectSemester);
   };
-  const onReset = (e) => {
-    setRadioValue({ radios: '' });
-    setSelectSemester({ semesters: '' });
+
+  const onSaved = (e) => {
+    const takenStatus = objToString(radioValue, 5);
+    const takenSemester = objToString2(selectSemester, 5);
+    console.log(userData.userId);
+    console.log(takenStatus);
+    console.log(takenSemester);
+    fetch('http://localhost:8080/api/user/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: userData.userId,
+        takenStatus: takenStatus,
+        takenSemester: takenSemester,
+      }),
+    }).then((response) => response.json());
+    alert('저장되었습니다.');
   };
+
+  function objToString(obj, idx) {
+    var str = '';
+    console.log(idx);
+    for (var p = 0; p < idx; p++) {
+      if (!obj.hasOwnProperty(p)) {
+        str += '0';
+      } else if (obj.hasOwnProperty(p)) {
+        str += obj[p];
+      }
+    }
+    return str;
+  }
+
+  function objToString2(obj, idx) {
+    var str = '';
+
+    for (var p = 0; p < idx; p++) {
+      if (!obj.hasOwnProperty(p)) {
+        str += ', ';
+      } else if (obj.hasOwnProperty(p)) {
+        if (p != 4) str += obj[p] + ', ';
+        else str += obj[p];
+      }
+    }
+    return str;
+  }
   useEffect(() => {
     console.log(radioValue);
   }, [radioValue]);
@@ -122,16 +181,23 @@ export default function ResultTable() {
                           <Form>
                             {radioBtns.map((radio, idx2) => (
                               <Form.Label key={idx + '' + idx2} inline className="m-0">
+                                <h>{userData.lectures[idx].lecturePosition + '' + idx2}</h>
                                 <Form.Check
                                   key={idx + '' + idx2}
                                   className="m-2"
                                   inline
                                   defaultChecked={idx2 == 0}
                                   name={userData.lectures[idx].lectureName}
-                                  value={idx + '' + idx2}
+                                  value={userData.lectures[idx].lecturePosition + '' + idx2}
                                   type="radio"
-                                  id={`${idx}`}
-                                  onClick={() => idx + '' + idx2}
+                                  id={`${userData.lectures[idx].lecturePosition}`}
+                                  // disabled={
+                                  //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 0) ||
+                                  //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                                  //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                                  //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 4)
+                                  // }
+                                  onClick={() => userData.lectures[idx].lecturePosition + '' + idx2}
                                   onChange={handleClickedRadioBtn}
                                 />
                                 {radio}
@@ -145,20 +211,22 @@ export default function ResultTable() {
                           aria-label="SelectBox"
                           size="sm"
                           disabled={
-                            radioValue[idx] === '0' ||
-                            (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 0) ||
-                            (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2) ||
-                            (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 3) ||
-                            (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 4)
+                            radioValue[userData.lectures[idx].lecturePosition] === '0' ||
+                            (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 0) ||
+                            (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                            (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                            (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 4)
                           }
                           onChange={handleClickedSelectBox}
                         >
-                          <option key={idx}>이수 학기</option>
+                          <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
+                            이수 학기
+                          </option>
                           {userData.lectures[idx].openYear.map((lecture, idx2) =>
                             (() => {
-                              if (radioValue[idx] === '1')
+                              if (radioValue[userData.lectures[idx].lecturePosition] === '1')
                                 return (
-                                  <option key={idx2} value={idx + userData.lectures[idx].openYear[idx2]}>
+                                  <option key={idx2} value={userData.lectures[idx].lecturePosition + userData.lectures[idx].openYear[idx2]}>
                                     {userData.lectures[idx].openYear[idx2]}
                                   </option>
                                 );
@@ -166,15 +234,15 @@ export default function ResultTable() {
                           )}
 
                           {(() => {
-                            if (radioValue[idx] === '2')
+                            if (radioValue[userData.lectures[idx].lecturePosition] === '2')
                               return (
-                                <option key={idx + '' + '2022-1'} value={idx + '' + '2022-1'}>
+                                <option key={userData.lectures[idx].lecturePosition + '' + '2022-1'} value={userData.lectures[idx].lecturePosition + '' + '2022-1'}>
                                   2022-1
                                 </option>
                               );
-                            if (radioValue[idx] === '3')
+                            if (radioValue[userData.lectures[idx].lecturePosition] === '3')
                               return (
-                                <option key={idx + '' + '2022-2'} value={idx + '' + '2022-2'}>
+                                <option key={userData.lectures[idx].lecturePosition + '' + '2022-2'} value={userData.lectures[idx].lecturePosition + '' + '2022-2'}>
                                   2022-2
                                 </option>
                               );
@@ -187,15 +255,13 @@ export default function ResultTable() {
               </TableBody>
             </Table>
           </TableContainer>
+          <>
+            <Button type="button" value="저장하기" className="rounded-pill m-2" onClick={onSaved}>
+              저장하기
+            </Button>
+          </>
         </>
       ) : null}
-      {/* <button onClick={() => setRadioValue({ radios: [] })}>Reset</button> */}
-      {/* <Button type="reset" className="rounded-pill m-2" onClick={onReset}>
-        초기화
-      </Button> */}
-      {/* <form>
-        <input type="reset" value="reset" />
-      </form> */}
     </TableLayout>
   );
 }

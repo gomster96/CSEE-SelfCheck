@@ -81,7 +81,7 @@ export default function ResultTable(props) {
                       <StyledTableCell component="th" scope="row" align="center">
                         {Object.values(userData.lectures[idx].lectureName)}
                       </StyledTableCell>
-                      <StyledTableCell align="center">{userData.takenSemesters[idx]}</StyledTableCell>
+                      <StyledTableCell align="center">{userData.takenSemesters[userData.lectures[idx].lecturePosition]}</StyledTableCell>
                       <StyledTableCell align="center">{userData.takenStatus[idx] === '1' ? '이수' : '미이수'}</StyledTableCell>
                     </StyledTableRow>
                   </>
