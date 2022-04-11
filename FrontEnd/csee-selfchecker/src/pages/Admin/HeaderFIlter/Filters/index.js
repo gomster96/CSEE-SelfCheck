@@ -91,10 +91,8 @@ export default function Filters(props) {
               ></FormControlLabel>
             );
           })}
-          <ExplainDiv>
-            필터하고 싶은 조건을 체크하시거나, 검색어를 입력하시고 조회버튼을 누르시면
-            <br /> 관련 조건으로 필터링되어 학생데이터가 조회됩니다.
-          </ExplainDiv>
+
+          <ExplainDiv>원하는 조건 체크 후 조회를 클릭하세요.</ExplainDiv>
         </CheckBoxAlignDiv>
       </FormGroup>
     </FiltersLayout>
@@ -102,7 +100,9 @@ export default function Filters(props) {
 }
 const ExplainDiv = styled.div`
   color: #797979;
-  font-size: 0.3vw;
+  font-size: 0.8vw;
+  width: 16vw;
+  text-align: right;
 `;
 const CheckBoxAlignDiv = styled.div`
   display: flex;
