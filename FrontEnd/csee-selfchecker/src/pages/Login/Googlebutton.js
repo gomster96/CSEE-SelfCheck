@@ -30,7 +30,7 @@ export default function LoginGoogle(props) {
   const checkIsAdmin = async () => {
     const response = await service.checkAdminByEmail(userEmail);
     adminId = response;
-    window.sessionStorage.setItem('admin_id', clientId);
+    window.sessionStorage.setItem('user_id', clientId);
     if (!adminId) {
       navigate('/adminregister', {
         state: { email: userEmail },
