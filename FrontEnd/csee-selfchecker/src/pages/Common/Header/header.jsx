@@ -14,15 +14,15 @@ function Header(props) {
       <Navbar bg="light">
         <Container>
           <Navbar.Brand href="/">
-            <img alt="" src={headerImg} width="40" height="40" className="d-inline-block align-top" /> 공학프로젝트기획 Self-Checker
+            <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-center"/> 공학프로젝트기획 Self-Checker
           </Navbar.Brand>
-          <Link to="../">
+          <Link to="/">
             {sessionStorage.getItem('user_id') === null ? (
-              <a>잘못된 경로로 접근하셨습니다. [클릭]</a>
+              window.location.href="/"
             ) : (
-              <button type="button" onClick={onLogout}>
+              <Button type="button" onClick={onLogout}>
                 로그아웃
-              </button>
+              </Button>
             )}
           </Link>
         </Container>

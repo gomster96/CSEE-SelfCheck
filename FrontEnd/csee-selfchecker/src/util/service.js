@@ -89,42 +89,36 @@ const uploadUsers = async (formData) => {
 const checkUserByEmail = async (body) => {
   const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/checkemail`;
   const response = await fetch(getStudentUrl, postOptions(body));
-  console.log(response);
   return await handleResult(response);
 };
 
 const checkAdminByEmail = async (body) => {
   const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/checkemail`;
   const response = await fetch(getStudentUrl, postOptions(body));
-  console.log(response);
   return await handleResult(response);
 };
 
 const checkUserInfo = async (body) => {
   const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/checkInfo`;
   const response = await fetch(getStudentUrl, postOptions(body));
-  console.log(response);
   return await handleResult(response);
 };
 
 const postUserResult = async (body) => {
   const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/save`;
   const response = await fetch(getStudentUrl, postOptions(body));
-  console.log(response);
   return await handleResult(response);
 };
 
 const signupAdmin = async (body) => {
   const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/signup`;
   const response = await fetch(getStudentUrl, postOptions(body));
-  console.log(response);
   return await handleResult(response);
 };
 
 const checkAdminIsActive = async (body) => {
   const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/isActive`;
   const response = await fetch(getStudentUrl, postOptions(body));
-  console.log(response);
   return await handleResult(response);
 };
 
