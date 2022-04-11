@@ -52,7 +52,7 @@ export default function ResultTable() {
     const idx = e.target.value.slice(0, 1);
     const val = e.target.value.slice(1, 2);
     // radio click change 시 selectbox 값 reset
-    selectSemester[idx] = '';
+    selectSemester[idx] = ' ';
     setSelectSemester((prevState) => {
       return { ...prevState, selectSemester };
     });
@@ -65,27 +65,28 @@ export default function ResultTable() {
   };
 
   const handleClickedSelectBox = (e) => {
-    // console.log(e.target.value);
+    console.log(e.target.value);
     const idx = e.target.value.slice(0, 1);
     const val = e.target.value.slice(1, 7);
-    if (e.target.value === '이수 학기') {
+    if (val === '이수 학기') {
+      console.log("aaa");
       selectSemester[idx] = ' ';
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
       });
     } else {
-      // console.log(val);
+      console.log(val);
       selectSemester[idx] = val;
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
       });
     }
-    // console.log(selectSemester);
+    console.log(selectSemester);
   };
 
   const onSaved = (e) => {
     for (var p = 0; p < 5; p++) {
-      if (selectSemester[p] === '' && (radioValue[p] === '1' || radioValue[p] === '2' || radioValue[p] === '3')) {
+      if ((selectSemester[p] === '' || selectSemester[p] === ' ') && (radioValue[p] === '1' || radioValue[p] === '2' || radioValue[p] === '3')) {
         alert('이수학기를 선택해주세요');
         return;
       }
@@ -130,7 +131,6 @@ export default function ResultTable() {
 
   function objToString2(obj, idx) {
     var str = '';
-
     for (var p = 0; p < idx; p++) {
       if (!obj.hasOwnProperty(p)) {
         str += ', ';
