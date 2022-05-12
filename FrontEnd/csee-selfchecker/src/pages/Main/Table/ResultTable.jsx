@@ -46,6 +46,8 @@ export default function ResultTable(props) {
     navigate('../Selfcheck', {
       state: {
         userId: userData.userId,
+        takenStatus: userData.takenStatus,
+        takenSemesters: userData.takenSemesters,
       },
     });
   };
@@ -54,12 +56,13 @@ export default function ResultTable(props) {
     fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        // console.log(result.res);
-        // console.log('state is');
-        // console.log(state);
-        // console.log('result is');
-        // console.log(result);
+        console.log(result.res);
+        console.log('state is');
+        console.log(state);
+        console.log('result is');
+        console.log(result);
         setUserData(result);
+        // console.log(result.takenSemesters);
       })
       .catch((error) => console.log('error', error));
   }, []);
