@@ -9,8 +9,13 @@ public interface UserDataDto {
     int getResult();
     String getTakenStatus();
 
-    default boolean isTakenLecture(int lectureIdx){
-        return getTakenStatus().charAt(lectureIdx) != '0';
+    // ToDO 나중에 쓸지 모르니 남겨둠
+//    default boolean isTakenLecture(int lectureIdx){
+//        return getTakenStatus().charAt(lectureIdx) != '0';
+//    }
+
+    default boolean isNotTakenLecture(int lectureIdx){
+        return getTakenStatus().charAt(lectureIdx) == '0' && getChecker().charAt(lectureIdx) == '1';
     }
 
     default boolean isSameSemester(String semester){

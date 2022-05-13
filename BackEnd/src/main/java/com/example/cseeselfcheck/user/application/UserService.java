@@ -47,7 +47,7 @@ public class UserService {
 
         List<UserDataDto> userDatas = userRepository.findUserData(data.getSearchWord());
         return userDatas.stream()
-                        .filter(data::isUserContainLecture)
+                        .filter(data::isNotUserContainLecture)
                         .filter(data::isUserContainSemester)
                         .filter(data::isSameTakePossible)
                         .map(AdminUserResponseDto::new)

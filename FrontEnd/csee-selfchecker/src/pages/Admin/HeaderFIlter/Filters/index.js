@@ -36,15 +36,6 @@ export default function Filters(props) {
     const fetchLectures = async () => {
       const data = await service.getLectures();
       props.setLectureList(data);
-      // const initialStatus = {
-      //   lectures: [],
-      //   semesters: [],
-      //   possibleStatus: [],
-      // };
-      // initialStatus.lectures.length = data.length;
-      // initialStatus.semesters.length = semester.length;
-      // initialStatus.possibleStatus.length = possibleStudent.length;
-      // props.setFilterStatus(initialStatus);
     };
     fetchLectures();
   }, []);
@@ -53,7 +44,7 @@ export default function Filters(props) {
     <FiltersLayout>
       <FormGroup>
         <CheckBoxAlignDiv>
-          <CheckBoxesTitle>이수한 과목</CheckBoxesTitle>
+          <CheckBoxesTitle>미이수 과목</CheckBoxesTitle>
           {props.lectureList.map((lecture, idx) => {
             return (
               <FormControlLabel

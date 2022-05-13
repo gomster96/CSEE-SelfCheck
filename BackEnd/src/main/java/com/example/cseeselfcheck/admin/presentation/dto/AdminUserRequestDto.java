@@ -16,11 +16,21 @@ public class AdminUserRequestDto {
     private int takePossible;
     private String searchWord;
 
-    public boolean isUserContainLecture(UserDataDto user){
+// ToDO 나중에 쓸지 모르니 남겨둠
+//    public boolean isUserContainLecture(UserDataDto user){
+//        System.out.println(user.getTakenStatus());
+//        for(int lectureIdx : lectures){
+//            if(!user.isTakenLecture(lectureIdx)) return false;
+//        }
+//        return true;
+//    }
+
+    public boolean isNotUserContainLecture(UserDataDto user){
+        if(lectures.size() == 0) return true;
         for(int lectureIdx : lectures){
-            if(!user.isTakenLecture(lectureIdx)) return false;
+            if(user.isNotTakenLecture(lectureIdx)) return true;
         }
-        return true;
+        return false;
     }
 
     public boolean isUserContainSemester(UserDataDto user){
