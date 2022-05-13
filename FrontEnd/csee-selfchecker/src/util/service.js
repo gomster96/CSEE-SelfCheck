@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const getOptions = () => {
   const option = {
     method: 'GET',
@@ -36,9 +38,26 @@ const getLectures = async () => {
 };
 
 const getStudents = async (body) => {
-  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/users`;
-  const response = await fetch(getStudentUrl, postOptions(body));
+  const url = `${process.env.REACT_APP_SERVER_URL}/admin/users`;
+  const response = await fetch(url, postOptions(body));
   return await handleResult(response);
+};
+
+const downloadExcel = async (body) => {
+  const url = `${process.env.REACT_APP_SERVER_URL}/admin/export`;
+
+  axios
+    .post(url, body, {
+      responseType: 'blob',
+    })
+    .then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]), { type: response.headers['content-type'] });
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `CSEE_Checker_Student.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+    });
 };
 
 const uploadLectures = async (formData) => {
@@ -87,38 +106,38 @@ const uploadUsers = async (formData) => {
 };
 
 const checkUserByEmail = async (body) => {
-  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/checkemail`;
-  const response = await fetch(getStudentUrl, postOptions(body));
+  const url = `${process.env.REACT_APP_SERVER_URL}/api/user/checkemail`;
+  const response = await fetch(url, postOptions(body));
   return await handleResult(response);
 };
 
 const checkAdminByEmail = async (body) => {
-  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/checkemail`;
-  const response = await fetch(getStudentUrl, postOptions(body));
+  const url = `${process.env.REACT_APP_SERVER_URL}/admin/checkemail`;
+  const response = await fetch(url, postOptions(body));
   return await handleResult(response);
 };
 
 const checkUserInfo = async (body) => {
-  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/checkInfo`;
-  const response = await fetch(getStudentUrl, postOptions(body));
+  const url = `${process.env.REACT_APP_SERVER_URL}/api/user/checkInfo`;
+  const response = await fetch(url, postOptions(body));
   return await handleResult(response);
 };
 
 const postUserResult = async (body) => {
-  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/api/user/save`;
-  const response = await fetch(getStudentUrl, postOptions(body));
+  const url = `${process.env.REACT_APP_SERVER_URL}/api/user/save`;
+  const response = await fetch(url, postOptions(body));
   return await handleResult(response);
 };
 
 const signupAdmin = async (body) => {
-  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/signup`;
-  const response = await fetch(getStudentUrl, postOptions(body));
+  const url = `${process.env.REACT_APP_SERVER_URL}/admin/signup`;
+  const response = await fetch(url, postOptions(body));
   return await handleResult(response);
 };
 
 const checkAdminIsActive = async (body) => {
-  const getStudentUrl = `${process.env.REACT_APP_SERVER_URL}/admin/isActive`;
-  const response = await fetch(getStudentUrl, postOptions(body));
+  const url = `${process.env.REACT_APP_SERVER_URL}/admin/isActive`;
+  const response = await fetch(url, postOptions(body));
   return await handleResult(response);
 };
 
@@ -134,6 +153,7 @@ const service = {
   postUserResult,
   signupAdmin,
   checkAdminIsActive,
+  downloadExcel,
 };
 
 export default service;

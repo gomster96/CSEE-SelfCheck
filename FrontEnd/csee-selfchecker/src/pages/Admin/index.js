@@ -20,7 +20,7 @@ export default function Admin() {
   const [lectureList, setLectureList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useLocation();
-
+  const [isExportClick, setIsExportClick] = useState(false);
   useEffect(() => {
     if (state === null) {
       alert('잘못된 접근입니다.');
@@ -40,7 +40,14 @@ export default function Admin() {
               {isLoading ? <Loading /> : null}
               <HeaderFilter filterStatus={filterStatus} setFilterStatus={setFilterStatus} setFetchBody={setFetchBody} lectureList={lectureList} setLectureList={setLectureList} />
 
-              <SearchBar setFetchBody={setFetchBody} lectureList={lectureList} filterStatus={filterStatus} setIsLoading={setIsLoading} />
+              <SearchBar
+                setFetchBody={setFetchBody}
+                lectureList={lectureList}
+                filterStatus={filterStatus}
+                setIsLoading={setIsLoading}
+                isExportClick={isExportClick}
+                setIsExportClick={setIsExportClick}
+              />
               <TableLayout>
                 <AdminTable fetchBody={fetchBody} lectureList={lectureList} setIsLoading={setIsLoading} />
               </TableLayout>
@@ -48,7 +55,7 @@ export default function Admin() {
             <TextLayout>
               <ButtonStyle className="mb-3">
                 <ImportButton />
-                <ExportButton />
+                <ExportButton setIsExportClick={setIsExportClick} />
               </ButtonStyle>
             </TextLayout>
           </InnerLayout>
