@@ -44,18 +44,14 @@ export default function ResultTable() {
   const [userData, setUserData] = useState({});
   const { state } = useLocation({});
   const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
-
   let [radioValue, setRadioValue] = useState({ radios: ['', '', '', '', ''] });
   const [selectSemester, setSelectSemester] = useState({ semesters: ['', '', '', '', ''] });
   const navigate = useNavigate();
-
   const handleClickedRadioBtn = (e) => {
-    //console.log(e.target.value);
-
+    // console.log(e.target.value);
     const idx = e.target.value.slice(0, 1);
     const val = e.target.value.slice(1, 2);
     // radio click change 시 selectbox 값 reset
-
     selectSemester[idx] = ' ';
     setSelectSemester((prevState) => {
       return { ...prevState, selectSemester };
@@ -69,22 +65,23 @@ export default function ResultTable() {
   };
 
   const handleClickedSelectBox = (e) => {
-    //console.log(e.target.value);
+    console.log(e.target.value);
     const idx = e.target.value.slice(0, 1);
     const val = e.target.value.slice(1, 7);
     if (val === '이수 학기') {
+      console.log("aaa");
       selectSemester[idx] = ' ';
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
       });
     } else {
-      //console.log(val);
+      console.log(val);
       selectSemester[idx] = val;
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
       });
     }
-    //console.log(selectSemester);
+    console.log(selectSemester);
   };
 
   const onSaved = (e) => {
@@ -138,7 +135,7 @@ export default function ResultTable() {
       if (!obj.hasOwnProperty(p)) {
         str += ', ';
       } else if (obj.hasOwnProperty(p)) {
-        if (p !== 4) str += obj[p] + ', ';
+        if (p != 4) str += obj[p] + ', ';
         else str += obj[p];
       }
     }
@@ -152,17 +149,6 @@ export default function ResultTable() {
     // console.log(selectSemester);
   }, [selectSemester]);
 
-  let radioInits = [0, 0, 0, 0, 0];
-  let selectInits = ['', '', '', '', '', ''];
-  for (var p = 0; p < 5; p++) {
-    radioInits[p] = state.takenStatus.split('')[p];
-  }
-  for (var q = 0; q < 6; q++) {
-    selectInits[q] = state.takenSemesters[q];
-  }
-  console.log(radioInits);
-  // console.log(state.takenSemesters);
-  console.log(selectInits);
   useEffect(() => {
     fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
@@ -171,7 +157,7 @@ export default function ResultTable() {
         // console.log('state is');
         // console.log({ state });
         // console.log('result is');
-        console.log(result);
+        // console.log(result);
         setUserData(result);
       })
       .catch((error) => console.log('error', error));
@@ -206,24 +192,24 @@ export default function ResultTable() {
                           {
                             <Form>
                               {radioBtns.map((radio, idx2) => (
-                                <Form.Label classname="m-0">
+                                <Form.Label className="m-0">
+                                  {/* <h>{userData.lectures[idx].lecturePosition + '' + idx2}</h> */}
                                   <Form.Check
                                     className="m-2"
                                     inline
-                                    // defaultChecked={idx2 == radioInits[idx]}
-                                    defaultChecked={idx2 == radioInits[userData.lectures[idx].lecturePosition]}
+                                    defaultChecked={idx2 == 0}
                                     name={userData.lectures[idx].lectureName}
                                     value={userData.lectures[idx].lecturePosition + '' + idx2}
                                     type="radio"
                                     id={`${userData.lectures[idx].lecturePosition}`}
+                                    // disabled={
+                                    //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 0) ||
+                                    //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                                    //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                                    //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 4)
+                                    // }
                                     onClick={() => userData.lectures[idx].lecturePosition + '' + idx2}
                                     onChange={handleClickedRadioBtn}
-                                    disabled={
-                                      userData.lectures[idx].lecturePosition + '' + idx2 === '02' ||
-                                      userData.lectures[idx].lecturePosition + '' + idx2 === '22' ||
-                                      userData.lectures[idx].lecturePosition + '' + idx2 === '33' ||
-                                      userData.lectures[idx].lecturePosition + '' + idx2 === '43'
-                                    }
                                   />
                                   {radio}
                                 </Form.Label>
@@ -236,34 +222,17 @@ export default function ResultTable() {
                             aria-label="SelectBox"
                             size="sm"
                             disabled={
-                              radioValue[userData.lectures[idx].lecturePosition] === '0'
-                              // (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 0) ||
-                              // (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 2) ||
-                              // (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 3) ||
-                              // (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 4)
+                              radioValue[userData.lectures[idx].lecturePosition] === '0' ||
+                              (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 0) ||
+                              (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                              (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                              (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 4)
                             }
                             onChange={handleClickedSelectBox}
-                            // defaultChecked={selectInits[userData.lectures[idx].lecturePosition]}
                           >
-                            {radioInits[userData.lectures[idx].lecturePosition] != 0 ? (
-                              <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
-                                {selectInits[userData.lectures[idx].lecturePosition]}
-                              </option>
-                            ) : (
-                              <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
-                                이수학기
-                              </option>
-                            )}
-
-                            {/* {radioInits[userData.lectures[idx].lecturePosition] != radioInits[idx] ? (
-                              <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
-                                이수학기
-                              </option>
-                            ) : 
-                              <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
-                                {selectInits[userData.lectures[idx].lecturePosition]}
-                              </option>
-                            )} */}
+                            <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
+                              이수 학기
+                            </option>
                             {userData.lectures[idx].openYear.map((lecture, idx2) =>
                               (() => {
                                 if (radioValue[userData.lectures[idx].lecturePosition] === '1')
@@ -274,24 +243,17 @@ export default function ResultTable() {
                                   );
                               })()
                             )}
+
                             {(() => {
-                              // if (radioValue[userData.lectures[idx].lecturePosition] === '2')
-                              //   return (
-                              //     <option
-                              //       key={userData.lectures[idx].lecturePosition + '' + '2022-1'}
-                              //       value={userData.lectures[idx].lecturePosition + '' + '2022-1'}
-                              //       selected={'2022-1' === selectInits[idx]}
-                              //     >
-                              //       2022-1
-                              //     </option>
-                              //   );
+                              if (radioValue[userData.lectures[idx].lecturePosition] === '2')
+                                return (
+                                  <option key={userData.lectures[idx].lecturePosition + '' + '2022-1'} value={userData.lectures[idx].lecturePosition + '' + '2022-1'}>
+                                    2022-1
+                                  </option>
+                                );
                               if (radioValue[userData.lectures[idx].lecturePosition] === '3')
                                 return (
-                                  <option
-                                    key={userData.lectures[idx].lecturePosition + '' + '2022-2'}
-                                    value={userData.lectures[idx].lecturePosition + '' + '2022-2'}
-                                    selected={'2022-2' === selectInits[idx]}
-                                  >
+                                  <option key={userData.lectures[idx].lecturePosition + '' + '2022-2'} value={userData.lectures[idx].lecturePosition + '' + '2022-2'}>
                                     2022-2
                                   </option>
                                 );
