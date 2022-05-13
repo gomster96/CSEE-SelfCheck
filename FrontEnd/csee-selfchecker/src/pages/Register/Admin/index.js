@@ -84,6 +84,7 @@ const calcWidthPercent = (span) => {
 
 const BREAK_POINT_MOBILE = 768;
 const BREAK_POINT_TABLET = 992;
+const BREAK_POINT_LAPTOP = 1024;
 const BREAK_POINT_PC = 1200;
 
 const ContainerDiv = styled.div`
@@ -102,14 +103,17 @@ const ContainerDiv = styled.div`
   @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
+  @media only screen and (min-width: ${BREAK_POINT_LAPTOP}px) {
+    width: ${({ mdlg }) => mdlg && `${calcWidthPercent(mdlg)}%`};
+  }
   @media only screen and (min-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
 `;
 const LoginFormDiv = styled.div`
   background: #f5f5f5;
-  width: 1050px;
-  height: auto;
+  width: 100vw;
+  height: 85vh;
   display: flex;
   flex-direction: row;
   box-shadow: 10px black;
@@ -126,6 +130,9 @@ const LoginFormDiv = styled.div`
   }
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_LAPTOP}px) {
+    width: ${({ mdlg }) => mdlg && `${calcWidthPercent(mdlg)}%`};
   }
   @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
@@ -148,6 +155,9 @@ const LoginFormLeft1 = styled.div`
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
   }
+  @media only screen and (min-width: ${BREAK_POINT_LAPTOP}px) {
+    width: ${({ mdlg }) => mdlg && `${calcWidthPercent(mdlg)}%`};
+  }
   @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
   }
@@ -168,6 +178,9 @@ const LoginFormLeft2 = styled.div`
   }
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: ${({ md }) => md && `${calcWidthPercent(md)}%`};
+  }
+  @media only screen and (min-width: ${BREAK_POINT_LAPTOP}px) {
+    width: ${({ mdlg }) => mdlg && `${calcWidthPercent(mdlg)}%`};
   }
   @media only screen and (max-width: ${BREAK_POINT_PC}px) {
     width: ${({ lg }) => lg && `${calcWidthPercent(lg)}%`};
