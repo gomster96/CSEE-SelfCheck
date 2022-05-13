@@ -66,7 +66,7 @@ export const RoundBackgroundDiv = styled.div`
 export const InnerLayout = styled.div`
   display: inline-block;
   height: 80%;
-  margin-top: 3%;
+  margin-top: 2%;
   width: ${({ xs }) => (xs ? `${calcWidthPercent(xs)}%` : `90%`)};
   padding: 1rem;
   @media only screen and (min-width: ${BREAK_POINT_MOBILE}px) {
@@ -81,7 +81,7 @@ export const InnerLayout = styled.div`
 `;
 
 export const TableLayout = styled.div`
-  margin-bottom: 6vh;
+  margin-bottom: 2vh;
 `;
 
 export const TextLayout = styled.div`
