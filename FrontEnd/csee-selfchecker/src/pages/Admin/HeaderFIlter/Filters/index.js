@@ -5,7 +5,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import service from '../../../../util/service';
 
-const semester = ['5학기', '6학기', '7학기', '8학기', '9학기', '10학기'];
+const semester = ['5학기', '6학기', '7학기', '8학기', '9학기 이상'];
 const possibleStudent = ['가능', '불가능'];
 
 export default function Filters(props) {

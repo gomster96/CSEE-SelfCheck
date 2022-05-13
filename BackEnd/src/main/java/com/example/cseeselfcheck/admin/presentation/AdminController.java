@@ -2,7 +2,6 @@ package com.example.cseeselfcheck.admin.presentation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +17,8 @@ import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
 import com.example.cseeselfcheck.lecture.application.LectureService;
 import com.example.cseeselfcheck.lecture.presentation.dto.LectureResponseDto;
 import com.example.cseeselfcheck.user.application.UserService;
-import com.example.cseeselfcheck.user.application.dto.UserResponseDto;
 import com.example.cseeselfcheck.user.domain.User;
 import com.example.cseeselfcheck.user.domain.repository.UserRepository;
-
-import com.example.cseeselfcheck.user.presentation.dto.UserCheckRequestDto;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +26,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;

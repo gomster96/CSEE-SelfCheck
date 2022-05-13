@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import service from '../../../util/service';
-const semester = ['5학기', '6학기', '7학기', '8학기', '9학기', '10학기'];
+const semester = ['5학기', '6학기', '7학기', '8학기', '9학기 이상'];
 
 export default function SearchBar(props) {
   const [inputData, setInputData] = useState('');

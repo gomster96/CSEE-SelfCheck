@@ -28,6 +28,11 @@ public class AdminUserRequestDto {
         for(String semester : semesters){
             if(user.isSameSemester(semester)) return true;
         }
+        if(semesters.get(semesters.size()-1).equals("9학기 이상")){
+            String semester = user.getSemester();
+            int userSemester =  Integer.parseInt(semester.substring(0, semester.length()-2));
+            return userSemester >= 9;
+        }
         return false;
     }
 
