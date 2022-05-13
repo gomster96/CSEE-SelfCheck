@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-const semester = ['5학기', '6학기', '7학기', '8학기', '9학기', '10학기'];
+import service from '../../../util/service';
+const semester = ['5학기', '6학기', '7학기', '8학기', '9학기 이상'];
 
 export default function SearchBar(props) {
   const [inputData, setInputData] = useState('');
-
+  useEffect(() => {
+    const fetchBody = { lectures: getLectureFetchBody(), semesters: getSemesterFetchBody(), takePossible: getTakePossible(), searchWord: inputData };
+    if (props.isExportClick === true) {
+      service.downloadExcel(fetchBody);
+      props.setIsExportClick(false);
+    }
+  }, [props.isExportClick]);
   const onChange = (e) => {
     setInputData(e.target.value);
   };
 
   const onClick = () => {
+    props.setIsLoading(true);
+    props.setFetchBody((prevState) => {
+      return { ...prevState, lectures: getLectureFetchBody(), semesters: getSemesterFetchBody(), takePossible: getTakePossible(), searchWord: inputData };
+    });
+  };
+
+  const getLectureFetchBody = () => {
     const tmpLecture = props.filterStatus.lectures
       .map((lectureStatus, idx) => {
         if (lectureStatus === true) {
@@ -19,6 +33,10 @@ export default function SearchBar(props) {
         }
       })
       .filter((el) => el !== undefined);
+    return tmpLecture;
+  };
+
+  const getSemesterFetchBody = () => {
     const tmpSemester = props.filterStatus.semesters
       .map((sem, idx) => {
         if (sem === true) {
@@ -26,17 +44,17 @@ export default function SearchBar(props) {
         }
       })
       .filter((el) => el !== undefined);
+    return tmpSemester;
+  };
+  const getTakePossible = () => {
     let tmp = 0;
     if (props.filterStatus.possibleStatus[0] === true && props.filterStatus.possibleStatus[1] === true) tmp = 2;
     else if (props.filterStatus.possibleStatus[0] === true) tmp = 1;
     else if (props.filterStatus.possibleStatus[1] === true) tmp = 0;
     else tmp = 2;
-    console.log(tmp);
-    props.setIsLoading(true);
-    props.setFetchBody((prevState) => {
-      return { ...prevState, lectures: tmpLecture, semesters: tmpSemester, takePossible: tmp, searchWord: inputData };
-    });
+    return tmp;
   };
+
   return (
     <>
       <SearchBarLayout>
