@@ -77,7 +77,7 @@ export default function ResultTable(props) {
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table" size="small">
               <TableHead>
-                <TableRow key="uniq1">
+                <TableRow>
                   <StyledTableCell align="center">과목명</StyledTableCell>
                   <StyledTableCell align="center">이수학기</StyledTableCell>
                   <StyledTableCell align="center">이수여부</StyledTableCell>
@@ -86,7 +86,7 @@ export default function ResultTable(props) {
               <TableBody>
                 {Object.keys(userData.lectures).map((user, idx) => (
                   <>
-                    <StyledTableRow key={idx + 'a'}>
+                    <StyledTableRow key={user.lectureName}>
                       <StyledTableCell component="th" scope="row" align="center">
                         {Object.values(userData.lectures[idx].lectureName)}
                       </StyledTableCell>

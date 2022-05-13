@@ -39,7 +39,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ResultTable() {
+export default function SelfCheckTable() {
   const classes = useStyles();
   const [userData, setUserData] = useState({});
   const { state } = useLocation({});
@@ -65,23 +65,23 @@ export default function ResultTable() {
   };
 
   const handleClickedSelectBox = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const idx = e.target.value.slice(0, 1);
     const val = e.target.value.slice(1, 7);
     if (val === '이수 학기') {
-      console.log("aaa");
+      // console.log('aaa');
       selectSemester[idx] = ' ';
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
       });
     } else {
-      console.log(val);
+      // console.log(val);
       selectSemester[idx] = val;
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
       });
     }
-    console.log(selectSemester);
+    // console.log(selectSemester);
   };
 
   const onSaved = (e) => {
@@ -210,6 +210,12 @@ export default function ResultTable() {
                                     // }
                                     onClick={() => userData.lectures[idx].lecturePosition + '' + idx2}
                                     onChange={handleClickedRadioBtn}
+                                    disabled={
+                                      userData.lectures[idx].lecturePosition + '' + idx2 === '02' ||
+                                      userData.lectures[idx].lecturePosition + '' + idx2 === '22' ||
+                                      userData.lectures[idx].lecturePosition + '' + idx2 === '33' ||
+                                      userData.lectures[idx].lecturePosition + '' + idx2 === '43'
+                                    }
                                   />
                                   {radio}
                                 </Form.Label>
