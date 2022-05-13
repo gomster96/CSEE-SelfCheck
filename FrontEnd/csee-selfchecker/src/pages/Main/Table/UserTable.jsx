@@ -98,7 +98,7 @@ export default function MyPageTable() {
       ) : null}
       <h6 className="text-muted">
         <small>
-          <br></br>*개인정보수정 필요시 관리자에게 문의하세요.<br></br>[054-260-1234 / admin@handong.ac.kr]
+          <br></br>*개인정보수정 필요시 관리자에게 문의하세요.<br></br> <br></br>전산전자 학부사무실<br></br>[054-260-1414 / csee@handong.edu]
         </small>
       </h6>
     </TableLayout>
