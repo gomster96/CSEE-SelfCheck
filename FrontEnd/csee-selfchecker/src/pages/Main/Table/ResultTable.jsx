@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { TableLayout, TextLayout } from '../main.styled';
-import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
 import { ButtonStyle } from '../main.styled';
 import { Button } from 'react-bootstrap';
@@ -37,9 +36,7 @@ const useStyles = makeStyles({
 });
 
 export default function ResultTable(props) {
-  const { state } = useLocation();
   const classes = useStyles();
-  const [userData, setUserData] = useState({});
   const navigate = useNavigate();
 
   const onRetry = () => {
@@ -50,24 +47,11 @@ export default function ResultTable(props) {
     });
   };
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        // console.log(result.res);
-        // console.log('state is');
-        // console.log(state);
-        // console.log('result is');
-        // console.log(result);
-        setUserData(result);
-      })
-      .catch((error) => console.log('error', error));
-  }, []);
-
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-  };
+  const userData = { ...props.userData };
+  // useEffect(() => {
+  //   console.log('rt', props.userData);
+  //   console.log('ut', userData);
+  // });
 
   return (
     <TableLayout>

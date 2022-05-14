@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { TableLayout } from '../main.styled';
-import { useLocation } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -35,30 +34,10 @@ const TableStyles = makeStyles({
   },
 });
 
-export default function MyPageTable() {
+export default function SelfCheckUserTable(props) {
   const classes = TableStyles();
-  const { state } = useLocation({});
-  const [userData, setUserData] = useState({});
-  // console.log({ state });
-  // console.log(userData.userId);
-  useEffect(() => {
-    fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        // console.log(result.res);
-        // console.log('state is');
-        // console.log({ state });
-        // console.log('result is');
-        // console.log(result);
-        setUserData(result);
-      })
-      .catch((error) => console.log('error', error));
-  }, []);
+  const userData = { ...props.userData };
 
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-  };
   return (
     <TableLayout>
       {userData ? (

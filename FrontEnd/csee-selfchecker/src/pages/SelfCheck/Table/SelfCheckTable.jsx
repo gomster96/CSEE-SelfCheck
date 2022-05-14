@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form } from 'react-bootstrap';
 import { TableLayout, ButtonStyle } from '../main.styled';
-import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
@@ -39,18 +38,20 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SelfCheckTable() {
+export default function SelfCheckTable(props) {
   const classes = useStyles();
-  const [userData, setUserData] = useState({});
-  const { state } = useLocation({});
+  const userData = { ...props.userData };
+
   const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
   let [radioValue, setRadioValue] = useState({ radios: ['', '', '', '', ''] });
   const [selectSemester, setSelectSemester] = useState({ semesters: ['', '', '', '', ''] });
   const navigate = useNavigate();
-  const handleClickedRadioBtn = (e) => {
-    // console.log(e.target.value);
-    const idx = e.target.value.slice(0, 1);
-    const val = e.target.value.slice(1, 2);
+
+  const handleClickedRadioBtn = (e, lecturePosition) => {
+    // console.log(lecturePosition + e.target.value);
+    const val = e.target.value;
+    const idx = lecturePosition;
+
     // radio click change 시 selectbox 값 reset
     selectSemester[idx] = ' ';
     setSelectSemester((prevState) => {
@@ -64,18 +65,17 @@ export default function SelfCheckTable() {
     });
   };
 
-  const handleClickedSelectBox = (e) => {
+  const handleClickedSelectBox = (e, lecturePosition) => {
     // console.log(e.target.value);
-    const idx = e.target.value.slice(0, 1);
-    const val = e.target.value.slice(1, 7);
+    // console.log(lecturePosition);
+    const val = e.target.value;
+    const idx = lecturePosition;
     if (val === '이수 학기') {
-      // console.log('aaa');
       selectSemester[idx] = ' ';
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
       });
     } else {
-      // console.log(val);
       selectSemester[idx] = val;
       setSelectSemester((prevState) => {
         return { ...prevState, selectSemester };
@@ -96,7 +96,7 @@ export default function SelfCheckTable() {
     // console.log(userData.userId);
     // console.log(takenStatus);
     // console.log(takenSemester);
-    fetch('http://localhost:8080/api/user/save', {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/api/user/save`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -149,24 +149,6 @@ export default function SelfCheckTable() {
     // console.log(selectSemester);
   }, [selectSemester]);
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/api/user/info?userId=${state.userId}`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        // console.log(result.res);
-        // console.log('state is');
-        // console.log({ state });
-        // console.log('result is');
-        // console.log(result);
-        setUserData(result);
-      })
-      .catch((error) => console.log('error', error));
-  }, []);
-
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-  };
   return (
     <>
       <TableLayout>
@@ -193,23 +175,16 @@ export default function SelfCheckTable() {
                             <Form>
                               {radioBtns.map((radio, idx2) => (
                                 <Form.Label className="m-0">
-                                  {/* <h>{userData.lectures[idx].lecturePosition + '' + idx2}</h> */}
                                   <Form.Check
                                     className="m-2"
                                     inline
                                     defaultChecked={idx2 == 0}
                                     name={userData.lectures[idx].lectureName}
-                                    value={userData.lectures[idx].lecturePosition + '' + idx2}
+                                    value={idx2}
                                     type="radio"
-                                    id={`${userData.lectures[idx].lecturePosition}`}
-                                    // disabled={
-                                    //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 0) ||
-                                    //   (radioValue[idx] === '2' && userData.lectures[idx].lecturePosition === 2) ||
-                                    //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 3) ||
-                                    //   (radioValue[idx] === '3' && userData.lectures[idx].lecturePosition === 4)
-                                    // }
-                                    onClick={() => userData.lectures[idx].lecturePosition + '' + idx2}
-                                    onChange={handleClickedRadioBtn}
+                                    id={`${idx2}`}
+                                    onClick={() => idx2}
+                                    onChange={(e) => handleClickedRadioBtn(e, userData.lectures[idx].lecturePosition)}
                                     disabled={
                                       userData.lectures[idx].lecturePosition + '' + idx2 === '02' ||
                                       userData.lectures[idx].lecturePosition + '' + idx2 === '22' ||
@@ -234,16 +209,16 @@ export default function SelfCheckTable() {
                               (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 3) ||
                               (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 4)
                             }
-                            onChange={handleClickedSelectBox}
+                            onChange={(e) => handleClickedSelectBox(e, userData.lectures[idx].lecturePosition)}
                           >
-                            <option value={userData.lectures[idx].lecturePosition + '이수 학기'} key={idx}>
+                            <option value={'이수 학기'} key={'이수 학기'}>
                               이수 학기
                             </option>
                             {userData.lectures[idx].openYear.map((lecture, idx2) =>
                               (() => {
                                 if (radioValue[userData.lectures[idx].lecturePosition] === '1')
                                   return (
-                                    <option key={idx2} value={userData.lectures[idx].lecturePosition + userData.lectures[idx].openYear[idx2]}>
+                                    <option key={userData.lectures[idx].openYear[idx2]} value={userData.lectures[idx].openYear[idx2]}>
                                       {userData.lectures[idx].openYear[idx2]}
                                     </option>
                                   );
@@ -253,13 +228,13 @@ export default function SelfCheckTable() {
                             {(() => {
                               if (radioValue[userData.lectures[idx].lecturePosition] === '2')
                                 return (
-                                  <option key={userData.lectures[idx].lecturePosition + '' + '2022-1'} value={userData.lectures[idx].lecturePosition + '' + '2022-1'}>
+                                  <option key={'2022-1'} value={'2022-1'}>
                                     2022-1
                                   </option>
                                 );
                               if (radioValue[userData.lectures[idx].lecturePosition] === '3')
                                 return (
-                                  <option key={userData.lectures[idx].lecturePosition + '' + '2022-2'} value={userData.lectures[idx].lecturePosition + '' + '2022-2'}>
+                                  <option key={'2022-2'} value={'2022-2'}>
                                     2022-2
                                   </option>
                                 );
