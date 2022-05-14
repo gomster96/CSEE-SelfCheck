@@ -53,10 +53,10 @@ export default function AdminRegister() {
 
           <LoginFormRight>
             <Form>
-              <LoginFormRightTitle>
+              <LoginFormRightTitle style={{ marginTop: '13vh' }}>
                 <h3>Admin Information</h3>
               </LoginFormRightTitle>
-              <Form.Group className="mb-3" style={{ marginTop: '50px' }}>
+              <Form.Group className="mb-3" style={{ marginTop: '10vh' }}>
                 <Form.Control placeholder="  소속 (Department)" name="department" onChange={handleChange} style={{ borderRadius: '20px' }} />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -64,7 +64,7 @@ export default function AdminRegister() {
               </Form.Group>
               <p>제출 시 관리자 승인 후 로그인 가능합니다.</p>
             </Form>
-            <Button as="input" type="button" value="회원가입" onClick={handleSubmit} style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
+            <Button as="input" type="button" value="회원가입" onClick={handleSubmit} style={{ width: '70%', borderRadius: '20px', background: '#2e75b6', marginTop: '5vh' }} />{' '}
           </LoginFormRight>
         </LoginFormDiv>
       </ContainerDiv>
@@ -222,5 +222,4 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding: 35% 0px 10px 0px;
 `;
