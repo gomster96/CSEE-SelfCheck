@@ -20,7 +20,7 @@ function Header(props) {
             {sessionStorage.getItem('user_id') === null ? (
               window.location.href="/"
             ) : (
-              <Button type="button" onClick={onLogout} style={{backgroundColor: '#2e75b6'}}>
+              <Button type="button" onClick={onLogout} style={{backgroundColor: '#2e75b6', border: '0px'}}>
                 로그아웃
               </Button>
             )}

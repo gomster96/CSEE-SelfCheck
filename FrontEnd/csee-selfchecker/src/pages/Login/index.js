@@ -46,11 +46,9 @@ export default function Login() {
                 <Googlebutton isUserSelect={isUserSelect} setIsUserSelect={setIsUserSelect} />
               </GoogleLoginClass>
             </GoogleLoginContainer>
-            <LoginFormRightsubTitle>
-              <p>학교 구글 계정으로 로그인하세요.</p>
-              <br></br>
-              <p style={{ fontSize: '10px' }}>시크릿 모드에서 동작하지 않습니다.</p>
-            </LoginFormRightsubTitle>
+            <LoginFormRightsubTitle>학교 구글 계정으로 로그인하세요.</LoginFormRightsubTitle>
+
+            <p style={{ fontSize: '0.8rem' }}>[크롬 시크릿 모드에서 동작하지 않습니다.]</p>
           </LoginFormRight>
         </LoginFormDiv>
       </ContainerDiv>
@@ -209,10 +207,12 @@ const LoginFormRightsubTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1rem;
+  margin-bottom: 1vh;
 `;
 const GoogleLoginContainer = styled.div`
-  padding-top: 90px;
-  padding-bottom: 50px;
+  padding-top: 80px;
+  padding-bottom: 40px;
   width: 300px;
 `;
 const GoogleLoginClass = styled.div`
