@@ -68,11 +68,11 @@ export default function Register() {
           </LoginFormLeft2>
 
           <LoginFormRight>
-            <Form>
+            <Form style={{ marginTop: '13vh' }}>
               <LoginFormRightTitle>
                 <h3>Student Information</h3>
               </LoginFormRightTitle>
-              <Form.Group className="mb-3" style={{ marginTop: '50px' }}>
+              <Form.Group className="mb-3" style={{ marginTop: '5vh' }}>
                 <Form.Control placeholder="  학번 (Student ID)" name="studentNumber" onChange={handleChange} style={{ borderRadius: '20px' }} />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -80,12 +80,12 @@ export default function Register() {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Control placeholder="  핸드폰 뒤 4자리 (XXXX)" name="phone" onChange={handleChange} style={{ borderRadius: '20px' }} />
-                <p style={{ marginTop: '2vh', fontSize: '1.2vw', textAlign: 'center' }}>Hisnet에 저장된 연락처 뒤 4자리를 입력하세요.</p>
+                <p style={{ marginTop: '2vh', fontSize: '1.1vw', textAlign: 'center' }}>Hisnet에 저장된 연락처 뒤 4자리를 입력하세요.</p>
               </Form.Group>
             </Form>
-            <Button as="input" type="button" value="회원가입" onClick={handleSubmit} style={{ width: '100%', borderRadius: '20px', background: '#2e75b6', marginTop: '10%' }} />{' '}
-            <p style={{ marginTop: '2vh', fontSize: '1.2vw', textAlign: 'center' }}>
-              회원가입이 안될 시 관리자에게 문의하세요.<br></br>[054-260-1234 / admin@handong.ac.kr]{' '}
+            <Button as="input" type="button" value="회원가입" onClick={handleSubmit} style={{ width: '70%', borderRadius: '20px', background: '#2e75b6', marginTop: '3vh' }} />{' '}
+            <p style={{ marginTop: '2vh', fontSize: '1.1vw', textAlign: 'center' }}>
+              회원가입이 안될 시 관리자에게 문의하세요.<br></br>[054-260-1414 / csee@handong.edu]{' '}
             </p>
           </LoginFormRight>
         </LoginFormDiv>
@@ -244,5 +244,4 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding: 20% 0px 10px 0px;
 `;

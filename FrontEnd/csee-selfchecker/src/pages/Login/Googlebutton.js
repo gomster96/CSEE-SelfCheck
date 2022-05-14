@@ -43,7 +43,7 @@ export default function LoginGoogle(props) {
           state: { userId: adminId },
         });
       } else {
-        alert('관리자 승인 대기 중입니다.');
+        alert('관리자 승인 대기 중입니다. (학부사무실: 054-260-1414)');
         navigate('/');
       }
     }

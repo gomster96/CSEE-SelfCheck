@@ -34,7 +34,7 @@ export default function Login() {
             <LogoImg src={logo} />
           </LoginFormLeft2>
           <LoginFormRight>
-            <LoginFormRightTitle>
+            <LoginFormRightTitle style={{ marginTop: '15vh' }}>
               <h1>Log in</h1>
             </LoginFormRightTitle>
             <ItemContainer>
@@ -48,6 +48,8 @@ export default function Login() {
             </GoogleLoginContainer>
             <LoginFormRightsubTitle>
               <p>학교 구글 계정으로 로그인하세요.</p>
+              <br></br>
+              <p style={{ fontSize: '10px' }}>시크릿 모드에서 동작하지 않습니다.</p>
             </LoginFormRightsubTitle>
           </LoginFormRight>
         </LoginFormDiv>
@@ -202,8 +204,6 @@ const LoginFormRight = styled.div`
 const LoginFormRightTitle = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 100px;
-  padding-bottom: 10px;
 `;
 const LoginFormRightsubTitle = styled.div`
   display: flex;
@@ -221,7 +221,7 @@ const GoogleLoginClass = styled.div`
   align-items: center;
   width: 300px;
   height: 45px;
-  margin-top: 20px;
+  margin-top: 5vh;
   border-radius: 2px;
 `;
 const LogoImg = styled.img`
