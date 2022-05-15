@@ -18,14 +18,15 @@ export default function AdminTable(props) {
 
   const parseTakenStatus = (takenStatus) => {
     let parsedStatus = '';
+    console.log(takenStatus);
     for (let i = 0; i < takenStatus.length; i++) {
       if (props.lectureList.length === 0) break;
       if (takenStatus[i] === '-') {
         parsedStatus += props.lectureList[i].lectureName + ', ';
       } else if (takenStatus[i] === '*') {
-        parsedStatus += props.lectureList[i].lectureName + ' 이수중, ';
+        parsedStatus += props.lectureList[i].lectureName + '(이수중), ';
       } else if (takenStatus[i] === '+') {
-        parsedStatus += props.lectureList[i].lectureName + ' 병수예정, ';
+        parsedStatus += props.lectureList[i].lectureName + '(병수), ';
       }
     }
     if (parsedStatus.length > 2) parsedStatus = parsedStatus.substring(0, parsedStatus.length - 2);

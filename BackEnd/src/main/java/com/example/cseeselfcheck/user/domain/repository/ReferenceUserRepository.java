@@ -12,5 +12,5 @@ import java.util.Optional;
 
 public interface ReferenceUserRepository extends JpaRepository<ReferenceUser, Long> {
     @Query("select r.id as id, r.studentNumber as studentNumber, r.name as name, r.phone as phone from ReferenceUser r where r.studentNumber = :studentNumber")
-    List<UserCheckDto> findByStudentNumber(String studentNumber);
+    UserCheckDto findFirstByStudentNumber(String studentNumber);
 }

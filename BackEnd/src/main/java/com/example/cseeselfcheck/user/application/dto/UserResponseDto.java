@@ -17,8 +17,8 @@ public class UserResponseDto {
     private String email;
     private String phone;
 
-    public UserResponseDto(UserCheckDto user) {
-        this.id = user.getId();
+    public UserResponseDto(Long id, UserCheckDto user) {
+        this.id = id;
         this.studentNumber = user.getStudentNumber();
         this.name = user.getName();
         this.email = user.getEmail();

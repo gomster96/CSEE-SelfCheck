@@ -13,7 +13,6 @@ export default function Register() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [userDatas, setUserDatas] = useState([]);
-  var userId;
   var userEmail;
 
   const initialFormData = {
@@ -33,24 +32,17 @@ export default function Register() {
     });
   };
 
-  const checkIsUser = async () => {
-    const res = await service.checkUserByEmail(formData.email);
-    userId = res;
-
-    if (!userId) {
+  const handleSubmit = async () => {
+    const response = await service.checkUserInfo(formData);
+    const id = response;
+    if (id == -1) {
       alert('[공학 프로젝트 기획] 수강 가능 명단에 입력하신 정보가 존재하지 않습니다. 모든 정보를 정확하게 입력해주세요.');
       navigate('/');
     } else {
       navigate('/SelfCheck', {
-        state: { userId: userId },
+        state: { userId: id },
       });
     }
-  };
-
-  const handleSubmit = async () => {
-    const response = await service.checkUserInfo(formData);
-
-    checkIsUser();
   };
 
   return (
