@@ -39,7 +39,6 @@ public class UserService {
     private final MajorRepository majorRepository;
 
     public Optional<User> checkUserByEmail(String email) {
-        System.out.println(email + " 중복검사");
         return userRepository.findByEmail(email);
     }
 
@@ -85,20 +84,16 @@ public class UserService {
     }
 
     @Transactional
-    public List<UserResponseDto> checkUserInfo(UserCheckRequestDto data) {
-        List<UserCheckDto> userDatas = referenceUserRepository.findByStudentNumber(data.getStudentNumber());
+    public UserResponseDto checkUserInfo(UserCheckRequestDto data) {
+        UserCheckDto userDatas = referenceUserRepository.findFirstByStudentNumber(data.getStudentNumber());
+        if(userDatas == null) return null;
         User user = new User();
-        if (userDatas.isEmpty()) {
-            System.out.println("체크 요청 실패!");
+        if (!userDatas.checkData(data)) {
             return null;
         } else {
-            System.out.println("체크 요청 성공!");
             user.insertUserData(data);
-            userRepository.save(user);
-            System.out.println("회원가입 성공!");
-            return userDatas.stream()
-                            .map(UserResponseDto::new)
-                            .collect(Collectors.toList());
+            User savedUser = userRepository.save(user);
+            return new UserResponseDto(savedUser.getId() ,userDatas);
         }
 
 

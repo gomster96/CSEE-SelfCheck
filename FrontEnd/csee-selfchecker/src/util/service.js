@@ -120,6 +120,7 @@ const checkAdminByEmail = async (body) => {
 const checkUserInfo = async (body) => {
   const url = `${process.env.REACT_APP_SERVER_URL}/api/user/checkInfo`;
   const response = await fetch(url, postOptions(body));
+
   return await handleResult(response);
 };
 
