@@ -10,12 +10,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 public class CseeSelfCheckApplication extends SpringBootServletInitializer {
 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
+
+        return builder.sources(CseeSelfCheckApplication.class);
+
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(CseeSelfCheckApplication.class, args);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
-        return super.configure(builder);
-    }
+
 }

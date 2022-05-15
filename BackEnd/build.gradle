@@ -2,22 +2,22 @@ plugins {
     id 'org.springframework.boot' version '2.6.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'war'
+//    id 'war'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = "1.8"
 apply plugin: 'war'
 
 bootWar{
 //    archiveName("CSEE-SelfChecker.war")
-    enabled = true
     archiveBaseName = 'CSEE-SelfChecker'
     archiveFileName = 'CSEE-SelfChecker.war'
     archiveVersion = "0.0.0"
 }
-
+bootWar.enabled = false
+war.enabled = true
 
 
 configurations {
@@ -44,6 +44,3 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
-//tasks.named('test') {
-//    useJUnitPlatform()
-//}
