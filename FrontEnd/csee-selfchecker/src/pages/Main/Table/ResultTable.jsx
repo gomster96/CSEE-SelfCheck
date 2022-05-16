@@ -40,7 +40,7 @@ export default function ResultTable(props) {
   const navigate = useNavigate();
 
   const onRetry = () => {
-    navigate('../Selfcheck', {
+    navigate('../csc/Selfcheck', {
       state: {
         userId: userData.userId,
       },

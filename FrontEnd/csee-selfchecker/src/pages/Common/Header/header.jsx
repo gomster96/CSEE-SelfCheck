@@ -13,12 +13,12 @@ function Header(props) {
     <>
       <Navbar bg="light">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/csc/">
             <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-center"/> 공학프로젝트기획 Self-Checker
           </Navbar.Brand>
-          <Link to="/">
+          <Link to="/csc/">
             {sessionStorage.getItem('user_id') === null ? (
-              window.location.href="/"
+              window.location.href="/csc/"
             ) : (
               <Button type="button" onClick={onLogout} style={{backgroundColor: '#2e75b6', border: '0px'}}>
                 로그아웃

@@ -12,13 +12,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/adminregister" element={<AdminRegister />} />
-        <Route path="/main" element={<Main />} />
-        <Route path="/SelfCheck" element={<SelfCheck />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/google-login" element={<LoginGoogle />} />
+        <Route exact path="/csc/" element={<Login />} />
+        <Route path="/csc/register" element={<Register />} />
+        <Route path="/csc/adminregister" element={<AdminRegister />} />
+        <Route path="/csc/main" element={<Main />} />
+        <Route path="/csc/SelfCheck" element={<SelfCheck />} />
+        <Route path="/csc/admin" element={<Admin />} />
+        <Route path="/csc/google-login" element={<LoginGoogle />} />
       </Routes>
     </BrowserRouter>
   );

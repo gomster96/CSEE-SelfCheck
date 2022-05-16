@@ -108,7 +108,7 @@ export default function SelfCheckTable(props) {
       }),
     }).then((response) => response.json());
 
-    navigate('../main', {
+    navigate('../csc/main', {
       state: {
         userId: userData.userId,
       },

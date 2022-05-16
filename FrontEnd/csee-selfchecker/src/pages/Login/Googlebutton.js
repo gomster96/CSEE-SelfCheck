@@ -17,11 +17,11 @@ export default function LoginGoogle(props) {
     userId = response;
     window.sessionStorage.setItem('user_id', clientId);
     if (!userId) {
-      navigate('/register', {
+      navigate('/csc/register', {
         state: { email: userEmail },
       });
     } else {
-      navigate('/main', {
+      navigate('/csc/main', {
         state: { userId: userId },
       });
     }
@@ -32,19 +32,19 @@ export default function LoginGoogle(props) {
     adminId = response;
     window.sessionStorage.setItem('user_id', clientId);
     if (!adminId) {
-      navigate('/adminregister', {
+      navigate('/csc/adminregister', {
         state: { email: userEmail },
       });
     } else {
       const check = await service.checkAdminIsActive(adminId);
       isActive = check;
       if (check) {
-        navigate('/admin', {
+        navigate('/csc/admin', {
           state: { userId: adminId },
         });
       } else {
         alert('관리자 승인 대기 중입니다. (학부사무실: 054-260-1414)');
-        navigate('/');
+        navigate('/csc/');
       }
     }
   };
@@ -71,14 +71,10 @@ export default function LoginGoogle(props) {
     }
     // }
   }
-  const onFailure = (res) => {
-    alert('구글 로그인에 실패하였습니다');
-    console.log('err', res);
-  };
 
   return (
     <Container>
-      <GoogleLogin clientId={clientId} buttonText="구글로 로그인하기" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'} />
+      <GoogleLogin clientId={clientId} buttonText="구글로 로그인하기" onSuccess={onSuccess} cookiePolicy={'single_host_origin'} />
     </Container>
   );
 }

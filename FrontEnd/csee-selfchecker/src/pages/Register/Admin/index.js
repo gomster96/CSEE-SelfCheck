@@ -35,7 +35,7 @@ export default function AdminRegister() {
     setUserDatas(response);
 
     alert('관리자 회원가입 정보 제출 완료! 관리자 승인 후 로그인이 가능합니다.');
-    navigate('/');
+    navigate('/csc/');
   };
   return (
     <>

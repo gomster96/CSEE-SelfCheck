@@ -24,7 +24,7 @@ export default function Admin() {
   useEffect(() => {
     if (state === null) {
       alert('잘못된 접근입니다.');
-      navigate('/');
+      navigate('/csc/');
     }
   }, []);
   return (
