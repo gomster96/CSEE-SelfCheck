@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 
 import com.example.cseeselfcheck.admin.application.dto.AdminResponseDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminAcceptRequestDto;
+import com.example.cseeselfcheck.exception.common.CommonException;
 
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class AdminService {
 
     @Transactional
     public List<AdminResponseDto> activateAdminById(AdminAcceptRequestDto acceptRequest) {
-        Admin admin = adminRepository.findById(acceptRequest.getAdminId()).orElseThrow();
+        Admin admin = adminRepository.findById(acceptRequest.getAdminId()).orElseThrow(CommonException::new);
         admin.activate();
         return adminRepository.findAllByActiveStatus(false)
                 .stream()

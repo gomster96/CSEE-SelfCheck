@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserRequestDto;
 import com.example.cseeselfcheck.admin.presentation.dto.AdminUserResponseDto;
+import com.example.cseeselfcheck.exception.common.CommonException;
 import com.example.cseeselfcheck.lecture.application.dto.LectureDataDto;
 import com.example.cseeselfcheck.lecture.domain.Lecture;
 import com.example.cseeselfcheck.lecture.domain.repository.LectureRepository;
@@ -38,7 +39,6 @@ public class UserService {
     private final MajorRepository majorRepository;
 
     public Optional<User> checkUserByEmail(String email) {
-        System.out.println(email + " 중복검사");
         return userRepository.findByEmail(email);
     }
 
@@ -57,7 +57,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserFullDataResponseDto getUserIndividualDataById(Long userId) {
         UserIndividualDataDto individualData = userRepository.findFirstByIndividualDataById(userId)
-                                                             .orElseThrow();
+                                                             .orElseThrow(CommonException::new);
         String lectureChecker = individualData.getChecker();
         List<Lecture> lectures = lectureRepository.findAll();
         List<LectureDataDto> userLectures = lectures.stream()
@@ -69,8 +69,8 @@ public class UserService {
 
     @Transactional
     public UserDataSaveResponseDto saveUserData(UserDataSaveRequest userSaveData) {
-        User user = userRepository.findById(userSaveData.getUserId()).orElseThrow();
-        Major userMajor = majorRepository.findFirstByStudentNumber(user.getStudentNumber()).orElseThrow();
+        User user = userRepository.findById(userSaveData.getUserId()).orElseThrow(CommonException::new);
+        Major userMajor = majorRepository.findFirstByStudentNumber(user.getStudentNumber()).orElseThrow(CommonException::new);
         String checker = userMajor.getChecker();
         int result = 1;
         for (int i = 0; i < checker.length(); i++) {
@@ -84,20 +84,16 @@ public class UserService {
     }
 
     @Transactional
-    public List<UserResponseDto> checkUserInfo(UserCheckRequestDto data) {
-        List<UserCheckDto> userDatas = referenceUserRepository.findByStudentNumber(data.getStudentNumber());
+    public UserResponseDto checkUserInfo(UserCheckRequestDto data) {
+        UserCheckDto userDatas = referenceUserRepository.findFirstByStudentNumber(data.getStudentNumber());
+        if(userDatas == null) return null;
         User user = new User();
-        if (userDatas.isEmpty()) {
-            System.out.println("체크 요청 실패!");
+        if (!userDatas.checkData(data)) {
             return null;
         } else {
-            System.out.println("체크 요청 성공!");
             user.insertUserData(data);
-            userRepository.save(user);
-            System.out.println("회원가입 성공!");
-            return userDatas.stream()
-                            .map(UserResponseDto::new)
-                            .collect(Collectors.toList());
+            User savedUser = userRepository.save(user);
+            return new UserResponseDto(savedUser.getId() ,userDatas);
         }
 
 

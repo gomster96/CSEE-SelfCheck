@@ -59,15 +59,14 @@ public class UserController {
     @PostMapping("/user/checkemail")
     public ResponseEntity<Object> checkUserByEmail(@RequestBody String email){
         String e = email.replace("\"", "");
-        System.out.println("중복 확인 요청된 이메일: "+e);
 
         return ResponseEntity.ok(userService.checkUserByEmail(e));
     }
 
     @PostMapping("/user/checkInfo")
     public ResponseEntity<Object> checkUserInfo(@RequestBody UserCheckRequestDto data){
-        List<UserResponseDto> userDatas = userService.checkUserInfo(data);
-        Long idd = 1L;
-        return ResponseEntity.ok(idd);
+        UserResponseDto userResponseDto = userService.checkUserInfo(data);
+        Long response = userResponseDto==null ? -1 : userResponseDto.getId();
+        return ResponseEntity.ok(response);
     }
 }
