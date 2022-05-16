@@ -48,10 +48,7 @@ export default function ResultTable(props) {
   };
 
   const userData = { ...props.userData };
-  // useEffect(() => {
-  //   console.log('rt', props.userData);
-  //   console.log('ut', userData);
-  // });
+
 
   return (
     <TableLayout>

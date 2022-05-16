@@ -39,13 +39,8 @@ export default function Register() {
       alert('[공학 프로젝트 기획] 수강 가능 명단에 입력하신 정보가 존재하지 않습니다. 모든 정보를 정확하게 입력해주세요.');
       navigate('/csc/');
     } else {
-<<<<<<< HEAD
       navigate('/csc/SelfCheck', {
-        state: { userId: userId },
-=======
-      navigate('/SelfCheck', {
         state: { userId: id },
->>>>>>> 86844455ba08cb63e6c2d91c8b2db3c585afb335
       });
     }
   };

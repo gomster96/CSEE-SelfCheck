@@ -48,7 +48,7 @@ export default function SelfCheckTable(props) {
   const navigate = useNavigate();
 
   const handleClickedRadioBtn = (e, lecturePosition) => {
-    // console.log(lecturePosition + e.target.value);
+
     const val = e.target.value;
     const idx = lecturePosition;
 
@@ -66,8 +66,6 @@ export default function SelfCheckTable(props) {
   };
 
   const handleClickedSelectBox = (e, lecturePosition) => {
-    // console.log(e.target.value);
-    // console.log(lecturePosition);
     const val = e.target.value;
     const idx = lecturePosition;
     if (val === '이수 학기') {
@@ -81,7 +79,6 @@ export default function SelfCheckTable(props) {
         return { ...prevState, selectSemester };
       });
     }
-    // console.log(selectSemester);
   };
 
   const onSaved = (e) => {
@@ -93,9 +90,6 @@ export default function SelfCheckTable(props) {
     }
     const takenStatus = objToString(radioValue, 5);
     const takenSemester = objToString2(selectSemester, 5);
-    // console.log(userData.userId);
-    // console.log(takenStatus);
-    // console.log(takenSemester);
     fetch(`${process.env.REACT_APP_SERVER_URL}/api/user/save`, {
       method: 'POST',
       headers: {
@@ -118,7 +112,6 @@ export default function SelfCheckTable(props) {
 
   function objToString(obj, idx) {
     var str = '';
-    // console.log(idx);
     for (var p = 0; p < idx; p++) {
       if (!obj.hasOwnProperty(p)) {
         str += '0';
@@ -142,11 +135,9 @@ export default function SelfCheckTable(props) {
     return str;
   }
   useEffect(() => {
-    // console.log(radioValue);
   }, [radioValue]);
 
   useEffect(() => {
-    // console.log(selectSemester);
   }, [selectSemester]);
 
   return (

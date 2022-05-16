@@ -10,16 +10,12 @@ import Footer from '../Common/Footer/footer';
 export default function SelfCheck() {
   const { state } = useLocation({});
   const [userData, setUserData] = useState({});
-  // console.log('index props', userData);
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/api/user/info?userId=${state.userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        // console.log(result.res);
-        // console.log('state is');
-        // console.log({ state });
-        // console.log('result is');
-        // console.log(result);
+
         setUserData(result);
       })
       .catch((error) => console.log('error', error));

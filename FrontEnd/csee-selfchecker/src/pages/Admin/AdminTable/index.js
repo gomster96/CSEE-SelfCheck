@@ -18,7 +18,6 @@ export default function AdminTable(props) {
 
   const parseTakenStatus = (takenStatus) => {
     let parsedStatus = '';
-    console.log(takenStatus);
     for (let i = 0; i < takenStatus.length; i++) {
       if (props.lectureList.length === 0) break;
       if (takenStatus[i] === '-') {
