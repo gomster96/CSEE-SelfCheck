@@ -18,7 +18,7 @@ export default function Login() {
     <>
       <Navbar bg="light">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/csc/">
             <img alt="" src={headerImg} width="30" height="30" className="d-inline-block align-top" /> 공학프로젝트기획 Self-Checker
           </Navbar.Brand>
         </Container>
