@@ -49,12 +49,10 @@ export default function ResultTable(props) {
 
   const userData = { ...props.userData };
 
-
   return (
     <TableLayout>
       {userData.lectures ? (
         <>
-          {/* {Object ? <h>{Object.values(userData.lectures[0].lectureName)}</h> : null} */}
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table" size="small">
               <TableHead>
@@ -67,6 +65,9 @@ export default function ResultTable(props) {
               <TableBody>
                 {Object.keys(userData.lectures).map((user, idx) => (
                   <>
+                    {/* <h>{userData.lectures[idx].lecturePosition}</h> */}
+                    {/* <h>{userData.takenStatus[idx]}</h> */}
+                    {/* <h>{userData.takenStatus[userData.lectures[idx].lecturePosition]}</h> */}
                     <StyledTableRow key={user.lectureName}>
                       <StyledTableCell component="th" scope="row" align="center">
                         {Object.values(userData.lectures[idx].lectureName)}
@@ -74,10 +75,10 @@ export default function ResultTable(props) {
                       <StyledTableCell align="center">{userData.takenSemesters[userData.lectures[idx].lecturePosition]}</StyledTableCell>
                       <StyledTableCell align="center">
                         {(() => {
-                          if (userData.takenStatus[idx] === '1') return '이수';
-                          else if (userData.takenStatus[idx] === '0') return '미이수';
-                          else if (userData.takenStatus[idx] === '2') return '이수중';
-                          else if (userData.takenStatus[idx] === '3') return '병수예정';
+                          if (userData.takenStatus[userData.lectures[idx].lecturePosition] === '1') return '이수';
+                          else if (userData.takenStatus[userData.lectures[idx].lecturePosition] === '0') return '미이수';
+                          else if (userData.takenStatus[userData.lectures[idx].lecturePosition] === '2') return '이수중';
+                          else if (userData.takenStatus[userData.lectures[idx].lecturePosition] === '3') return '병수예정';
                         })()}
                       </StyledTableCell>
                     </StyledTableRow>

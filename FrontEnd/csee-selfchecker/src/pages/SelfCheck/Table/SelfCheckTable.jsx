@@ -13,6 +13,7 @@ import { TableLayout, ButtonStyle } from '../main.styled';
 import { useNavigate } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
+import { TextLayout } from '../../Main/main.styled';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -48,7 +49,6 @@ export default function SelfCheckTable(props) {
   const navigate = useNavigate();
 
   const handleClickedRadioBtn = (e, lecturePosition) => {
-
     const val = e.target.value;
     const idx = lecturePosition;
 
@@ -134,11 +134,9 @@ export default function SelfCheckTable(props) {
     }
     return str;
   }
-  useEffect(() => {
-  }, [radioValue]);
+  useEffect(() => {}, [radioValue]);
 
-  useEffect(() => {
-  }, [selectSemester]);
+  useEffect(() => {}, [selectSemester]);
 
   return (
     <>
@@ -241,6 +239,14 @@ export default function SelfCheckTable(props) {
           </>
         ) : null}
       </TableLayout>
+      <TextLayout>
+        {' '}
+        <small>
+          <h6 className="pt-3" style={{ fontSize: '0.8rem' }}>
+            ※심화 전공의 경우 캡스톤디자인을 마칠 때까지 설계 학점 총 12학점을 이수해야 합니다.
+          </h6>
+        </small>
+      </TextLayout>
       <ButtonStyle>
         <Button
           type="button"

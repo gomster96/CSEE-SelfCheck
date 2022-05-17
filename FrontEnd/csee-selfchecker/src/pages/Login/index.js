@@ -48,7 +48,7 @@ export default function Login() {
             </GoogleLoginContainer>
             <LoginFormRightsubTitle>학교 구글 계정으로 로그인하세요.</LoginFormRightsubTitle>
 
-            <p style={{ fontSize: '0.8rem' }}>[크롬 시크릿 모드에서 동작하지 않습니다.]</p>
+            <p style={{ fontSize: '0.8rem' }}>※ PC 사용 권장, 시크릿 모드에서 동작하지 않습니다.</p>
           </LoginFormRight>
         </LoginFormDiv>
       </ContainerDiv>
