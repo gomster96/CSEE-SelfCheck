@@ -40,8 +40,22 @@ const useStyles = makeStyles({
 });
 
 export default function SelfCheckTable(props) {
+  let now = new Date();
+  let year = now.getFullYear();
+  let nextYear = year + 1;
+  let todayMonth = now.getMonth() + 1;
+  // console.log(year);
+  let semester;
+  if (todayMonth < 9 && todayMonth > 2) semester = 1;
+  else semester = 2;
+  let semester1 = 1;
+  let semester2 = 2;
+  let nextYearAndSemester = JSON.parse(JSON.stringify(nextYear + '-' + semester1));
+  let nextSemester = year + '-' + semester2;
+  // console.log(semester);
   const classes = useStyles();
   const userData = { ...props.userData };
+  console.log(userData);
 
   const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
   let [radioValue, setRadioValue] = useState({ radios: ['', '', '', '', ''] });
@@ -51,6 +65,7 @@ export default function SelfCheckTable(props) {
   const handleClickedRadioBtn = (e, lecturePosition) => {
     const val = e.target.value;
     const idx = lecturePosition;
+    console.log(e.target.value);
 
     // radio click change 시 selectbox 값 reset
     selectSemester[idx] = ' ';
@@ -67,6 +82,7 @@ export default function SelfCheckTable(props) {
 
   const handleClickedSelectBox = (e, lecturePosition) => {
     const val = e.target.value;
+    console.log(JSON.parse(JSON.stringify(e.target.value)));
     const idx = lecturePosition;
     if (val === '이수 학기') {
       selectSemester[idx] = ' ';
@@ -164,6 +180,8 @@ export default function SelfCheckTable(props) {
                             <Form>
                               {radioBtns.map((radio, idx2) => (
                                 <Form.Label className="m-0">
+                                  {userData.lectures[idx].lecturePosition}
+                                  {idx2}
                                   <Form.Check
                                     className="m-2"
                                     inline
@@ -175,10 +193,15 @@ export default function SelfCheckTable(props) {
                                     onClick={() => idx2}
                                     onChange={(e) => handleClickedRadioBtn(e, userData.lectures[idx].lecturePosition)}
                                     disabled={
-                                      userData.lectures[idx].lecturePosition + '' + idx2 === '02' ||
-                                      userData.lectures[idx].lecturePosition + '' + idx2 === '22' ||
-                                      userData.lectures[idx].lecturePosition + '' + idx2 === '33' ||
-                                      userData.lectures[idx].lecturePosition + '' + idx2 === '43'
+                                      todayMonth < 9 && todayMonth > 2
+                                        ? userData.lectures[idx].lecturePosition + '' + idx2 === '02' ||
+                                          userData.lectures[idx].lecturePosition + '' + idx2 === '22' ||
+                                          userData.lectures[idx].lecturePosition + '' + idx2 === '33' ||
+                                          userData.lectures[idx].lecturePosition + '' + idx2 === '43'
+                                        : userData.lectures[idx].lecturePosition + '' + idx2 === '03' ||
+                                          userData.lectures[idx].lecturePosition + '' + idx2 === '23' ||
+                                          userData.lectures[idx].lecturePosition + '' + idx2 === '32' ||
+                                          userData.lectures[idx].lecturePosition + '' + idx2 === '42'
                                     }
                                   />
                                   {radio}
@@ -192,11 +215,17 @@ export default function SelfCheckTable(props) {
                             aria-label="SelectBox"
                             size="sm"
                             disabled={
-                              radioValue[userData.lectures[idx].lecturePosition] === '0' ||
-                              (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 0) ||
-                              (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 2) ||
-                              (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 3) ||
-                              (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 4)
+                              todayMonth < 9 && todayMonth > 2
+                                ? radioValue[userData.lectures[idx].lecturePosition] === '0' ||
+                                  (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 0) ||
+                                  (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 2) ||
+                                  (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 3) ||
+                                  (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 4)
+                                : radioValue[userData.lectures[idx].lecturePosition] === '0' ||
+                                  (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 0) ||
+                                  (radioValue[userData.lectures[idx].lecturePosition] === '3' && userData.lectures[idx].lecturePosition === 2) ||
+                                  (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 3) ||
+                                  (radioValue[userData.lectures[idx].lecturePosition] === '2' && userData.lectures[idx].lecturePosition === 4)
                             }
                             onChange={(e) => handleClickedSelectBox(e, userData.lectures[idx].lecturePosition)}
                           >
@@ -209,6 +238,7 @@ export default function SelfCheckTable(props) {
                                   return (
                                     <option key={userData.lectures[idx].openYear[idx2]} value={userData.lectures[idx].openYear[idx2]}>
                                       {userData.lectures[idx].openYear[idx2]}
+                                      {typeof userData.lectures[idx].openYear[idx2]}
                                     </option>
                                   );
                               })()
@@ -217,16 +247,26 @@ export default function SelfCheckTable(props) {
                             {(() => {
                               if (radioValue[userData.lectures[idx].lecturePosition] === '2')
                                 return (
-                                  <option key={'2022-1'} value={'2022-1'}>
-                                    2022-1
+                                  <option key={{ year } - { semester }} value={{ year } - { semester }}>
+                                    {year}-{semester}
                                   </option>
                                 );
-                              if (radioValue[userData.lectures[idx].lecturePosition] === '3')
-                                return (
-                                  <option key={'2022-2'} value={'2022-2'}>
-                                    2022-2
-                                  </option>
-                                );
+                              if (radioValue[userData.lectures[idx].lecturePosition] === '3') {
+                                if (todayMonth < 8 && todayMonth > 2)
+                                  return (
+                                    <option key={{ year } - { semester2 }} value={{ year } - { semester2 }}>
+                                      {{ year } - { semester2 }}
+                                    </option>
+                                  );
+                                else {
+                                  return (
+                                    <option key={{ nextYearAndSemester }} value={{ nextYearAndSemester }}>
+                                      {nextYearAndSemester}
+                                      {/* {typeof nextYearAndSemester} */}
+                                    </option>
+                                  );
+                                }
+                              }
                             })()}
                           </Form.Select>
                         </StyledTableCell>
