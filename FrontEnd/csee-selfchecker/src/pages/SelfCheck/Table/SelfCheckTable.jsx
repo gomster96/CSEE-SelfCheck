@@ -44,18 +44,17 @@ export default function SelfCheckTable(props) {
   let year = now.getFullYear();
   let nextYear = year + 1;
   let todayMonth = now.getMonth() + 1;
-  // console.log(year);
   let semester;
   if (todayMonth < 9 && todayMonth > 2) semester = 1;
   else semester = 2;
   let semester1 = 1;
   let semester2 = 2;
-  let nextYearAndSemester = JSON.parse(JSON.stringify(nextYear + '-' + semester1));
+  let nextYearAndNextSemester = nextYear + '-' + semester1;
+  let thisYear = year + '-' + semester;
   let nextSemester = year + '-' + semester2;
-  // console.log(semester);
   const classes = useStyles();
   const userData = { ...props.userData };
-  console.log(userData);
+  // console.log(userData);
 
   const radioBtns = ['미이수', '이수', '이수중', '병수예정'];
   let [radioValue, setRadioValue] = useState({ radios: ['', '', '', '', ''] });
@@ -65,7 +64,7 @@ export default function SelfCheckTable(props) {
   const handleClickedRadioBtn = (e, lecturePosition) => {
     const val = e.target.value;
     const idx = lecturePosition;
-    console.log(e.target.value);
+    // console.log(e.target.value);
 
     // radio click change 시 selectbox 값 reset
     selectSemester[idx] = ' ';
@@ -82,7 +81,7 @@ export default function SelfCheckTable(props) {
 
   const handleClickedSelectBox = (e, lecturePosition) => {
     const val = e.target.value;
-    console.log(JSON.parse(JSON.stringify(e.target.value)));
+    // console.log(JSON.parse(JSON.stringify(e.target.value)));
     const idx = lecturePosition;
     if (val === '이수 학기') {
       selectSemester[idx] = ' ';
@@ -180,8 +179,8 @@ export default function SelfCheckTable(props) {
                             <Form>
                               {radioBtns.map((radio, idx2) => (
                                 <Form.Label className="m-0">
-                                  {userData.lectures[idx].lecturePosition}
-                                  {idx2}
+                                  {/* {userData.lectures[idx].lecturePosition}
+                                  {idx2} */}
                                   <Form.Check
                                     className="m-2"
                                     inline
@@ -238,7 +237,6 @@ export default function SelfCheckTable(props) {
                                   return (
                                     <option key={userData.lectures[idx].openYear[idx2]} value={userData.lectures[idx].openYear[idx2]}>
                                       {userData.lectures[idx].openYear[idx2]}
-                                      {typeof userData.lectures[idx].openYear[idx2]}
                                     </option>
                                   );
                               })()
@@ -247,21 +245,23 @@ export default function SelfCheckTable(props) {
                             {(() => {
                               if (radioValue[userData.lectures[idx].lecturePosition] === '2')
                                 return (
-                                  <option key={{ year } - { semester }} value={{ year } - { semester }}>
-                                    {year}-{semester}
+                                  <option key={`${thisYear}`} value={`${thisYear}`}>
+                                    {thisYear}
                                   </option>
                                 );
                               if (radioValue[userData.lectures[idx].lecturePosition] === '3') {
+                                // 현재 1학기, 다음학기 병수예정 (2022-2학기)
                                 if (todayMonth < 8 && todayMonth > 2)
                                   return (
-                                    <option key={{ year } - { semester2 }} value={{ year } - { semester2 }}>
-                                      {{ year } - { semester2 }}
+                                    <option key={`${nextSemester}`} value={`${nextSemester}`}>
+                                      {nextSemester}
                                     </option>
                                   );
+                                // 현재 2학기, 다음학기 병수예정 (2023-1학기)
                                 else {
                                   return (
-                                    <option key={{ nextYearAndSemester }} value={{ nextYearAndSemester }}>
-                                      {nextYearAndSemester}
+                                    <option key={`${nextYearAndNextSemester}`} value={`${nextYearAndNextSemester}`}>
+                                      {nextYearAndNextSemester}
                                       {/* {typeof nextYearAndSemester} */}
                                     </option>
                                   );
