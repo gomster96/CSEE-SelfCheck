@@ -251,7 +251,7 @@ export default function SelfCheckTable(props) {
                                 );
                               if (radioValue[userData.lectures[idx].lecturePosition] === '3') {
                                 // 현재 1학기, 다음학기 병수예정 (2022-2학기)
-                                if (todayMonth < 8 && todayMonth > 2)
+                                if (todayMonth < 9 && todayMonth > 2)
                                   return (
                                     <option key={`${nextSemester}`} value={`${nextSemester}`}>
                                       {nextSemester}
